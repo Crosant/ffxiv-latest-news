@@ -1,6 +1,11 @@
 {
   "version": "1.0.0",
-  "lastUpdated": 1770319128,
+  "lastUpdated": 1738783200,
   "source": "lodestonenews.com",
-  "maintenance": null
+  "maintenance": {
+    "title": "All Worlds Maintenance (Feb. 10)",
+    "start": 1739145600,
+    "end": 1739163600,
+    "url": "https://na.finalfantasyxiv.com/lodestone/news/detail/test-7-41-hf2"
+  }
 }
