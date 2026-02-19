@@ -1,16 +1,6 @@
 {
-  "version": "2.0.0",
-  "lastUpdated": 1771526418,
+  "version": "1.0.0",
+  "lastUpdated": 1771526459,
   "source": "lodestonenews.com",
-  "maintenance": null,
-  "events": [
-    {
-      "title": "Little Ladies' Day Begins February 26!",
-      "category": "seasonal",
-      "start": 1772092800,
-      "end": 1773331140,
-      "url": "https://na.finalfantasyxiv.com/lodestone/topics/detail/55fe5d5314ea050e0450f25492d8924965ae907c",
-      "description": "The Little Ladies' Day festivities are upon us once again! Under a canopy of fragrant peach blossoms, the Songbirds and the Seneschal Prince shall soo"
-    }
-  ]
+  "maintenance": null
 }
