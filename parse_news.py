@@ -2,10 +2,9 @@
 import json
 import requests
 import re
-import xml.etree.ElementTree as ET
 from datetime import datetime, timezone, timedelta
-from pathlib import Path
 from typing import Optional, Tuple, Dict, List
+
 
 # --- Configuration ---
 LODESTONE_API = "https://lodestonenews.com/news"
@@ -14,9 +13,10 @@ RETENTION_DAYS = 30
 
 SEASONAL_KEYWORDS = [
     "Valentione", "Heavensturn", "Little Ladies", "Hatching",
-    "Make It Rain", "Moonfire", "The Rising", "All Saints", 
+    "Make It Rain", "Moonfire", "The Rising", "All Saints",
     "Starlight", "Moogle Treasure", "Irregular Tomestone"
 ]
+
 
 def fetch_api(category: str) -> List[Dict]:
     try:
@@ -29,115 +29,185 @@ def fetch_api(category: str) -> List[Dict]:
         print(f"  ✗ Error fetching {category}: {e}")
         return []
 
+
 def scrape_event_dates(url: str) -> Tuple[Optional[int], Optional[int]]:
-    """Surgical scraper that ignores image alt-text and finds the 2026 dates."""
     try:
         print(f"    🌐 Initial URL: {url}")
-        response = requests.get(url, timeout=15)
-        response.raise_for_status()
-        content = response.text
 
-        # 1. Follow redirect to Special Site (where the real code lives)
-        special_match = re.search(r'href="(https://[^"]*finalfantasyxiv\.com/lodestone/special/[^"]+)"', content)
-        if special_match:
-            url = special_match.group(1)
-            print(f"    🔗 Jumping to Special Page: {url}")
-            response = requests.get(url, timeout=15)
+        for hop in range(3):
+            response = requests.get(url, timeout=15, allow_redirects=True)
+            response.raise_for_status()
             content = response.text
+            url = response.url
 
-        # 2. TARGETED: Isolate the visible date paragraph <p class="na">
-        # This completely bypasses the 2015 image alt text
-        p_match = re.search(r'<p class="na">.*?</p>', content, re.DOTALL | re.IGNORECASE)
-        if not p_match:
-            print(f"    ⚠️ Warning: Date paragraph (<p class='na'>) not found")
-            return None, None
-            
-        # Clean tags (like <br />) so regex doesn't choke
-        clean_text = re.sub(r'<[^>]+>', ' ', p_match.group(0))
+            if '/lodestone/special/' in url:
+                print(f"    ✅ On special page (hop {hop}): {url}")
+                break
 
-        # 3. Flexible regex for the "From... to..." pattern
-        pattern = (
-            r'[Ff]rom\s+\w+,\s+(\w+\s+\d+,\s+\d{4})\s+at\s+(\d+:\d+)\s+([ap]\.m\.)\s*'
-            r'to\s+\w+,\s+(\w+\s+\d+,\s+\d{4})\s+at\s+(\d+:\d+)\s+([ap]\.m\.)\s+\((\w+)\)'
+            special_match = re.search(
+                r'href="(https://[^"]*finalfantasyxiv\.com/lodestone/special/[^"]+)"',
+                content
+            )
+            if special_match:
+                url = special_match.group(1)
+                print(f"    🔗 Hop {hop + 1}: Direct special link → {url}")
+                continue
+
+            read_on_href = re.search(
+                r'href="(https://(?:sqex\.to|[^"]*finalfantasyxiv\.com)/[^"]+)"[^>]*>[^<]*[Rr]ead\s+on',
+                content
+            )
+            if not read_on_href:
+                read_on_href = re.search(
+                    r'[Rr]ead\s+on[^<]*<[^>]+href="([^"]+)"',
+                    content
+                )
+            if not read_on_href:
+                read_on_href = re.search(r'href="(https://sqex\.to/[^"]+)"', content)
+
+            if read_on_href:
+                url = read_on_href.group(1)
+                print(f"    🔗 Hop {hop + 1}: Read on link → {url}")
+                continue
+
+            print(f"    ⚠️ Hop {hop + 1}: No onward link found at {url}")
+            break
+
+        meta_match = re.search(
+            r'<meta name="description" content="[^"]*'
+            r'[Ff]rom\s+\w+,\s+(\w+\s+\d+,\s+\d{4})\s+at\s+(\d+:\d+)\s+([ap]\.m\.)\s*\((\w+)\)'
+            r'\s+to\s+'
+            r'\w+,\s+(\w+\s+\d+,\s+\d{4})\s+at\s+(\d+:\d+)\s+([ap]\.m\.)\s*\((\w+)\)',
+            content,
+            re.IGNORECASE
         )
-        match = re.search(pattern, clean_text, re.IGNORECASE)
-        if not match:
-            print(f"    ✗ Date pattern failed inside the targeted block.")
+
+        if not meta_match:
+            print(f"    ✗ Meta description date pattern not found")
             return None, None
 
-        start_date, start_time, start_mer, end_date, end_time, end_mer, tz = match.groups()
-        s_mer, e_mer = start_mer.replace('.', '').upper(), end_mer.replace('.', '').upper()
-        
-        s_dt = datetime.strptime(f"{start_date} {start_time} {s_mer}", "%B %d, %Y %I:%M %p")
-        e_dt = datetime.strptime(f"{end_date} {end_time} {e_mer}", "%B %d, %Y %I:%M %p")
+        start_date, start_time, start_mer, start_tz, \
+        end_date,   end_time,   end_mer,   end_tz = meta_match.groups()
 
-        # UTC-8 for PST, etc.
         tz_map = {"PST": 8, "PDT": 7, "EST": 5, "EDT": 4}
-        offset = tz_map.get(tz.upper(), 8)
-        
-        return int((s_dt + timedelta(hours=offset)).timestamp()), int((e_dt + timedelta(hours=offset)).timestamp())
+        s_offset = tz_map.get(start_tz.upper(), 8)
+        e_offset = tz_map.get(end_tz.upper(), 8)
+
+        # Parse as UTC-naive, then manually shift to UTC using the timezone offset
+        # Without .replace(tzinfo=timezone.utc), Python assumes your LOCAL timezone
+        # (your PC is EST = UTC-5) and applies that on top, making times 5 hours wrong
+        s_dt = datetime.strptime(
+            f"{start_date} {start_time} {start_mer.replace('.', '').upper()}",
+            "%B %d, %Y %I:%M %p"
+        ).replace(tzinfo=timezone.utc)
+
+        e_dt = datetime.strptime(
+            f"{end_date} {end_time} {end_mer.replace('.', '').upper()}",
+            "%B %d, %Y %I:%M %p"
+        ).replace(tzinfo=timezone.utc)
+
+        s_ts = int((s_dt + timedelta(hours=s_offset)).timestamp())
+        e_ts = int((e_dt + timedelta(hours=e_offset)).timestamp())
+
+        print(f"    ✅ {start_date} ({start_tz}) → {end_date} ({end_tz})")
+        return s_ts, e_ts
+
     except Exception as e:
         print(f"    ✗ Scrape error: {e}")
         return None, None
 
+
 def parse_maintenance(maint_list: List[Dict], now: int) -> Tuple[Optional[Dict], Optional[Dict]]:
     current, last = None, None
+
     for item in maint_list:
-        if "All Worlds Maintenance" not in item.get('title', ''): continue
-        description = item.get('description', '')
-        if not description: continue
+        if "All Worlds Maintenance" not in item.get('title', ''):
+            continue
 
-        # Extract EST/EDT time directly to avoid the 8:10 vs 3:10 bug
-        pattern = r'to\s+\w+,\s+\w+\s+\d+\s+(\d+:\d+\s+[APM]+)\s+\((\w+)\)'
-        match = re.search(pattern, description)
-        if not match: continue
-        
         try:
-            time_str, tz_name = match.groups()
-            year = datetime.now().year
-            date_match = re.search(r'(\w+\s+\d+)', description)
-            date_str = date_match.group(1)
+            start_ts = int(datetime.fromisoformat(
+                item['start'].replace('Z', '+00:00')
+            ).timestamp())
+            end_ts = int(datetime.fromisoformat(
+                item['end'].replace('Z', '+00:00')
+            ).timestamp())
 
-            e_dt = datetime.strptime(f"{date_str} {time_str} {year}", "%b %d %I:%M %p %Y")
-            offset = {"PST": 8, "PDT": 7, "EST": 5, "EDT": 4}.get(tz_name.upper(), 8)
-            e_ts = int((e_dt + timedelta(hours=offset)).timestamp())
+            m_data = {
+                'title': item['title'],
+                'start': start_ts,
+                'end': end_ts,
+                'url': item['url']
+            }
 
-            m_data = {"title": item['title'], "start": e_ts - 14400, "end": e_ts, "url": item['url']}
-            if e_ts > now:
-                if not current: current = m_data
+            if end_ts > now:
+                if not current:
+                    current = m_data
             else:
-                if not last or e_ts > last['end']: last = m_data
-        except: continue
+                if not last or end_ts > last['end']:
+                    last = m_data
+
+        except Exception as e:
+            print(f"  ✗ Maintenance parse error for '{item.get('title', '')}': {e}")
+            continue
+
     return current, last
 
+
 def main():
-    print("=" * 60 + "\nFFXIV Latest News Updater - PRODUCTION FIX\n" + "=" * 60)
+    print("=" * 60)
+    print("FFXIV Latest News Updater v2.0.0")
+    print("=" * 60)
+
     now = int(datetime.now(timezone.utc).timestamp())
-    topics, maint_list = fetch_api("topics"), fetch_api("maintenance")
-    
+
+    topics = fetch_api("topics")
+    maint_list = fetch_api("maintenance")
+
+    print("\n🔧 Processing Maintenance...")
     current_maint, last_maint = parse_maintenance(maint_list, now)
-    
+    if current_maint:
+        print(f"  ✅ Current: {current_maint['title']}")
+    else:
+        print(f"  ℹ️ No upcoming maintenance found")
+    if last_maint:
+        print(f"  ✅ Last: {last_maint['title']}")
+
+    print("\n🎉 Processing Events...")
     events, last_event = [], None
     cutoff = now - (RETENTION_DAYS * 86400)
-    
-    print("\n🎉 Processing Events...")
+
     for item in topics:
-        if any(kw.lower() in item.get('title', '').lower() for kw in SEASONAL_KEYWORDS):
-            print(f"  📅 Checking: {item['title']}")
-            start, end = scrape_event_dates(item['url'])
-            if start and end:
-                evt = {"title": item['title'], "start": start, "end": end, "url": item['url'], "category": "seasonal"}
-                if end > now:
-                    events.append(evt)
-                    print(f"    ✅ Added as Active")
-                elif end > cutoff:
-                    if not last_event or end > last_event['end']:
-                        last_event = evt
-                        print(f"    ✅ Added as Last Event")
+        title = item.get('title', '')
+        if not any(kw.lower() in title.lower() for kw in SEASONAL_KEYWORDS):
+            continue
+
+        print(f"  📅 Checking: {title}")
+        start, end = scrape_event_dates(item['url'])
+
+        if not start or not end:
+            print(f"    ⚠️ Skipping — could not parse dates")
+            continue
+
+        evt = {
+            'title': title,
+            'start': start,
+            'end': end,
+            'url': item['url'],
+            'category': 'seasonal'
+        }
+
+        if end > now:
+            events.append(evt)
+            print(f"    ✅ Active event added")
+        elif end > cutoff:
+            if not last_event or end > last_event['end']:
+                last_event = evt
+                print(f"    ✅ Stored as lastEvent")
 
     output = {
         "version": "2.0.0",
         "lastUpdated": now,
+        "source": "lodestonenews.com",
         "maintenance": current_maint,
         "lastMaintenance": last_maint,
         "events": sorted(events, key=lambda x: x['start']),
@@ -146,7 +216,12 @@ def main():
 
     with open(OUTPUT_FILE, 'w', encoding='utf-8') as f:
         json.dump(output, f, indent=2, ensure_ascii=False)
-    print(f"\n✅ Wrote {OUTPUT_FILE}\n" + "=" * 60)
+
+    print(f"\n✅ Wrote {OUTPUT_FILE}")
+    print(f"   Events active: {len(events)}")
+    print(f"   Maintenance: {'Yes' if current_maint else 'None'}")
+    print("=" * 60)
+
 
 if __name__ == "__main__":
     main()
