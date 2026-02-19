@@ -131,26 +131,36 @@ def parse_maintenance(maint_list: List[Dict], now: int) -> Tuple[Optional[Dict],
             end_ts = int(datetime.fromisoformat(
                 item['end'].replace('Z', '+00:00')
             ).timestamp())
+            pub_ts = int(datetime.fromisoformat(
+                item['time'].replace('Z', '+00:00')  # 'time' = publication date
+            ).timestamp())
 
             m_data = {
                 'title': item['title'],
                 'start': start_ts,
                 'end': end_ts,
+                'pub': pub_ts,
                 'url': item['url']
             }
 
             if end_ts > now:
-                if not current:
+                if not current or pub_ts > current['pub']:
                     current = m_data
             else:
-                if not last or end_ts > last['end']:
+                if not last or pub_ts > last['pub']:
                     last = m_data
 
         except Exception as e:
             print(f"  ✗ Maintenance parse error for '{item.get('title', '')}': {e}")
             continue
 
+    if current:
+        current = {k: v for k, v in current.items() if k != 'pub'}
+    if last:
+        last = {k: v for k, v in last.items() if k != 'pub'}
+
     return current, last
+
 
 
 def main():
