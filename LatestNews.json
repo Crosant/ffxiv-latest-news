@@ -1,19 +1,28 @@
 {
   "version": "2.0.0",
-  "lastUpdated": 1772519947,
+  "lastUpdated": 1772541330,
   "source": "lodestonenews.com",
-  "maintenance": {
+  "maintenance": null,
+  "lastMaintenance": {
     "title": "All Worlds Maintenance (Mar. 2)",
     "start": 1772506800,
     "end": 1772532000,
     "url": "https://na.finalfantasyxiv.com/lodestone/news/detail/26abc8b73e24526165e4a947b1c15b22602f3ffd"
   },
-  "lastMaintenance": {
-    "title": "All Worlds Maintenance (Feb. 4): Follow-up",
-    "start": 1770267600,
-    "end": 1770279000,
-    "url": "https://na.finalfantasyxiv.com/lodestone/news/detail/685ec70021b830d2925b66b55a0fdf269afec9ea"
-  },
-  "events": [],
-  "lastEvent": null
+  "events": [
+    {
+      "title": "Little Ladies' Day Begins February 26!",
+      "start": 1772092800,
+      "end": 1773327540,
+      "url": "https://na.finalfantasyxiv.com/lodestone/topics/detail/55fe5d5314ea050e0450f25492d8924965ae907c",
+      "category": "seasonal"
+    }
+  ],
+  "lastEvent": {
+    "title": "Valentione's Day Comes to Eorzea on February 2!",
+    "start": 1770019200,
+    "end": 1771253940,
+    "url": "https://na.finalfantasyxiv.com/lodestone/topics/detail/44ac60147d36ae9974713f75a61cca2eb2b9f2c0",
+    "category": "seasonal"
+  }
 }
