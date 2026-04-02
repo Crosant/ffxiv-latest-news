@@ -1,6 +1,6 @@
 {
   "version": "2.0.0",
-  "lastUpdated": 1775113269,
+  "lastUpdated": 1775134292,
   "source": "lodestonenews.com",
   "maintenance": null,
   "lastMaintenance": {
@@ -18,11 +18,5 @@
       "category": "seasonal"
     }
   ],
-  "lastEvent": {
-    "title": "Little Ladies' Day Begins February 26!",
-    "start": 1772092800,
-    "end": 1773327540,
-    "url": "https://na.finalfantasyxiv.com/lodestone/topics/detail/55fe5d5314ea050e0450f25492d8924965ae907c",
-    "category": "seasonal"
-  }
+  "lastEvent": null
 }
