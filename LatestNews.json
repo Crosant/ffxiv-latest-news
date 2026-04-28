@@ -1,20 +1,8 @@
 {
   "version": "2.1.0",
-  "lastUpdated": 1777370130,
+  "lastUpdated": 1777370931,
   "source": "lodestonenews.com",
-  "maintenance": {
-    "title": "All Worlds Maintenance (Apr. 27)",
-    "start": 1777345200,
-    "end": 1777370400,
-    "url": "https://na.finalfantasyxiv.com/lodestone/news/detail/a61d9efab70d940fc74e8e2ea85dcb9e9d3b9eb0",
-    "urls": {
-      "na": "https://na.finalfantasyxiv.com/lodestone/news/detail/ef4902a5b0f938fe84076ea15e166dcc7957d2af",
-      "eu": "https://na.finalfantasyxiv.com/lodestone/news/detail/ef4902a5b0f938fe84076ea15e166dcc7957d2af",
-      "jp": "https://na.finalfantasyxiv.com/lodestone/news/detail/ef4902a5b0f938fe84076ea15e166dcc7957d2af",
-      "fr": "https://na.finalfantasyxiv.com/lodestone/news/detail/ef4902a5b0f938fe84076ea15e166dcc7957d2af",
-      "de": "https://na.finalfantasyxiv.com/lodestone/news/detail/ef4902a5b0f938fe84076ea15e166dcc7957d2af"
-    }
-  },
+  "maintenance": null,
   "lastMaintenance": {
     "title": "All Worlds Maintenance (Apr. 27): Follow-up",
     "start": 1777345200,
@@ -22,10 +10,10 @@
     "url": "https://na.finalfantasyxiv.com/lodestone/news/detail/1bb23d78516c06650e720770beababd7e605c5a4",
     "urls": {
       "na": "https://na.finalfantasyxiv.com/lodestone/news/detail/a30d44372e26d9b3b2cfdae824784c0148ee8e82",
-      "eu": "https://na.finalfantasyxiv.com/lodestone/news/detail/a30d44372e26d9b3b2cfdae824784c0148ee8e82",
-      "jp": "https://na.finalfantasyxiv.com/lodestone/news/detail/a30d44372e26d9b3b2cfdae824784c0148ee8e82",
-      "fr": "https://na.finalfantasyxiv.com/lodestone/news/detail/a30d44372e26d9b3b2cfdae824784c0148ee8e82",
-      "de": "https://na.finalfantasyxiv.com/lodestone/news/detail/a30d44372e26d9b3b2cfdae824784c0148ee8e82"
+      "eu": "https://eu.finalfantasyxiv.com/lodestone/news/detail/718a441af31bcc5dab5116270a125c6be0afea9e",
+      "jp": null,
+      "fr": null,
+      "de": "https://de.finalfantasyxiv.com/lodestone/news/detail/54ead9c509b31d2263926f2807dc6c125d3c5921"
     }
   },
   "events": [],
