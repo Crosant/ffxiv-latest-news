@@ -13,6 +13,17 @@ RETENTION_DAYS = 30
 # Supported Lodestone regions in the order they appear in the output.
 REGIONS = ["na", "eu", "jp", "fr", "de"]
 
+# Expected URL subdomain for each region.  Used to reject API responses that
+# return a URL from the wrong region (e.g. lodestonenews.com occasionally
+# serves NA articles for every region when the regional feed is unavailable).
+REGION_DOMAIN = {
+    "na": "na.finalfantasyxiv.com",
+    "eu": "eu.finalfantasyxiv.com",
+    "jp": "jp.finalfantasyxiv.com",
+    "fr": "fr.finalfantasyxiv.com",
+    "de": "de.finalfantasyxiv.com",
+}
+
 SEASONAL_KEYWORDS = [
     "Valentione", "Heavensturn", "Little Ladies", "Hatching",
     "Make It Rain", "Moonfire", "The Rising", "All Saints",
@@ -61,11 +72,13 @@ def build_maintenance_regional_urls(
     urls: Dict[str, Optional[str]] = {}
     for region in REGIONS:
         urls[region] = None
+        expected_domain = REGION_DOMAIN.get(region, "")
         for item in region_items.get(region, []):
             s = _parse_ts(item.get("start", ""))
             e = _parse_ts(item.get("end", ""))
-            if s == na_start_ts and e == na_end_ts:
-                urls[region] = item["url"]
+            item_url = item.get("url", "")
+            if s == na_start_ts and e == na_end_ts and expected_domain in item_url:
+                urls[region] = item_url
                 break
     return urls
 
@@ -95,10 +108,16 @@ def build_topic_regional_urls(
     urls: Dict[str, Optional[str]] = {}
     for region in REGIONS:
         urls[region] = None
+        expected_domain = REGION_DOMAIN.get(region, "")
         for item in region_items.get(region, []):
             pub_ts = _parse_ts(item.get("time", ""))
-            if pub_ts is not None and abs(pub_ts - na_pub_ts) <= _TOPIC_MATCH_WINDOW:
-                urls[region] = item["url"]
+            item_url = item.get("url", "")
+            if (
+                pub_ts is not None
+                and abs(pub_ts - na_pub_ts) <= _TOPIC_MATCH_WINDOW
+                and expected_domain in item_url
+            ):
+                urls[region] = item_url
                 break
     return urls
 
