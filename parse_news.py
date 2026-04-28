@@ -10,6 +10,9 @@ LODESTONE_API = "https://lodestonenews.com/news"
 OUTPUT_FILE = "LatestNews.json"
 RETENTION_DAYS = 30
 
+# Supported Lodestone regions in the order they appear in the output.
+REGIONS = ["na", "eu", "jp", "fr", "de"]
+
 SEASONAL_KEYWORDS = [
     "Valentione", "Heavensturn", "Little Ladies", "Hatching",
     "Make It Rain", "Moonfire", "The Rising", "All Saints",
@@ -17,16 +20,62 @@ SEASONAL_KEYWORDS = [
 ]
 
 
-def fetch_api(category: str) -> List[Dict]:
+def fetch_api(category: str, region: str = "na") -> List[Dict]:
     try:
-        url = f"{LODESTONE_API}/{category}"
+        url = f"{LODESTONE_API}/{category}?region={region}"
         print(f"📡 Fetching {url}")
         response = requests.get(url, timeout=10)
         response.raise_for_status()
         return response.json()
     except Exception as e:
-        print(f" ✗ Error fetching {category}: {e}")
+        print(f" ✗ Error fetching {category} ({region}): {e}")
         return []
+
+
+def fetch_all_regions(category: str) -> Dict[str, List[Dict]]:
+    """Fetch the given category from every supported Lodestone region."""
+    return {region: fetch_api(category, region) for region in REGIONS}
+
+
+def _lodestone_path(url: str) -> Optional[str]:
+    """
+    Extract the article path after the regional subdomain from a Lodestone URL.
+
+    Example:
+        "https://na.finalfantasyxiv.com/lodestone/news/detail/abc123"
+        → "/lodestone/news/detail/abc123"
+
+    The path segment (including the article ID) is identical across all Lodestone
+    regions for the same article, making it a reliable cross-region match key.
+    """
+    m = re.match(r"https://\w+\.finalfantasyxiv\.com(/lodestone/.+)", url)
+    return m.group(1) if m else None
+
+
+def build_regional_urls(
+    na_url: str, region_items: Dict[str, List[Dict]]
+) -> Dict[str, Optional[str]]:
+    """
+    For a given canonical (NA) article URL, find the corresponding URL for each
+    supported region by looking up that article's path in each region's feed data.
+
+    Matching is done by comparing the article path (e.g. /lodestone/news/detail/{id}),
+    which Square Enix keeps consistent across Lodestone regions.  A region URL is
+    only emitted when the article actually appears in that region's fetched feed;
+    no URL is fabricated by blind hostname substitution.  If an article is absent
+    from a region's feed the value is null.
+    """
+    target_path = _lodestone_path(na_url)
+    urls: Dict[str, Optional[str]] = {}
+    for region in REGIONS:
+        urls[region] = None
+        if target_path is None:
+            continue
+        for item in region_items.get(region, []):
+            if _lodestone_path(item.get("url", "")) == target_path:
+                urls[region] = item["url"]
+                break
+    return urls
 
 
 def scrape_event_dates(url: str) -> Tuple[Optional[int], Optional[int]]:
@@ -142,11 +191,20 @@ def scrape_event_dates(url: str) -> Tuple[Optional[int], Optional[int]]:
 
 
 def parse_maintenance(
-    maint_list: List[Dict], now: int
+    maint_by_region: Dict[str, List[Dict]], now: int
 ) -> Tuple[Optional[Dict], Optional[Dict]]:
-    current, last = None, None
+    """
+    Select the most-recently published upcoming and last completed
+    "All Worlds Maintenance" entries and annotate them with per-region URLs.
 
-    for item in maint_list:
+    maint_by_region is a mapping of region → list of items as returned by
+    fetch_all_regions("maintenance").  The NA feed is used as the canonical
+    source; other regions are matched by article path to populate urls.
+    """
+    current, last = None, None
+    na_items = maint_by_region.get("na", [])
+
+    for item in na_items:
         if "All Worlds Maintenance" not in item.get("title", ""):
             continue
 
@@ -172,7 +230,10 @@ def parse_maintenance(
                 "start": start_ts,
                 "end": end_ts,
                 "pub": pub_ts,
+                # Deprecated – use urls instead.  Kept for one version of
+                # backward compatibility; will be removed in a future release.
                 "url": item["url"],
+                "urls": build_regional_urls(item["url"], maint_by_region),
             }
 
             if end_ts > now:
@@ -198,16 +259,17 @@ def parse_maintenance(
 
 def main() -> None:
     print("=" * 60)
-    print("FFXIV Latest News Updater v2.0.0")
+    print("FFXIV Latest News Updater v2.1.0")
     print("=" * 60)
 
     now = int(datetime.now(timezone.utc).timestamp())
 
-    topics = fetch_api("topics")
-    maint_list = fetch_api("maintenance")
+    print("\n📡 Fetching all regions…")
+    maint_by_region = fetch_all_regions("maintenance")
+    topics_by_region = fetch_all_regions("topics")
 
     print("\n🔧 Processing Maintenance...")
-    current_maint, last_maint = parse_maintenance(maint_list, now)
+    current_maint, last_maint = parse_maintenance(maint_by_region, now)
     if current_maint:
         print(f"  ✅ Current: {current_maint['title']}")
     else:
@@ -220,7 +282,11 @@ def main() -> None:
     last_event: Optional[Dict] = None
     cutoff = now - (RETENTION_DAYS * 86400)
 
-    for item in topics:
+    # Use NA as canonical source for event discovery; other regions are matched
+    # by article path to build the per-region urls object.
+    na_topics = topics_by_region.get("na", [])
+
+    for item in na_topics:
         title = item.get("title", "")
         if not any(kw.lower() in title.lower() for kw in SEASONAL_KEYWORDS):
             continue
@@ -236,7 +302,10 @@ def main() -> None:
             "title": title,
             "start": start,
             "end": end,
+            # Deprecated – use urls instead.  Kept for one version of
+            # backward compatibility; will be removed in a future release.
             "url": item["url"],
+            "urls": build_regional_urls(item["url"], topics_by_region),
             "category": "seasonal",
         }
 
@@ -249,7 +318,7 @@ def main() -> None:
                 print("    ✅ Stored as lastEvent")
 
     output = {
-        "version": "2.0.0",
+        "version": "2.1.0",
         "lastUpdated": now,
         "source": "lodestonenews.com",
         "maintenance": current_maint,
