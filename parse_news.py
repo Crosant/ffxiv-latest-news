@@ -20,15 +20,15 @@ SEASONAL_KEYWORDS = [
 ]
 
 
-def fetch_api(category: str, region: str = "na") -> List[Dict]:
+def fetch_api(category: str, locale: str = "na") -> List[Dict]:
     try:
-        url = f"{LODESTONE_API}/{category}?region={region}"
+        url = f"{LODESTONE_API}/{category}?locale={locale}"
         print(f"📡 Fetching {url}")
         response = requests.get(url, timeout=10)
         response.raise_for_status()
         return response.json()
     except Exception as e:
-        print(f" ✗ Error fetching {category} ({region}): {e}")
+        print(f" ✗ Error fetching {category} ({locale}): {e}")
         return []
 
 
