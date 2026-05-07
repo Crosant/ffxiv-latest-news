@@ -2,8 +2,8 @@ name: Update FFXIV News Data
 
 on:
   schedule:
-    # Every 6 hours at :00
-    - cron: '0 */6 * * *'
+    # Every hour at :00
+    - cron: '0 */1 * * *'
   
   # Allow manual trigger
   workflow_dispatch:
