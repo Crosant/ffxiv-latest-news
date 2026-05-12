@@ -16,7 +16,8 @@ REGIONS = ["na", "eu", "jp", "fr", "de"]
 SEASONAL_KEYWORDS = [
     "Valentione", "Heavensturn", "Little Ladies", "Hatching",
     "Make It Rain", "Moonfire", "The Rising", "All Saints",
-    "Starlight", "Moogle Treasure", "Irregular Tomestone"
+    "Starlight", "Moogle Treasure", "Irregular Tomestone",
+    "Maiden's Rhapsody", "Returns",
 ]
 
 
