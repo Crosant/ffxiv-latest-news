@@ -1,6 +1,6 @@
 {
   "version": "2.1.0",
-  "lastUpdated": 1779441257,
+  "lastUpdated": 1779448021,
   "source": "lodestonenews.com",
   "maintenance": null,
   "lastMaintenance": {
@@ -37,11 +37,11 @@
       "end": 1782313140,
       "url": "https://na.finalfantasyxiv.com/lodestone/topics/detail/a0335376ad339be407f2bda6c3ae150c7ac5df06",
       "urls": {
-        "na": "https://na.finalfantasyxiv.com/lodestone/topics/detail/a0335376ad339be407f2bda6c3ae150c7ac5df06",
-        "eu": "https://eu.finalfantasyxiv.com/lodestone/topics/detail/85445b8d6f3e6c85d7230afa942c0cd1ace03142",
+        "na": "https://na.finalfantasyxiv.com/lodestone/topics/detail/1f55d9ac626ac85511600500236a47b8539414bb",
+        "eu": "https://eu.finalfantasyxiv.com/lodestone/topics/detail/06706c8320406ea0defc359bbe74e5d3a0fc17b2",
         "jp": "https://jp.finalfantasyxiv.com/lodestone/topics/detail/e2c1d47df650c2e4b0e803143f660ee732f67109",
-        "fr": "https://fr.finalfantasyxiv.com/lodestone/topics/detail/b8c2974dfe11eb110c0b791777035f84a27bb0b2",
-        "de": "https://de.finalfantasyxiv.com/lodestone/topics/detail/78cd82f783c5d4d0c321fc725bc1e023041d9211"
+        "fr": "https://fr.finalfantasyxiv.com/lodestone/topics/detail/ae50e4f247e9e49131ff49e33a46b91a1bfeb61c",
+        "de": "https://de.finalfantasyxiv.com/lodestone/topics/detail/b7bb6c9d74ea84a6ef380261f5424ae007e5b30b"
       },
       "category": "seasonal"
     }
