@@ -1,6 +1,6 @@
 {
   "version": "2.1.0",
-  "lastUpdated": 1779434583,
+  "lastUpdated": 1779441257,
   "source": "lodestonenews.com",
   "maintenance": null,
   "lastMaintenance": {
@@ -28,6 +28,20 @@
         "jp": "https://jp.finalfantasyxiv.com/lodestone/topics/detail/4d6bc9e68619884ffcad1f16baefab676ac98bf0",
         "fr": "https://fr.finalfantasyxiv.com/lodestone/topics/detail/ff2a18a48c38d3bb8293bdca9f3ea120eed19e6b",
         "de": "https://de.finalfantasyxiv.com/lodestone/topics/detail/e90a806ea6427980c4b3cd926a9ec7672df98c26"
+      },
+      "category": "seasonal"
+    },
+    {
+      "title": "The Make It Rain Campaign Begins May 29!",
+      "start": 1780041600,
+      "end": 1782313140,
+      "url": "https://na.finalfantasyxiv.com/lodestone/topics/detail/a0335376ad339be407f2bda6c3ae150c7ac5df06",
+      "urls": {
+        "na": "https://na.finalfantasyxiv.com/lodestone/topics/detail/a0335376ad339be407f2bda6c3ae150c7ac5df06",
+        "eu": "https://eu.finalfantasyxiv.com/lodestone/topics/detail/85445b8d6f3e6c85d7230afa942c0cd1ace03142",
+        "jp": "https://jp.finalfantasyxiv.com/lodestone/topics/detail/e2c1d47df650c2e4b0e803143f660ee732f67109",
+        "fr": "https://fr.finalfantasyxiv.com/lodestone/topics/detail/b8c2974dfe11eb110c0b791777035f84a27bb0b2",
+        "de": "https://de.finalfantasyxiv.com/lodestone/topics/detail/78cd82f783c5d4d0c321fc725bc1e023041d9211"
       },
       "category": "seasonal"
     }
