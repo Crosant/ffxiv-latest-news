@@ -108,7 +108,10 @@ def load_existing_output(path: str) -> Optional[Dict]:
     try:
         with open(path, "r", encoding="utf-8") as f:
             data = json.load(f)
-            return data if isinstance(data, dict) else None
+            if isinstance(data, dict):
+                return data
+            print(" ⚠️ Existing output is not a JSON object; regenerating")
+            return None
     except FileNotFoundError:
         return None
     except Exception as e:
