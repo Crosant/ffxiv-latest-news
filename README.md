@@ -50,7 +50,7 @@ https://raw.githubusercontent.com/LegendsOfTheGame/ffxiv-latest-news/main/Latest
 ### Fields
 
 - **version** (string): API format version
-- **lastUpdated** (number): UNIX timestamp of last update (UTC)
+- **lastUpdated** (number): UNIX timestamp of the last meaningful data update (UTC)
 - **source** (string): Data source attribution
 - **maintenance** (object|null): Next scheduled maintenance, or null if none
   - **maintenance.title** (string): Maintenance title

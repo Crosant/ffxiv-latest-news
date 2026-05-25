@@ -104,6 +104,25 @@ def build_topic_regional_urls(
     return urls
 
 
+def load_existing_output(path: str) -> Optional[Dict]:
+    try:
+        with open(path, "r", encoding="utf-8") as f:
+            data = json.load(f)
+            if isinstance(data, dict):
+                return data
+            print(" ⚠️ Existing output is not a JSON object; regenerating")
+            return None
+    except FileNotFoundError:
+        return None
+    except Exception as e:
+        print(f" ⚠️ Could not read existing output: {e}")
+        return None
+
+
+def strip_last_updated(data: Dict) -> Dict:
+    return {k: v for k, v in data.items() if k != "lastUpdated"}
+
+
 def scrape_event_dates(url: str) -> Tuple[Optional[int], Optional[int]]:
     try:
         print(f"    🌐 Initial URL: {url}")
@@ -353,13 +372,22 @@ def main() -> None:
 
     output = {
         "version": "2.1.0",
-        "lastUpdated": now,
         "source": "lodestonenews.com",
         "maintenance": current_maint,
         "lastMaintenance": last_maint,
         "events": sorted(events, key=lambda x: x["start"]),
         "lastEvent": last_event,
     }
+
+    existing_output = load_existing_output(OUTPUT_FILE)
+    if existing_output and strip_last_updated(existing_output) == output:
+        print(f"\nℹ️ No meaningful changes detected; leaving {OUTPUT_FILE} unchanged")
+        print(f"   Events active: {len(output['events'])}")
+        print(f"   Maintenance: {'Yes' if current_maint else 'None'}")
+        print("=" * 60)
+        return
+
+    output["lastUpdated"] = now
 
     with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
         json.dump(output, f, indent=2, ensure_ascii=False)
