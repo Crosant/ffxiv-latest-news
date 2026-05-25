@@ -5,12 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FFXIV Maintenance Demo - XIVToDo Style</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
             background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
@@ -18,7 +13,6 @@
             padding: 40px 20px;
             min-height: 100vh;
         }
-
         .container {
             max-width: 600px;
             margin: 0 auto;
@@ -27,20 +21,8 @@
             padding: 32px;
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
         }
-
-        h1 {
-            font-size: 28px;
-            margin-bottom: 8px;
-            color: #fff;
-            font-weight: 600;
-        }
-
-        .subtitle {
-            color: #888;
-            font-size: 14px;
-            margin-bottom: 32px;
-        }
-
+        h1 { font-size: 28px; margin-bottom: 8px; color: #fff; font-weight: 600; }
+        .subtitle { color: #888; font-size: 14px; margin-bottom: 32px; }
         .countdown-item {
             background: rgba(255, 255, 255, 0.05);
             border-radius: 12px;
@@ -49,296 +31,126 @@
             border: 1px solid rgba(255, 255, 255, 0.1);
             transition: all 0.3s ease;
         }
-
-        .countdown-item:hover {
-            background: rgba(255, 255, 255, 0.08);
-            border-color: rgba(255, 255, 255, 0.2);
-        }
-
-        .countdown-item.maintenance {
-            border-left: 4px solid #f59e0b;
-        }
-
-        .countdown-item.active {
-            border-left: 4px solid #10b981;
-        }
-
-        .countdown-item.ended {
-            border-left: 4px solid #ef4444;
-            opacity: 0.6;
-        }
-
-        .item-title {
-            font-size: 18px;
-            font-weight: 600;
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .icon {
-            font-size: 20px;
-        }
-
-        .item-status {
-            font-size: 14px;
-            color: #aaa;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            flex-wrap: wrap;
-        }
-
-        .status-indicator {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .status-icon {
-            font-size: 14px;
-        }
-
-        .time-highlight {
-            color: #fff;
-            font-weight: 600;
-        }
-
-        .time-highlight.warning {
-            color: #f59e0b;
-        }
-
-        .time-highlight.success {
-            color: #10b981;
-        }
-
-        .time-highlight.danger {
-            color: #ef4444;
-        }
-
-        .link {
-            color: #60a5fa;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-        }
-
-        .link:hover {
-            text-decoration: underline;
-        }
-
-        .loading {
-            text-align: center;
-            padding: 40px;
-            color: #888;
-        }
-
-        .error {
-            background: rgba(239, 68, 68, 0.1);
-            border: 1px solid rgba(239, 68, 68, 0.3);
-            color: #ef4444;
-            padding: 16px;
-            border-radius: 8px;
-            margin-bottom: 16px;
-        }
-
-        .info-box {
-            background: rgba(96, 165, 250, 0.1);
-            border: 1px solid rgba(96, 165, 250, 0.3);
-            color: #60a5fa;
-            padding: 16px;
-            border-radius: 8px;
-            margin-bottom: 24px;
-            font-size: 14px;
-        }
-
-        .footer {
-            margin-top: 32px;
-            padding-top: 24px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            text-align: center;
-            color: #666;
-            font-size: 13px;
-        }
-
-        .footer a {
-            color: #60a5fa;
-            text-decoration: none;
-        }
-
-        .footer a:hover {
-            text-decoration: underline;
-        }
+        .countdown-item:hover { background: rgba(255, 255, 255, 0.08); border-color: rgba(255, 255, 255, 0.2); }
+        .countdown-item.maintenance { border-left: 4px solid #f59e0b; }
+        .countdown-item.active { border-left: 4px solid #10b981; }
+        .countdown-item.ended { border-left: 4px solid #ef4444; opacity: 0.6; }
+        .item-title { font-size: 18px; font-weight: 600; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+        .icon { font-size: 20px; }
+        .item-status { font-size: 14px; color: #aaa; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+        .status-indicator { display: inline-flex; align-items: center; gap: 6px; }
+        .status-icon { font-size: 14px; }
+        .time-highlight { color: #fff; font-weight: 600; }
+        .time-highlight.warning { color: #f59e0b; }
+        .time-highlight.success { color: #10b981; }
+        .time-highlight.danger { color: #ef4444; }
+        .link { color: #60a5fa; text-decoration: none; display: inline-flex; align-items: center; gap: 4px; }
+        .link:hover { text-decoration: underline; }
+        .loading { text-align: center; padding: 40px; color: #888; }
+        .error { background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); color: #ef4444; padding: 16px; border-radius: 8px; margin-bottom: 16px; }
+        .info-box { background: rgba(96, 165, 250, 0.1); border: 1px solid rgba(96, 165, 250, 0.3); color: #60a5fa; padding: 16px; border-radius: 8px; margin-bottom: 24px; font-size: 14px; }
+        .footer { margin-top: 32px; padding-top: 24px; border-top: 1px solid rgba(255, 255, 255, 0.1); text-align: center; color: #666; font-size: 13px; }
+        .footer a { color: #60a5fa; text-decoration: none; }
+        .footer a:hover { text-decoration: underline; }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Countdowns</h1>
         <p class="subtitle">Live demo of automatic Lodestone maintenance tracking</p>
-
         <div class="info-box">
-            ⚡ This demo fetches live data from: <a href="https://raw.githubusercontent.com/LegendsOfTheGame/ffxiv-latest-news/main/MaintenanceData.json" target="_blank" class="link">MaintenanceData.json</a>
+            ⚡ This demo fetches live data from: <a href="https://raw.githubusercontent.com/LegendsOfTheGame/ffxiv-latest-news/main/MaintenanceData.json" target="_blank" class="link">MaintenanceData.json</a><br>
+            🌍 Times shown in <strong>your local timezone</strong>
         </div>
-
         <div id="content">
             <div class="loading">Loading maintenance data...</div>
         </div>
-
         <div class="footer">
             <p>Proof of concept for <a href="https://xivtodo.com" target="_blank">XIVToDo</a></p>
             <p style="margin-top: 8px;">API Source: <a href="https://github.com/LegendsOfTheGame/ffxiv-latest-news" target="_blank">github.com/LegendsOfTheGame/ffxiv-latest-news</a></p>
         </div>
     </div>
-
     <script>
         const API_URL = 'https://raw.githubusercontent.com/LegendsOfTheGame/ffxiv-latest-news/main/MaintenanceData.json';
-
         function timeAgo(timestamp) {
             const now = Math.floor(Date.now() / 1000);
             const diff = timestamp - now;
             const absDiff = Math.abs(diff);
-            
             const minutes = Math.floor(absDiff / 60);
             const hours = Math.floor(absDiff / 3600);
             const days = Math.floor(absDiff / 86400);
-            
-            if (days > 0) {
-                return `${days} day${days !== 1 ? 's' : ''}`;
-            } else if (hours > 0) {
-                return `${hours} hour${hours !== 1 ? 's' : ''}`;
-            } else if (minutes > 0) {
-                return `${minutes} minute${minutes !== 1 ? 's' : ''}`;
-            } else {
-                return 'less than a minute';
-            }
+            if (days > 0) return `${days} day${days !== 1 ? 's' : ''}`;
+            else if (hours > 0) return `${hours} hour${hours !== 1 ? 's' : ''}`;
+            else if (minutes > 0) return `${minutes} minute${minutes !== 1 ? 's' : ''}`;
+            else return 'less than a minute';
         }
-
+        function getTimezoneAbbr() {
+            const date = new Date();
+            const tzString = date.toLocaleTimeString('en-US', { timeZoneName: 'short' }).split(' ')[2];
+            return tzString;
+        }
+        function formatDateTime(timestamp) {
+            const date = new Date(timestamp * 1000);
+            const dateStr = date.toLocaleString('en-US', {
+                month: 'short',
+                day: 'numeric',
+                year: 'numeric',
+                hour: 'numeric',
+                minute: '2-digit',
+                hour12: true
+            });
+            const tz = getTimezoneAbbr();
+            return `${dateStr} ${tz}`;
+        }
         function renderMaintenance(data) {
             const content = document.getElementById('content');
-            
             if (!data.maintenance) {
                 content.innerHTML = `
                     <div class="countdown-item">
-                        <div class="item-title">
-                            <span class="icon">🔧</span>
-                            <span>Server Maintenance</span>
-                        </div>
+                        <div class="item-title"><span class="icon">🔧</span><span>Server Maintenance</span></div>
                         <div class="item-status">
-                            <span class="status-indicator">
-                                <span class="status-icon">✅</span>
-                                <span class="time-highlight success">No scheduled maintenance</span>
-                            </span>
+                            <span class="status-indicator"><span class="status-icon">✅</span><span class="time-highlight success">No scheduled maintenance</span></span>
                         </div>
                     </div>
                 `;
                 return;
             }
-
             const { title, start, end, url } = data.maintenance;
             const now = Math.floor(Date.now() / 1000);
-            
             let statusHTML = '';
             let itemClass = 'maintenance';
-            
             if (now < start) {
-                // Future maintenance
                 const timeUntil = timeAgo(start);
-                statusHTML = `
-                    <span class="status-indicator">
-                        <span class="status-icon">⚠️</span>
-                        <span>Starting <span class="time-highlight warning">in ${timeUntil}</span></span>
-                    </span>
-                `;
+                statusHTML = `<span class="status-indicator"><span class="status-icon">⚠️</span><span>Starting <span class="time-highlight warning">in ${timeUntil}</span></span></span>`;
             } else if (now >= start && now < end) {
-                // Ongoing maintenance
                 const timeRemaining = timeAgo(end);
-                statusHTML = `
-                    <span class="status-indicator">
-                        <span class="status-icon">🔴</span>
-                        <span>Servers down - Ending <span class="time-highlight danger">in ${timeRemaining}</span></span>
-                    </span>
-                `;
+                statusHTML = `<span class="status-indicator"><span class="status-icon">🔴</span><span>Servers down - Ending <span class="time-highlight danger">in ${timeRemaining}</span></span></span>`;
                 itemClass = 'maintenance active';
             } else {
-                // Past maintenance
-                statusHTML = `
-                    <span class="status-indicator">
-                        <span class="status-icon">✅</span>
-                        <span class="time-highlight success">Completed</span>
-                    </span>
-                `;
+                statusHTML = `<span class="status-indicator"><span class="status-icon">✅</span><span class="time-highlight success">Completed</span></span>`;
                 itemClass = 'maintenance ended';
             }
-
-            const startDate = new Date(start * 1000).toLocaleString();
-            const endDate = new Date(end * 1000).toLocaleString();
-            
+            const startDate = formatDateTime(start);
+            const endDate = formatDateTime(end);
             content.innerHTML = `
                 <div class="countdown-item ${itemClass}">
-                    <div class="item-title">
-                        <span class="icon">🔧</span>
-                        <span>${title}</span>
-                    </div>
-                    <div class="item-status">
-                        ${statusHTML}
-                        <span>·</span>
-                        <a href="${url}" target="_blank" class="link">
-                            More details
-                            <span>→</span>
-                        </a>
-                    </div>
-                    <div class="item-status" style="margin-top: 8px; font-size: 12px; opacity: 0.7;">
-                        <span>Start: ${startDate}</span>
-                        <span>·</span>
-                        <span>End: ${endDate}</span>
-                    </div>
+                    <div class="item-title"><span class="icon">🔧</span><span>${title}</span></div>
+                    <div class="item-status">${statusHTML}<span>·</span><a href="${url}" target="_blank" class="link">More details<span>→</span></a></div>
+                    <div class="item-status" style="margin-top: 8px; font-size: 12px; opacity: 0.7;"><span>Start: ${startDate}</span><span>·</span><span>End: ${endDate}</span></div>
                 </div>
-
-                <!-- Example: Other countdowns would appear below -->
                 <div class="countdown-item active">
-                    <div class="item-title">
-                        <span class="icon">🗓️</span>
-                        <span>Valentione's Day</span>
-                    </div>
-                    <div class="item-status">
-                        <span class="status-indicator">
-                            <span class="status-icon">🎉</span>
-                            <span>Ending <span class="time-highlight success">in 10 days</span></span>
-                        </span>
-                        <span>·</span>
-                        <a href="#" class="link">
-                            More details
-                            <span>→</span>
-                        </a>
-                    </div>
+                    <div class="item-title"><span class="icon">🗓️</span><span>Valentione's Day</span></div>
+                    <div class="item-status"><span class="status-indicator"><span class="status-icon">🎉</span><span>Ending <span class="time-highlight success">in 10 days</span></span></span><span>·</span><a href="#" class="link">More details<span>→</span></a></div>
                 </div>
-
                 <div class="countdown-item">
-                    <div class="item-title">
-                        <span class="icon">📝</span>
-                        <span>Patch 7.41</span>
-                    </div>
-                    <div class="item-status">
-                        <span class="status-indicator">
-                            <span class="status-icon">✅</span>
-                            <span class="time-highlight success">Currently available</span>
-                        </span>
-                    </div>
+                    <div class="item-title"><span class="icon">📝</span><span>Patch 7.41</span></div>
+                    <div class="item-status"><span class="status-indicator"><span class="status-icon">✅</span><span class="time-highlight success">Currently available</span></span></div>
                 </div>
             `;
         }
-
         function showError(message) {
-            const content = document.getElementById('content');
-            content.innerHTML = `
-                <div class="error">
-                    <strong>Error loading data:</strong> ${message}
-                </div>
-            `;
+            document.getElementById('content').innerHTML = `<div class="error"><strong>Error loading data:</strong> ${message}</div>`;
         }
-
         async function fetchData() {
             try {
                 const response = await fetch(API_URL + '?t=' + Date.now());
@@ -349,11 +161,7 @@
                 showError(error.message);
             }
         }
-
-        // Initial load
         fetchData();
-
-        // Update every minute
         setInterval(fetchData, 60000);
     </script>
 </body>
