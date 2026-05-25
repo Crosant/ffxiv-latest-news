@@ -1,6 +1,7 @@
 {
-  "version": "1.0.0",
-  "lastUpdated": 1771440077,
+  "version": "2.0.0",
+  "lastUpdated": 1771463922,
   "source": "lodestonenews.com",
-  "maintenance": null
+  "maintenance": null,
+  "events": []
 }
