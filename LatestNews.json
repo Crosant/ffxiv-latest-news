@@ -1,6 +1,6 @@
 {
   "version": "2.0.0",
-  "lastUpdated": 1773340823,
+  "lastUpdated": 1773684796,
   "source": "lodestonenews.com",
   "maintenance": null,
   "lastMaintenance": {
@@ -9,7 +9,15 @@
     "end": 1773218100,
     "url": "https://na.finalfantasyxiv.com/lodestone/news/detail/c867cca720d37feaa709e2fbb928752e8af31ffc"
   },
-  "events": [],
+  "events": [
+    {
+      "title": "Hatching-tide Begins March 23!",
+      "start": 1774252800,
+      "end": 1775487540,
+      "url": "https://na.finalfantasyxiv.com/lodestone/topics/detail/187a47be0828ae300b720e9200421045bd32efd0",
+      "category": "seasonal"
+    }
+  ],
   "lastEvent": {
     "title": "Little Ladies' Day Begins February 26!",
     "start": 1772092800,
