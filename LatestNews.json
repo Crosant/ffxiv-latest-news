@@ -1,6 +1,6 @@
 {
   "version": "2.0.0",
-  "lastUpdated": 1775134292,
+  "lastUpdated": 1775501020,
   "source": "lodestonenews.com",
   "maintenance": null,
   "lastMaintenance": {
@@ -9,14 +9,12 @@
     "end": 1774341900,
     "url": "https://na.finalfantasyxiv.com/lodestone/news/detail/9a352a4219b25c9a5ef56e0c5b7cf08fa5145542"
   },
-  "events": [
-    {
-      "title": "Hatching-tide Begins March 23!",
-      "start": 1774252800,
-      "end": 1775487540,
-      "url": "https://na.finalfantasyxiv.com/lodestone/topics/detail/187a47be0828ae300b720e9200421045bd32efd0",
-      "category": "seasonal"
-    }
-  ],
-  "lastEvent": null
+  "events": [],
+  "lastEvent": {
+    "title": "Hatching-tide Begins March 23!",
+    "start": 1774252800,
+    "end": 1775487540,
+    "url": "https://na.finalfantasyxiv.com/lodestone/topics/detail/187a47be0828ae300b720e9200421045bd32efd0",
+    "category": "seasonal"
+  }
 }
