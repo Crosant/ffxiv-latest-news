@@ -1,6 +1,6 @@
 {
   "version": "2.0.0",
-  "lastUpdated": 1773232712,
+  "lastUpdated": 1773340823,
   "source": "lodestonenews.com",
   "maintenance": null,
   "lastMaintenance": {
@@ -9,20 +9,12 @@
     "end": 1773218100,
     "url": "https://na.finalfantasyxiv.com/lodestone/news/detail/c867cca720d37feaa709e2fbb928752e8af31ffc"
   },
-  "events": [
-    {
-      "title": "Little Ladies' Day Begins February 26!",
-      "start": 1772092800,
-      "end": 1773327540,
-      "url": "https://na.finalfantasyxiv.com/lodestone/topics/detail/55fe5d5314ea050e0450f25492d8924965ae907c",
-      "category": "seasonal"
-    }
-  ],
+  "events": [],
   "lastEvent": {
-    "title": "Valentione's Day Comes to Eorzea on February 2!",
-    "start": 1770019200,
-    "end": 1771253940,
-    "url": "https://na.finalfantasyxiv.com/lodestone/topics/detail/44ac60147d36ae9974713f75a61cca2eb2b9f2c0",
+    "title": "Little Ladies' Day Begins February 26!",
+    "start": 1772092800,
+    "end": 1773327540,
+    "url": "https://na.finalfantasyxiv.com/lodestone/topics/detail/55fe5d5314ea050e0450f25492d8924965ae907c",
     "category": "seasonal"
   }
 }
