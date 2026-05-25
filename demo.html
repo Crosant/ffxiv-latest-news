@@ -54,6 +54,17 @@ transition: all 0.3s ease;
 .footer { margin-top: 32px; padding-top: 24px; border-top: 1px solid rgba(255, 255, 255, 0.1); text-align: center; color: #666; font-size: 13px; }
 .footer a { color: #60a5fa; text-decoration: none; }
 .footer a:hover { text-decoration: underline; }
+.region-selector { display: flex; align-items: center; gap: 10px; margin-bottom: 24px; font-size: 14px; color: #aaa; }
+.region-selector label { white-space: nowrap; }
+.region-selector select {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.2);
+  color: #e0e0e0;
+  padding: 6px 10px;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+}
 </style>
 </head>
 <body>
@@ -63,6 +74,16 @@ transition: all 0.3s ease;
 <div class="info-box">
 ⚡ This demo fetches live data from: <a href="https://raw.githubusercontent.com/LegendsOfTheGame/ffxiv-latest-news/main/LatestNews.json" target="_blank" class="link">LatestNews.json</a><br>
 🌍 Times shown in <strong>your local timezone</strong>
+</div>
+<div class="region-selector">
+  <label for="regionSelect">🌐 Lodestone region:</label>
+  <select id="regionSelect">
+    <option value="na">NA – North America</option>
+    <option value="eu" selected>EU – Europe</option>
+    <option value="jp">JP – Japan</option>
+    <option value="fr">FR – France</option>
+    <option value="de">DE – Germany</option>
+  </select>
 </div>
 <div id="content">
 <div class="loading">Loading maintenance data...</div>
@@ -75,6 +96,17 @@ transition: all 0.3s ease;
 <script>
 const API_URL = './LatestNews.json';
 
+/**
+ * Return the Lodestone link for the requested region.
+ * Prefers urls[region], falls back to urls.na, then the deprecated url field.
+ */
+function regionUrl(item, region) {
+  if (item && item.urls) {
+    return item.urls[region] || item.urls['na'] || null;
+  }
+  // Backward compatibility with v2.0.0 items that only have a top-level url.
+  return item ? (item.url || null) : null;
+}
 
 function timeAgo(timestamp) {
 const now = Math.floor(Date.now() / 1000);
@@ -111,6 +143,7 @@ return `${dateStr} ${tz}`;
 
 function renderMaintenance(data) {
 const content = document.getElementById('content');
+const region = document.getElementById('regionSelect').value;
 const now = Math.floor(Date.now() / 1000);
 let html = '';
 
@@ -125,7 +158,8 @@ html += `
 </div>
 `;
 } else {
-const { title, start, end, url } = data.maintenance;
+const { title, start, end } = data.maintenance;
+const url = regionUrl(data.maintenance, region);
 let statusHTML = '';
 let itemClass = 'maintenance';
 
@@ -140,11 +174,14 @@ itemClass = 'maintenance active';
 
 const startDate = formatDateTime(start);
 const endDate = formatDateTime(end);
+const linkHtml = url
+  ? `<a href="${url}" target="_blank" class="link">More details<span>→</span></a>`
+  : `<span class="time-highlight muted">No ${region.toUpperCase()} link available</span>`;
 
 html += `
 <div class="countdown-item ${itemClass}">
 <div class="item-title"><span class="icon">🔧</span><span>${title}</span></div>
-<div class="item-status">${statusHTML}<span>·</span><a href="${url}" target="_blank" class="link">More details<span>→</span></a></div>
+<div class="item-status">${statusHTML}<span>·</span>${linkHtml}</div>
 <div class="item-status" style="margin-top: 8px; font-size: 12px; opacity: 0.7;"><span>Start: ${startDate}</span><span>·</span><span>End: ${endDate}</span></div>
 </div>
 `;
@@ -152,8 +189,12 @@ html += `
 
 // Last Maintenance Section
 if (data.lastMaintenance) {
-const { title, end, url } = data.lastMaintenance;
+const { title, end } = data.lastMaintenance;
+const url = regionUrl(data.lastMaintenance, region);
 const endDate = formatDateTime(end);
+const linkHtml = url
+  ? `<a href="${url}" target="_blank" class="link">More details<span>→</span></a>`
+  : `<span class="time-highlight muted">No ${region.toUpperCase()} link available</span>`;
 
 html += `
 <div class="countdown-item ended">
@@ -161,7 +202,7 @@ html += `
 <div class="item-status">
 <span class="status-indicator"><span class="status-icon">✅</span><span class="time-highlight success">Completed</span></span>
 <span>·</span>
-<a href="${url}" target="_blank" class="link">More details<span>→</span></a>
+${linkHtml}
 </div>
 <div class="item-status" style="margin-top: 8px; font-size: 12px; opacity: 0.7;"><span>Ended: ${endDate}</span></div>
 </div>
@@ -171,7 +212,8 @@ html += `
 // Current Events Section
 if (data.events && data.events.length > 0) {
 data.events.forEach(event => {
-const { title, start, end, url, category } = event;
+const { title, start, end, category } = event;
+const url = regionUrl(event, region);
 
 let statusHTML = '';
 let itemClass = category === 'seasonal' ? 'active' : '';
@@ -185,10 +227,14 @@ statusHTML = `<span class="status-indicator"><span class="status-icon">🎉</spa
 itemClass = 'active';
 }
 
+const linkHtml = url
+  ? `<a href="${url}" target="_blank" class="link">More details<span>→</span></a>`
+  : `<span class="time-highlight muted">No ${region.toUpperCase()} link available</span>`;
+
 html += `
 <div class="countdown-item ${itemClass}">
 <div class="item-title"><span class="icon">🗓️</span><span>${title}</span></div>
-<div class="item-status">${statusHTML}<span>·</span><a href="${url}" target="_blank" class="link">More details<span>→</span></a></div>
+<div class="item-status">${statusHTML}<span>·</span>${linkHtml}</div>
 </div>
 `;
 });
@@ -205,8 +251,12 @@ html += `
 
 // Last Event Section
 if (data.lastEvent) {
-const { title, end, url } = data.lastEvent;
+const { title, end } = data.lastEvent;
+const url = regionUrl(data.lastEvent, region);
 const endDate = formatDateTime(end);
+const linkHtml = url
+  ? `<a href="${url}" target="_blank" class="link">More details<span>→</span></a>`
+  : `<span class="time-highlight muted">No ${region.toUpperCase()} link available</span>`;
 
 html += `
 <div class="countdown-item ended">
@@ -214,7 +264,7 @@ html += `
 <div class="item-status">
 <span class="status-indicator"><span class="status-icon">🎁</span><span class="time-highlight muted">This event has ended</span></span>
 <span>·</span>
-<a href="${url}" target="_blank" class="link">More details<span>→</span></a>
+${linkHtml}
 </div>
 <div class="item-status" style="margin-top: 8px; font-size: 12px; opacity: 0.7;"><span>Ended: ${endDate}</span></div>
 </div>
@@ -228,17 +278,24 @@ function showError(message) {
 document.getElementById('content').innerHTML = `<div class="error"><strong>Error loading data:</strong> ${message}</div>`;
 }
 
+let cachedData = null;
+
 async function fetchData() {
 try {
 const response = await fetch(API_URL + '?t=' + Date.now());
 if (!response.ok) throw new Error('Failed to fetch API');
 
-const data = await response.json();
-renderMaintenance(data);
+cachedData = await response.json();
+renderMaintenance(cachedData);
 } catch (error) {
 showError(error.message);
 }
 }
+
+// Re-render immediately when the region changes (no extra network request needed).
+document.getElementById('regionSelect').addEventListener('change', () => {
+if (cachedData) renderMaintenance(cachedData);
+});
 
 fetchData();
 setInterval(fetchData, 60000);
