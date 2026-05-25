@@ -23,6 +23,7 @@
         }
         h1 { font-size: 28px; margin-bottom: 8px; color: #fff; font-weight: 600; }
         .subtitle { color: #888; font-size: 14px; margin-bottom: 32px; }
+        .section-header { font-size: 16px; font-weight: 600; color: #aaa; margin-top: 24px; margin-bottom: 12px; }
         .countdown-item {
             background: rgba(255, 255, 255, 0.05);
             border-radius: 12px;
@@ -35,6 +36,7 @@
         .countdown-item.maintenance { border-left: 4px solid #f59e0b; }
         .countdown-item.active { border-left: 4px solid #10b981; }
         .countdown-item.ended { border-left: 4px solid #ef4444; opacity: 0.6; }
+        .countdown-item.unscheduled { border-left: 4px solid #6b7280; }
         .item-title { font-size: 18px; font-weight: 600; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
         .icon { font-size: 20px; }
         .item-status { font-size: 14px; color: #aaa; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
@@ -44,6 +46,7 @@
         .time-highlight.warning { color: #f59e0b; }
         .time-highlight.success { color: #10b981; }
         .time-highlight.danger { color: #ef4444; }
+        .time-highlight.muted { color: #9ca3af; }
         .link { color: #60a5fa; text-decoration: none; display: inline-flex; align-items: center; gap: 4px; }
         .link:hover { text-decoration: underline; }
         .loading { text-align: center; padding: 40px; color: #888; }
@@ -59,7 +62,7 @@
         <h1>Countdowns</h1>
         <p class="subtitle">Live demo of automatic Lodestone maintenance tracking</p>
         <div class="info-box">
-            ⚡ This demo fetches live data from: <a href="https://raw.githubusercontent.com/LegendsOfTheGame/ffxiv-latest-news/main/MaintenanceData.json" target="_blank" class="link">MaintenanceData.json</a><br>
+            ⚡ This demo fetches live data from: <a href="https://raw.githubusercontent.com/LegendsOfTheGame/ffxiv-latest-news/main/LatestNews.json" target="_blank" class="link">LatestNews.json</a><br>
             🌍 Times shown in <strong>your local timezone</strong>
         </div>
         <div id="content">
@@ -71,7 +74,9 @@
         </div>
     </div>
     <script>
-        const API_URL = 'https://raw.githubusercontent.com/LegendsOfTheGame/ffxiv-latest-news/main/MaintenanceData.json';
+        const API_URL = 'https://raw.githubusercontent.com/LegendsOfTheGame/ffxiv-latest-news/main/LatestNews.json';
+        const RSS_URL = 'https://lodestonenews.com/feed/na.xml';
+        
         function timeAgo(timestamp) {
             const now = Math.floor(Date.now() / 1000);
             const diff = timestamp - now;
@@ -84,11 +89,13 @@
             else if (minutes > 0) return `${minutes} minute${minutes !== 1 ? 's' : ''}`;
             else return 'less than a minute';
         }
+        
         function getTimezoneAbbr() {
             const date = new Date();
             const tzString = date.toLocaleTimeString('en-US', { timeZoneName: 'short' }).split(' ')[2];
             return tzString;
         }
+        
         function formatDateTime(timestamp) {
             const date = new Date(timestamp * 1000);
             const dateStr = date.toLocaleString('en-US', {
@@ -102,42 +109,103 @@
             const tz = getTimezoneAbbr();
             return `${dateStr} ${tz}`;
         }
-        function renderMaintenance(data) {
+        
+        async function fetchLastMaintenance() {
+            try {
+                const response = await fetch('https://api.allorigins.win/raw?url=' + encodeURIComponent(RSS_URL));
+                const text = await response.text();
+                const parser = new DOMParser();
+                const xml = parser.parseFromString(text, 'text/xml');
+                const items = xml.querySelectorAll('item');
+                
+                for (const item of items) {
+                    const category = item.querySelector('category')?.textContent;
+                    const title = item.querySelector('title')?.textContent;
+                    const description = item.querySelector('description')?.textContent;
+                    const link = item.querySelector('link')?.textContent;
+                    
+                    if (category === 'Maintenance' && title?.startsWith('All Worlds Maintenance')) {
+                        // Parse EST times from description
+                        const estMatch = description?.match(/([A-Za-z]+, [A-Za-z]+ \d+ \d+:\d+ [AP]M) to ([A-Za-z]+, [A-Za-z]+ \d+ \d+:\d+ [AP]M) \(EST\)/);
+                        if (estMatch) {
+                            const endStr = estMatch[2].replace(/^\w+, /, '');
+                            const year = new Date().getFullYear();
+                            const endDate = new Date(`${endStr} ${year}`);
+                            const endTs = Math.floor(endDate.getTime() / 1000);
+                            const now = Math.floor(Date.now() / 1000);
+                            
+                            if (endTs < now) {
+                                return { title, link, endTs };
+                            }
+                        }
+                    }
+                }
+                return null;
+            } catch (e) {
+                console.error('Failed to fetch last maintenance:', e);
+                return null;
+            }
+        }
+        
+        function renderMaintenance(data, lastMaint) {
             const content = document.getElementById('content');
+            let html = '';
+            
+            // Next Maintenance Section
             if (!data.maintenance) {
-                content.innerHTML = `
-                    <div class="countdown-item">
-                        <div class="item-title"><span class="icon">🔧</span><span>Server Maintenance</span></div>
+                html += `
+                    <div class="countdown-item unscheduled">
+                        <div class="item-title"><span class="icon">🔧</span><span>Next Maintenance</span></div>
                         <div class="item-status">
-                            <span class="status-indicator"><span class="status-icon">✅</span><span class="time-highlight success">No scheduled maintenance</span></span>
+                            <span class="status-indicator"><span class="status-icon">📅</span><span class="time-highlight muted">Unscheduled</span></span>
                         </div>
                     </div>
                 `;
-                return;
-            }
-            const { title, start, end, url } = data.maintenance;
-            const now = Math.floor(Date.now() / 1000);
-            let statusHTML = '';
-            let itemClass = 'maintenance';
-            if (now < start) {
-                const timeUntil = timeAgo(start);
-                statusHTML = `<span class="status-indicator"><span class="status-icon">⚠️</span><span>Starting <span class="time-highlight warning">in ${timeUntil}</span></span></span>`;
-            } else if (now >= start && now < end) {
-                const timeRemaining = timeAgo(end);
-                statusHTML = `<span class="status-indicator"><span class="status-icon">🔴</span><span>Servers down - Ending <span class="time-highlight danger">in ${timeRemaining}</span></span></span>`;
-                itemClass = 'maintenance active';
             } else {
-                statusHTML = `<span class="status-indicator"><span class="status-icon">✅</span><span class="time-highlight success">Completed</span></span>`;
-                itemClass = 'maintenance ended';
+                const { title, start, end, url } = data.maintenance;
+                const now = Math.floor(Date.now() / 1000);
+                let statusHTML = '';
+                let itemClass = 'maintenance';
+                
+                if (now < start) {
+                    const timeUntil = timeAgo(start);
+                    statusHTML = `<span class="status-indicator"><span class="status-icon">⚠️</span><span>Starting <span class="time-highlight warning">in ${timeUntil}</span></span></span>`;
+                } else if (now >= start && now < end) {
+                    const timeRemaining = timeAgo(end);
+                    statusHTML = `<span class="status-indicator"><span class="status-icon">🔴</span><span>Servers down - Ending <span class="time-highlight danger">in ${timeRemaining}</span></span></span>`;
+                    itemClass = 'maintenance active';
+                }
+                
+                const startDate = formatDateTime(start);
+                const endDate = formatDateTime(end);
+                
+                html += `
+                    <div class="countdown-item ${itemClass}">
+                        <div class="item-title"><span class="icon">🔧</span><span>${title}</span></div>
+                        <div class="item-status">${statusHTML}<span>·</span><a href="${url}" target="_blank" class="link">More details<span>→</span></a></div>
+                        <div class="item-status" style="margin-top: 8px; font-size: 12px; opacity: 0.7;"><span>Start: ${startDate}</span><span>·</span><span>End: ${endDate}</span></div>
+                    </div>
+                `;
             }
-            const startDate = formatDateTime(start);
-            const endDate = formatDateTime(end);
-            content.innerHTML = `
-                <div class="countdown-item ${itemClass}">
-                    <div class="item-title"><span class="icon">🔧</span><span>${title}</span></div>
-                    <div class="item-status">${statusHTML}<span>·</span><a href="${url}" target="_blank" class="link">More details<span>→</span></a></div>
-                    <div class="item-status" style="margin-top: 8px; font-size: 12px; opacity: 0.7;"><span>Start: ${startDate}</span><span>·</span><span>End: ${endDate}</span></div>
-                </div>
+            
+            // Last Maintenance Section
+            if (lastMaint) {
+                const endDate = formatDateTime(lastMaint.endTs);
+                html += `
+                    <div class="countdown-item ended">
+                        <div class="item-title"><span class="icon">🔧</span><span>${lastMaint.title}</span></div>
+                        <div class="item-status">
+                            <span class="status-indicator"><span class="status-icon">✅</span><span class="time-highlight success">Completed</span></span>
+                            <span>·</span>
+                            <a href="${lastMaint.link}" target="_blank" class="link">More details<span>→</span></a>
+                        </div>
+                        <div class="item-status" style="margin-top: 8px; font-size: 12px; opacity: 0.7;"><span>Ended: ${endDate}</span></div>
+                    </div>
+                `;
+            }
+            
+            // Example events
+            html += `
                 <div class="countdown-item active">
                     <div class="item-title"><span class="icon">🗓️</span><span>Valentione's Day</span></div>
                     <div class="item-status"><span class="status-indicator"><span class="status-icon">🎉</span><span>Ending <span class="time-highlight success">in 10 days</span></span></span><span>·</span><a href="#" class="link">More details<span>→</span></a></div>
@@ -147,20 +215,29 @@
                     <div class="item-status"><span class="status-indicator"><span class="status-icon">✅</span><span class="time-highlight success">Currently available</span></span></div>
                 </div>
             `;
+            
+            content.innerHTML = html;
         }
+        
         function showError(message) {
             document.getElementById('content').innerHTML = `<div class="error"><strong>Error loading data:</strong> ${message}</div>`;
         }
+        
         async function fetchData() {
             try {
-                const response = await fetch(API_URL + '?t=' + Date.now());
-                if (!response.ok) throw new Error('Failed to fetch');
-                const data = await response.json();
-                renderMaintenance(data);
+                const [apiResponse, lastMaint] = await Promise.all([
+                    fetch(API_URL + '?t=' + Date.now()),
+                    fetchLastMaintenance()
+                ]);
+                
+                if (!apiResponse.ok) throw new Error('Failed to fetch API');
+                const data = await apiResponse.json();
+                renderMaintenance(data, lastMaint);
             } catch (error) {
                 showError(error.message);
             }
         }
+        
         fetchData();
         setInterval(fetchData, 60000);
     </script>
