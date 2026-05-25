@@ -1,18 +1,32 @@
 {
-  "version": "2.0.0",
-  "lastUpdated": 1777080468,
+  "version": "2.1.0",
+  "lastUpdated": 1777363671,
   "source": "lodestonenews.com",
   "maintenance": {
     "title": "All Worlds Maintenance (Apr. 27)",
     "start": 1777345200,
     "end": 1777370400,
-    "url": "https://na.finalfantasyxiv.com/lodestone/news/detail/a61d9efab70d940fc74e8e2ea85dcb9e9d3b9eb0"
+    "url": "https://na.finalfantasyxiv.com/lodestone/news/detail/a61d9efab70d940fc74e8e2ea85dcb9e9d3b9eb0",
+    "urls": {
+      "na": "https://na.finalfantasyxiv.com/lodestone/news/detail/a61d9efab70d940fc74e8e2ea85dcb9e9d3b9eb0",
+      "eu": "https://eu.finalfantasyxiv.com/lodestone/news/detail/a61d9efab70d940fc74e8e2ea85dcb9e9d3b9eb0",
+      "jp": "https://jp.finalfantasyxiv.com/lodestone/news/detail/a61d9efab70d940fc74e8e2ea85dcb9e9d3b9eb0",
+      "fr": "https://fr.finalfantasyxiv.com/lodestone/news/detail/a61d9efab70d940fc74e8e2ea85dcb9e9d3b9eb0",
+      "de": "https://de.finalfantasyxiv.com/lodestone/news/detail/a61d9efab70d940fc74e8e2ea85dcb9e9d3b9eb0"
+    }
   },
   "lastMaintenance": {
     "title": "All Worlds Maintenance (Mar. 23): Follow-up",
     "start": 1774332000,
     "end": 1774341900,
-    "url": "https://na.finalfantasyxiv.com/lodestone/news/detail/9a352a4219b25c9a5ef56e0c5b7cf08fa5145542"
+    "url": "https://na.finalfantasyxiv.com/lodestone/news/detail/9a352a4219b25c9a5ef56e0c5b7cf08fa5145542",
+    "urls": {
+      "na": "https://na.finalfantasyxiv.com/lodestone/news/detail/9a352a4219b25c9a5ef56e0c5b7cf08fa5145542",
+      "eu": "https://eu.finalfantasyxiv.com/lodestone/news/detail/9a352a4219b25c9a5ef56e0c5b7cf08fa5145542",
+      "jp": "https://jp.finalfantasyxiv.com/lodestone/news/detail/9a352a4219b25c9a5ef56e0c5b7cf08fa5145542",
+      "fr": "https://fr.finalfantasyxiv.com/lodestone/news/detail/9a352a4219b25c9a5ef56e0c5b7cf08fa5145542",
+      "de": "https://de.finalfantasyxiv.com/lodestone/news/detail/9a352a4219b25c9a5ef56e0c5b7cf08fa5145542"
+    }
   },
   "events": [],
   "lastEvent": null
