@@ -37,42 +37,67 @@ def fetch_all_regions(category: str) -> Dict[str, List[Dict]]:
     return {region: fetch_api(category, region) for region in REGIONS}
 
 
-def _lodestone_path(url: str) -> Optional[str]:
-    """
-    Extract the article path after the regional subdomain from a Lodestone URL.
-
-    Example:
-        "https://na.finalfantasyxiv.com/lodestone/news/detail/abc123"
-        → "/lodestone/news/detail/abc123"
-
-    The path segment (including the article ID) is identical across all Lodestone
-    regions for the same article, making it a reliable cross-region match key.
-    """
-    m = re.match(r"https://\w+\.finalfantasyxiv\.com(/lodestone/.+)", url)
-    return m.group(1) if m else None
+def _parse_ts(iso: str) -> Optional[int]:
+    """Parse an ISO-8601 datetime string (with optional trailing Z) to a UNIX timestamp."""
+    try:
+        return int(datetime.fromisoformat(iso.replace("Z", "+00:00")).timestamp())
+    except Exception:
+        return None
 
 
-def build_regional_urls(
-    na_url: str, region_items: Dict[str, List[Dict]]
+def build_maintenance_regional_urls(
+    na_start_ts: int, na_end_ts: int, region_items: Dict[str, List[Dict]]
 ) -> Dict[str, Optional[str]]:
     """
-    For a given canonical (NA) article URL, find the corresponding URL for each
-    supported region by looking up that article's path in each region's feed data.
+    Find the Lodestone maintenance article URL for each region by matching on the
+    (start_ts, end_ts) pair.
 
-    Matching is done by comparing the article path (e.g. /lodestone/news/detail/{id}),
-    which Square Enix keeps consistent across Lodestone regions.  A region URL is
-    only emitted when the article actually appears in that region's fetched feed;
-    no URL is fabricated by blind hostname substitution.  If an article is absent
-    from a region's feed the value is null.
+    Lodestone article IDs differ across regions, so the URL path cannot be used as
+    a match key.  The maintenance window (start and end times) is identical for all
+    regions since Square Enix takes every region down simultaneously, making it a
+    reliable cross-region identifier.  A region URL is only emitted when an exact
+    match is found in that region's feed; no URL is fabricated.
     """
-    target_path = _lodestone_path(na_url)
     urls: Dict[str, Optional[str]] = {}
     for region in REGIONS:
         urls[region] = None
-        if target_path is None:
-            continue
         for item in region_items.get(region, []):
-            if _lodestone_path(item.get("url", "")) == target_path:
+            s = _parse_ts(item.get("start", ""))
+            e = _parse_ts(item.get("end", ""))
+            if s == na_start_ts and e == na_end_ts:
+                urls[region] = item["url"]
+                break
+    return urls
+
+
+# Maximum seconds between two articles' publish times to consider them the same
+# seasonal-event announcement across regions.  24 hours is generous but safe:
+# seasonal events are infrequent, so no two distinct events will be published
+# within this window at the same time.
+_TOPIC_MATCH_WINDOW = 86400  # 24 hours
+
+
+def build_topic_regional_urls(
+    na_pub_ts: int, region_items: Dict[str, List[Dict]]
+) -> Dict[str, Optional[str]]:
+    """
+    Find the Lodestone topics/event article URL for each region by matching on
+    publication timestamp.
+
+    Lodestone article IDs and titles both differ across regions (titles are
+    localised into Japanese, French, German, etc.), so neither can be used as a
+    reliable cross-region key.  Square Enix publishes the same seasonal-event
+    announcement to all regions within a short window; matching on publish time
+    within ±24 hours is therefore reliable for the infrequent seasonal events
+    tracked by this tool.  A region URL is only emitted when a sufficiently
+    close match is found in that region's feed; no URL is fabricated.
+    """
+    urls: Dict[str, Optional[str]] = {}
+    for region in REGIONS:
+        urls[region] = None
+        for item in region_items.get(region, []):
+            pub_ts = _parse_ts(item.get("time", ""))
+            if pub_ts is not None and abs(pub_ts - na_pub_ts) <= _TOPIC_MATCH_WINDOW:
                 urls[region] = item["url"]
                 break
     return urls
@@ -233,7 +258,9 @@ def parse_maintenance(
                 # Deprecated – use urls instead.  Kept for one version of
                 # backward compatibility; will be removed in a future release.
                 "url": item["url"],
-                "urls": build_regional_urls(item["url"], maint_by_region),
+                "urls": build_maintenance_regional_urls(
+                    start_ts, end_ts, maint_by_region
+                ),
             }
 
             if end_ts > now:
@@ -298,6 +325,8 @@ def main() -> None:
             print("    ⚠️ Skipping — could not parse dates")
             continue
 
+        na_pub_ts = _parse_ts(item.get("time", ""))
+
         evt = {
             "title": title,
             "start": start,
@@ -305,7 +334,11 @@ def main() -> None:
             # Deprecated – use urls instead.  Kept for one version of
             # backward compatibility; will be removed in a future release.
             "url": item["url"],
-            "urls": build_regional_urls(item["url"], topics_by_region),
+            "urls": (
+                build_topic_regional_urls(na_pub_ts, topics_by_region)
+                if na_pub_ts is not None
+                else {r: None for r in REGIONS}
+            ),
             "category": "seasonal",
         }
 

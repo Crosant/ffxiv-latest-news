@@ -104,7 +104,9 @@ const link = event.urls.eu ?? event.urls.na;
 
 - **Every 6 hours** via GitHub Actions
 - Fetches from [lodestonenews.com](https://lodestonenews.com) API for **all 5 regions**
-- Matches articles across regions by their shared Lodestone article path (not host substitution)
+- Matches articles across regions using content-aware keys (not article ID or hostname substitution):
+  - *Maintenance*: matched by `(start_ts, end_ts)` — the maintenance window is identical for all regions
+  - *Events/Topics*: matched by publication timestamp within ±24 hours
 - Follows "Read on" links to scrape actual event dates from Lodestone special pages
 - Automatically removes expired events
 
@@ -220,7 +222,9 @@ foreach (var eventItem in root.GetProperty("events").EnumerateArray())
 
 1. **GitHub Actions** runs `parse_news.py` every 6 hours
 2. Script fetches from lodestonenews.com Topics and Maintenance APIs **for all 5 regions**
-3. Articles are matched across regions by their shared Lodestone article path (e.g. `/lodestone/news/detail/{id}`) — no blind hostname substitution
+3. Articles are matched across regions using content-aware keys — no article IDs or blind hostname substitution:
+   - *Maintenance*: matched by `(start_ts, end_ts)` — the maintenance window is global
+   - *Events/Topics*: matched by publication timestamp within a ±24 h window
 4. For seasonal events:
    - Detects events by keywords (Valentione's, Heavensturn, etc.)
    - Follows "Read on" redirect links (`sqex.to` → actual event page)
@@ -245,10 +249,15 @@ foreach (var eventItem in root.GetProperty("events").EnumerateArray())
 
 ## 🌐 Regional URL Notes
 
-Square Enix publishes each news/maintenance article to all Lodestone regions using the
-same article ID (path segment).  The generator fetches each region's feed independently
-via the lodestonenews.com API and matches by article path — so a regional URL only
-appears in the output when it is confirmed present in that region's feed.
+Square Enix publishes each news/maintenance article to all Lodestone regions, but with
+**different article IDs** per region.  The generator therefore cannot match by URL path.
+Instead it uses content-aware keys fetched independently from each region's feed:
+
+- **Maintenance** — matched by `(start_ts, end_ts)`.  Global maintenances share the
+  exact same window across all regions, making this a precise identifier.
+- **Events/Topics** — matched by publication timestamp within ±24 hours.  Seasonal
+  events are infrequent enough that no two distinct events are ever published within
+  that window simultaneously.
 
 If a region's feed is temporarily unavailable or does not carry a particular article,
 the corresponding `urls` value will be `null` rather than a fabricated URL.
