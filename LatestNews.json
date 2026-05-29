@@ -8,10 +8,10 @@
     "url": "https://na.finalfantasyxiv.com/lodestone/news/detail/5c2bb994bb4ea2c665ab87552a0853d9e941b2e8",
     "urls": {
       "na": "https://na.finalfantasyxiv.com/lodestone/news/detail/4fc12f17d6d13aeaa52fbd74f61d6094bb9c8fce",
-      "eu": null,
+      "eu": "https://eu.finalfantasyxiv.com/lodestone/news/detail/84bc407c8e63ece142ca0958cb3a1933998bc008",
       "jp": null,
       "fr": null,
-      "de": null
+      "de": "https://de.finalfantasyxiv.com/lodestone/news/detail/bbc14a5fb3414b2c48bff352d60a60e85de77e67"
     }
   },
   "lastMaintenance": {
@@ -57,5 +57,5 @@
     },
     "category": "seasonal"
   },
-  "lastUpdated": 1780026954
+  "lastUpdated": 1780041732
 }
