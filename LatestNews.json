@@ -57,19 +57,6 @@
       "category": "seasonal"
     }
   ],
-  "lastEvent": {
-    "title": "The Maiden's Rhapsody Returns May 8!",
-    "start": 1778227200,
-    "end": 1779721140,
-    "url": "https://na.finalfantasyxiv.com/lodestone/topics/detail/2e44e0fa9b12c057ed8ab12b5af966c452eeddd9",
-    "urls": {
-      "na": "https://na.finalfantasyxiv.com/lodestone/topics/detail/2e44e0fa9b12c057ed8ab12b5af966c452eeddd9",
-      "eu": "https://eu.finalfantasyxiv.com/lodestone/topics/detail/2d04d7954b521cfde43ad189e809ffaf01c0657f",
-      "jp": null,
-      "fr": "https://fr.finalfantasyxiv.com/lodestone/topics/detail/ff2a18a48c38d3bb8293bdca9f3ea120eed19e6b",
-      "de": "https://de.finalfantasyxiv.com/lodestone/topics/detail/e90a806ea6427980c4b3cd926a9ec7672df98c26"
-    },
-    "category": "seasonal"
-  },
-  "lastUpdated": 1781856113
+  "lastEvent": null,
+  "lastUpdated": 1781865338
 }
