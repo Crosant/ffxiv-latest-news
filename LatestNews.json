@@ -17,20 +17,6 @@
   },
   "events": [
     {
-      "title": "The Make It Rain Campaign Begins May 29!",
-      "start": 1780041600,
-      "end": 1782313140,
-      "url": "https://na.finalfantasyxiv.com/lodestone/topics/detail/a0335376ad339be407f2bda6c3ae150c7ac5df06",
-      "urls": {
-        "na": "https://na.finalfantasyxiv.com/lodestone/topics/detail/1f55d9ac626ac85511600500236a47b8539414bb",
-        "eu": "https://eu.finalfantasyxiv.com/lodestone/topics/detail/06706c8320406ea0defc359bbe74e5d3a0fc17b2",
-        "jp": "https://jp.finalfantasyxiv.com/lodestone/topics/detail/e2c1d47df650c2e4b0e803143f660ee732f67109",
-        "fr": "https://fr.finalfantasyxiv.com/lodestone/topics/detail/ae50e4f247e9e49131ff49e33a46b91a1bfeb61c",
-        "de": "https://de.finalfantasyxiv.com/lodestone/topics/detail/b7bb6c9d74ea84a6ef380261f5424ae007e5b30b"
-      },
-      "category": "seasonal"
-    },
-    {
       "title": "Breaking Brick Mountains Returns on June 25!",
       "start": 1782374400,
       "end": 1783954740,
@@ -45,6 +31,19 @@
       "category": "seasonal"
     }
   ],
-  "lastEvent": null,
-  "lastUpdated": 1782212870
+  "lastEvent": {
+    "title": "The Make It Rain Campaign Begins May 29!",
+    "start": 1780041600,
+    "end": 1782313140,
+    "url": "https://na.finalfantasyxiv.com/lodestone/topics/detail/a0335376ad339be407f2bda6c3ae150c7ac5df06",
+    "urls": {
+      "na": "https://na.finalfantasyxiv.com/lodestone/topics/detail/1f55d9ac626ac85511600500236a47b8539414bb",
+      "eu": "https://eu.finalfantasyxiv.com/lodestone/topics/detail/06706c8320406ea0defc359bbe74e5d3a0fc17b2",
+      "jp": "https://jp.finalfantasyxiv.com/lodestone/topics/detail/e2c1d47df650c2e4b0e803143f660ee732f67109",
+      "fr": "https://fr.finalfantasyxiv.com/lodestone/topics/detail/ae50e4f247e9e49131ff49e33a46b91a1bfeb61c",
+      "de": "https://de.finalfantasyxiv.com/lodestone/topics/detail/b7bb6c9d74ea84a6ef380261f5424ae007e5b30b"
+    },
+    "category": "seasonal"
+  },
+  "lastUpdated": 1782313301
 }
