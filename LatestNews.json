@@ -15,22 +15,20 @@
       "de": "https://de.finalfantasyxiv.com/lodestone/news/detail/70302b2f1c4f9da68e33409f28abdb87507c1647"
     }
   },
-  "events": [
-    {
-      "title": "Breaking Brick Mountains Returns on June 25!",
-      "start": 1782374400,
-      "end": 1783954740,
-      "url": "https://na.finalfantasyxiv.com/lodestone/topics/detail/53409c75eddec473f0554fe84d6169c4ba5edc97",
-      "urls": {
-        "na": "https://na.finalfantasyxiv.com/lodestone/topics/detail/edf1bafe70a7cec4d1393186d2a588bc24814bf9",
-        "eu": "https://eu.finalfantasyxiv.com/lodestone/topics/detail/015087895f7ea652177d3a1477c40ced6bd55de7",
-        "jp": "https://jp.finalfantasyxiv.com/lodestone/topics/detail/872e673999d74ae7f3118af87d647aa60a3832dd",
-        "fr": "https://fr.finalfantasyxiv.com/lodestone/topics/detail/2a823f54ac63492cfd492754a24dda8205717bb4",
-        "de": "https://de.finalfantasyxiv.com/lodestone/topics/detail/1ac3a901f92381050188dc8ae50984f6cb4144d0"
-      },
-      "category": "seasonal"
-    }
-  ],
-  "lastEvent": null,
-  "lastUpdated": 1783674676
+  "events": [],
+  "lastEvent": {
+    "title": "Breaking Brick Mountains Returns on June 25!",
+    "start": 1782374400,
+    "end": 1783954740,
+    "url": "https://na.finalfantasyxiv.com/lodestone/topics/detail/53409c75eddec473f0554fe84d6169c4ba5edc97",
+    "urls": {
+      "na": "https://na.finalfantasyxiv.com/lodestone/topics/detail/edf1bafe70a7cec4d1393186d2a588bc24814bf9",
+      "eu": "https://eu.finalfantasyxiv.com/lodestone/topics/detail/015087895f7ea652177d3a1477c40ced6bd55de7",
+      "jp": "https://jp.finalfantasyxiv.com/lodestone/topics/detail/872e673999d74ae7f3118af87d647aa60a3832dd",
+      "fr": "https://fr.finalfantasyxiv.com/lodestone/topics/detail/2a823f54ac63492cfd492754a24dda8205717bb4",
+      "de": "https://de.finalfantasyxiv.com/lodestone/topics/detail/1ac3a901f92381050188dc8ae50984f6cb4144d0"
+    },
+    "category": "seasonal"
+  },
+  "lastUpdated": 1783955012
 }
