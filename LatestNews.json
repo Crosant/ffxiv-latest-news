@@ -24,11 +24,11 @@
     "urls": {
       "na": "https://na.finalfantasyxiv.com/lodestone/topics/detail/edf1bafe70a7cec4d1393186d2a588bc24814bf9",
       "eu": "https://eu.finalfantasyxiv.com/lodestone/topics/detail/015087895f7ea652177d3a1477c40ced6bd55de7",
-      "jp": "https://jp.finalfantasyxiv.com/lodestone/topics/detail/872e673999d74ae7f3118af87d647aa60a3832dd",
+      "jp": null,
       "fr": "https://fr.finalfantasyxiv.com/lodestone/topics/detail/2a823f54ac63492cfd492754a24dda8205717bb4",
       "de": "https://de.finalfantasyxiv.com/lodestone/topics/detail/1ac3a901f92381050188dc8ae50984f6cb4144d0"
     },
     "category": "seasonal"
   },
-  "lastUpdated": 1783955012
+  "lastUpdated": 1784105471
 }
