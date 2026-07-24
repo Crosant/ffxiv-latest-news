@@ -1,7 +1,19 @@
 {
   "version": "2.1.0",
   "source": "lodestonenews.com",
-  "maintenance": null,
+  "maintenance": {
+    "title": "All Worlds Maintenance (Jul. 27)",
+    "start": 1785218400,
+    "end": 1785232800,
+    "url": "https://na.finalfantasyxiv.com/lodestone/news/detail/9eeba70ae0bd4492867f1cd4e3cd09015d45f401",
+    "urls": {
+      "na": "https://na.finalfantasyxiv.com/lodestone/news/detail/9eeba70ae0bd4492867f1cd4e3cd09015d45f401",
+      "eu": "https://eu.finalfantasyxiv.com/lodestone/news/detail/224e375092f6a6bad8f05e715bf092efcfb76606",
+      "jp": null,
+      "fr": null,
+      "de": "https://de.finalfantasyxiv.com/lodestone/news/detail/6f6d8d0f1f97ec8a21a49ae8e7be67008396e84a"
+    }
+  },
   "lastMaintenance": {
     "title": "All Worlds Maintenance (Jun. 22): Follow-up",
     "start": 1782194400,
@@ -12,10 +24,10 @@
       "eu": "https://eu.finalfantasyxiv.com/lodestone/news/detail/428f7ef07c734619a675d3644b4f9c50ab1b9658",
       "jp": null,
       "fr": null,
-      "de": null
+      "de": "https://de.finalfantasyxiv.com/lodestone/news/detail/70302b2f1c4f9da68e33409f28abdb87507c1647"
     }
   },
   "events": [],
   "lastEvent": null,
-  "lastUpdated": 1784869635
+  "lastUpdated": 1784876219
 }
