@@ -1,33 +1,21 @@
 {
   "version": "2.1.0",
   "source": "lodestonenews.com",
-  "maintenance": {
-    "title": "All Worlds Maintenance (Jul. 27)",
-    "start": 1785218400,
-    "end": 1785232800,
-    "url": "https://na.finalfantasyxiv.com/lodestone/news/detail/9eeba70ae0bd4492867f1cd4e3cd09015d45f401",
-    "urls": {
-      "na": "https://na.finalfantasyxiv.com/lodestone/news/detail/9eeba70ae0bd4492867f1cd4e3cd09015d45f401",
-      "eu": "https://eu.finalfantasyxiv.com/lodestone/news/detail/224e375092f6a6bad8f05e715bf092efcfb76606",
-      "jp": null,
-      "fr": null,
-      "de": "https://de.finalfantasyxiv.com/lodestone/news/detail/6f6d8d0f1f97ec8a21a49ae8e7be67008396e84a"
-    }
-  },
+  "maintenance": null,
   "lastMaintenance": {
-    "title": "All Worlds Maintenance (Jun. 22): Follow-up",
-    "start": 1782194400,
-    "end": 1782207900,
-    "url": "https://na.finalfantasyxiv.com/lodestone/news/detail/e5da770bbf5ab920530230716b9a3d3c47f92730",
+    "title": "All Worlds Maintenance (Jul. 27): Follow-up",
+    "start": 1785218400,
+    "end": 1785230400,
+    "url": "https://na.finalfantasyxiv.com/lodestone/news/detail/cb39397d0ed5420c2a2e177b865da1bccdd6e464",
     "urls": {
-      "na": "https://na.finalfantasyxiv.com/lodestone/news/detail/e5da770bbf5ab920530230716b9a3d3c47f92730",
-      "eu": "https://eu.finalfantasyxiv.com/lodestone/news/detail/428f7ef07c734619a675d3644b4f9c50ab1b9658",
+      "na": "https://na.finalfantasyxiv.com/lodestone/news/detail/a5590b073b7f426a2f10c4fbee7a0f34691fea1e",
+      "eu": "https://eu.finalfantasyxiv.com/lodestone/news/detail/1aff03e42edc8addbb312d09f6ce8c1cf4f738d6",
       "jp": null,
       "fr": null,
-      "de": "https://de.finalfantasyxiv.com/lodestone/news/detail/70302b2f1c4f9da68e33409f28abdb87507c1647"
+      "de": "https://de.finalfantasyxiv.com/lodestone/news/detail/ccd0b8d86d012c9046f474bf89c592b7429164e6"
     }
   },
   "events": [],
   "lastEvent": null,
-  "lastUpdated": 1784876219
+  "lastUpdated": 1785235918
 }
