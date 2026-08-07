@@ -20,6 +20,12 @@ SEASONAL_KEYWORDS = [
     "Maiden's Rhapsody", "Returns",
 ]
 
+# How long (seconds) a maintenance with no announced end time is still
+# considered ongoing after its start.  Emergency maintenances rarely last more
+# than a few hours; after this window a null-end entry is treated as completed
+# so a stale article cannot block newer maintenances indefinitely.
+NO_END_ONGOING_WINDOW = 86400  # 24 hours
+
 
 def fetch_api(category: str, locale: str = "na") -> List[Dict]:
     try:
@@ -47,7 +53,7 @@ def _parse_ts(iso: str) -> Optional[int]:
 
 
 def build_maintenance_regional_urls(
-    na_start_ts: int, na_end_ts: int, region_items: Dict[str, List[Dict]]
+    start_ts: int, end_ts: Optional[int], region_items: Dict[str, List[Dict]]
 ) -> Dict[str, Optional[str]]:
     """
     Find the Lodestone maintenance article URL for each region by matching on the
@@ -58,14 +64,17 @@ def build_maintenance_regional_urls(
     regions since Square Enix takes every region down simultaneously, making it a
     reliable cross-region identifier.  A region URL is only emitted when an exact
     match is found in that region's feed; no URL is fabricated.
+
+    end_ts may be None (emergency maintenances are often announced without an end
+    time); in that case a match requires the region item to also lack an end time.
     """
     urls: Dict[str, Optional[str]] = {}
     for region in REGIONS:
         urls[region] = None
         for item in region_items.get(region, []):
-            s = _parse_ts(item.get("start", ""))
-            e = _parse_ts(item.get("end", ""))
-            if s == na_start_ts and e == na_end_ts:
+            s = _parse_ts(item.get("start") or "")
+            e = _parse_ts(item.get("end") or "")
+            if s == start_ts and e == end_ts:
                 urls[region] = item["url"]
                 break
     return urls
@@ -235,66 +244,94 @@ def scrape_event_dates(url: str) -> Tuple[Optional[int], Optional[int]]:
         return None, None
 
 
+def classify_maintenance(title: str) -> Optional[str]:
+    """
+    Classify a maintenance article title.
+
+    Returns "scheduled" for regular "All Worlds Maintenance" announcements,
+    "emergency" for emergency maintenances (e.g. "Emergency Maintenance (Aug. 7)"
+    or "[Chaos] Emergency Server Maintenance"), and None for anything else.
+    """
+    lower = title.lower()
+    if "all worlds maintenance" in lower:
+        return "scheduled"
+    if "emergency" in lower and "maintenance" in lower:
+        return "emergency"
+    return None
+
+
 def parse_maintenance(
     maint_by_region: Dict[str, List[Dict]], now: int
 ) -> Tuple[Optional[Dict], Optional[Dict]]:
     """
     Select the most-recently published upcoming and last completed
-    "All Worlds Maintenance" entries and annotate them with per-region URLs.
+    "All Worlds Maintenance" / emergency maintenance entries and annotate them
+    with per-region URLs.
 
     maint_by_region is a mapping of region → list of items as returned by
-    fetch_all_regions("maintenance").  The NA feed is used as the canonical
-    source; other regions are matched by article path to populate urls.
+    fetch_all_regions("maintenance").  All regions are scanned (NA first, so it
+    remains the canonical source when an article exists in multiple regions);
+    entries seen in multiple regions are deduplicated by their maintenance
+    window (start/end timestamp pair).
+    This ensures emergency maintenances announced only on EU/JP/etc. feeds are
+    still detected.
     """
     current, last = None, None
-    na_items = maint_by_region.get("na", [])
+    seen_windows: set = set()
 
-    for item in na_items:
-        if "All Worlds Maintenance" not in item.get("title", ""):
-            continue
+    for region in REGIONS:
+        for item in maint_by_region.get(region, []):
+            m_type = classify_maintenance(item.get("title", ""))
+            if m_type is None:
+                continue
 
-        try:
-            start_ts = int(
-                datetime.fromisoformat(
-                    item["start"].replace("Z", "+00:00")
-                ).timestamp()
-            )
-            end_ts = int(
-                datetime.fromisoformat(
-                    item["end"].replace("Z", "+00:00")
-                ).timestamp()
-            )
-            pub_ts = int(
-                datetime.fromisoformat(
-                    item["time"].replace("Z", "+00:00")
-                ).timestamp()
-            )
+            try:
+                start_ts = _parse_ts(item.get("start") or "")
+                if start_ts is None:
+                    continue
+                # Emergency maintenances are often announced without an end
+                # time; treat a missing end as "ongoing".
+                end_ts = _parse_ts(item.get("end") or "")
+                pub_ts = _parse_ts(item.get("time") or "")
+                if pub_ts is None:
+                    continue
 
-            m_data = {
-                "title": item["title"],
-                "start": start_ts,
-                "end": end_ts,
-                "pub": pub_ts,
-                # Deprecated – use urls instead.  Kept for one version of
-                # backward compatibility; will be removed in a future release.
-                "url": item["url"],
-                "urls": build_maintenance_regional_urls(
-                    start_ts, end_ts, maint_by_region
-                ),
-            }
+                if (start_ts, end_ts) in seen_windows:
+                    continue
+                seen_windows.add((start_ts, end_ts))
 
-            if end_ts > now:
-                if not current or pub_ts > current["pub"]:
-                    current = m_data
-            else:
-                if not last or pub_ts > last["pub"]:
-                    last = m_data
+                m_data = {
+                    "title": item["title"],
+                    "type": m_type,
+                    "start": start_ts,
+                    "end": end_ts,
+                    "pub": pub_ts,
+                    # Deprecated – use urls instead.  Kept for one version of
+                    # backward compatibility; will be removed in a future release.
+                    "url": item["url"],
+                    "urls": build_maintenance_regional_urls(
+                        start_ts, end_ts, maint_by_region
+                    ),
+                }
 
-        except Exception as e:
-            print(
-                f" ✗ Maintenance parse error for '{item.get('title', '')}': {e}"
-            )
-            continue
+                if end_ts is not None:
+                    ongoing = end_ts > now
+                else:
+                    # No announced end: treat as ongoing only within a bounded
+                    # window after the start so stale articles age out.
+                    ongoing = now - start_ts <= NO_END_ONGOING_WINDOW
+                if ongoing:
+                    if not current or pub_ts > current["pub"]:
+                        current = m_data
+                else:
+                    if not last or pub_ts > last["pub"]:
+                        last = m_data
+
+            except Exception as e:
+                print(
+                    f" ✗ Maintenance parse error for '{item.get('title', '')}': {e}"
+                )
+                continue
 
     if current:
         current = {k: v for k, v in current.items() if k != "pub"}
@@ -306,7 +343,7 @@ def parse_maintenance(
 
 def main() -> None:
     print("=" * 60)
-    print("FFXIV Latest News Updater v2.1.0")
+    print("FFXIV Latest News Updater v2.2.0")
     print("=" * 60)
 
     now = int(datetime.now(timezone.utc).timestamp())
@@ -371,7 +408,7 @@ def main() -> None:
                 print("    ✅ Stored as lastEvent")
 
     output = {
-        "version": "2.1.0",
+        "version": "2.2.0",
         "source": "lodestonenews.com",
         "maintenance": current_maint,
         "lastMaintenance": last_maint,
