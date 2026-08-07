@@ -12,11 +12,12 @@ https://raw.githubusercontent.com/LegendsOfTheGame/ffxiv-latest-news/main/Latest
 
 ```json
 {
-  "version": "2.1.0",
+  "version": "2.2.0",
   "lastUpdated": 1739692800,
   "source": "lodestonenews.com",
   "maintenance": {
     "title": "All Worlds Maintenance (Feb. 16)",
+    "type": "scheduled",
     "start": 1739692800,
     "end": 1739703600,
     "url": "https://na.finalfantasyxiv.com/lodestone/news/detail/...",
@@ -52,10 +53,11 @@ https://raw.githubusercontent.com/LegendsOfTheGame/ffxiv-latest-news/main/Latest
 - **version** (string): API format version
 - **lastUpdated** (number): UNIX timestamp of the last meaningful data update (UTC)
 - **source** (string): Data source attribution
-- **maintenance** (object|null): Next scheduled maintenance, or null if none
+- **maintenance** (object|null): Next upcoming or ongoing maintenance, or null if none
   - **maintenance.title** (string): Maintenance title
+  - **maintenance.type** (string): `"scheduled"` for regular All Worlds maintenances, `"emergency"` for emergency maintenances
   - **maintenance.start** (number): Start time (UNIX timestamp, UTC)
-  - **maintenance.end** (number): End time (UNIX timestamp, UTC)
+  - **maintenance.end** (number|null): End time (UNIX timestamp, UTC); `null` when no end time has been announced yet (common for emergency maintenances) — treat as ongoing
   - **maintenance.url** (string): ⚠️ *Deprecated* – NA Lodestone URL; use `urls.na` instead
   - **maintenance.urls** (object): Per-region Lodestone URLs (see [Regions](#-regions))
 - **lastMaintenance** (object|null): Most recent completed maintenance (same shape as `maintenance`)
@@ -107,6 +109,7 @@ const link = event.urls.eu ?? event.urls.na;
 - Matches articles across regions using content-aware keys (not article ID or hostname substitution):
   - *Maintenance*: matched by `(start_ts, end_ts)` — the maintenance window is identical for all regions
   - *Events/Topics*: matched by publication timestamp within ±24 hours
+- Detects both scheduled ("All Worlds Maintenance") and emergency maintenances, scanning **all** region feeds so region-specific emergency announcements (e.g. EU-only) are not missed
 - Follows "Read on" links to scrape actual event dates from Lodestone special pages
 - Automatically removes expired events
 

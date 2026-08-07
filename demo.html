@@ -158,14 +158,18 @@ html += `
 </div>
 `;
 } else {
-const { title, start, end } = data.maintenance;
+const { title, start, end, type } = data.maintenance;
 const url = regionUrl(data.maintenance, region);
+const icon = type === 'emergency' ? '🚨' : '🔧';
 let statusHTML = '';
 let itemClass = 'maintenance';
 
 if (now < start) {
 const timeUntil = timeAgo(start);
 statusHTML = `<span class="status-indicator"><span class="status-icon">⚠️</span><span>Starting <span class="time-highlight warning">in ${timeUntil}</span></span></span>`;
+} else if (now >= start && end == null) {
+statusHTML = `<span class="status-indicator"><span class="status-icon">🔴</span><span>Servers down - <span class="time-highlight danger">End time not yet announced</span></span></span>`;
+itemClass = 'maintenance active';
 } else if (now >= start && now < end) {
 const timeRemaining = timeAgo(end);
 statusHTML = `<span class="status-indicator"><span class="status-icon">🔴</span><span>Servers down - Ending <span class="time-highlight danger">in ${timeRemaining}</span></span></span>`;
@@ -173,14 +177,14 @@ itemClass = 'maintenance active';
 }
 
 const startDate = formatDateTime(start);
-const endDate = formatDateTime(end);
+const endDate = end == null ? 'TBD' : formatDateTime(end);
 const linkHtml = url
   ? `<a href="${url}" target="_blank" class="link">More details<span>→</span></a>`
   : `<span class="time-highlight muted">No ${region.toUpperCase()} link available</span>`;
 
 html += `
 <div class="countdown-item ${itemClass}">
-<div class="item-title"><span class="icon">🔧</span><span>${title}</span></div>
+<div class="item-title"><span class="icon">${icon}</span><span>${title}</span></div>
 <div class="item-status">${statusHTML}<span>·</span>${linkHtml}</div>
 <div class="item-status" style="margin-top: 8px; font-size: 12px; opacity: 0.7;"><span>Start: ${startDate}</span><span>·</span><span>End: ${endDate}</span></div>
 </div>
