@@ -57,7 +57,7 @@ https://raw.githubusercontent.com/LegendsOfTheGame/ffxiv-latest-news/main/Latest
   - **maintenance.title** (string): Maintenance title
   - **maintenance.type** (string): `"scheduled"` for regular All Worlds maintenances, `"emergency"` for emergency maintenances
   - **maintenance.start** (number): Start time (UNIX timestamp, UTC)
-  - **maintenance.end** (number|null): End time (UNIX timestamp, UTC); `null` when no end time has been announced yet (common for emergency maintenances) — treat as ongoing
+  - **maintenance.end** (number|null): End time (UNIX timestamp, UTC); `null` when no end time has been announced yet (common for emergency maintenances). Consumers should handle `null` and use `start` vs current time to distinguish upcoming vs in-progress maintenances.
   - **maintenance.url** (string): ⚠️ *Deprecated* – NA Lodestone URL; use `urls.na` instead
   - **maintenance.urls** (object): Per-region Lodestone URLs (see [Regions](#-regions))
 - **lastMaintenance** (object|null): Most recent completed maintenance (same shape as `maintenance`)
