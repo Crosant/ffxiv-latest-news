@@ -193,16 +193,17 @@ html += `
 
 // Last Maintenance Section
 if (data.lastMaintenance) {
-const { title, end } = data.lastMaintenance;
+const { title, end, type } = data.lastMaintenance;
 const url = regionUrl(data.lastMaintenance, region);
-const endDate = formatDateTime(end);
+const lastIcon = type === 'emergency' ? '🚨' : '🔧';
+const endDate = end == null ? 'Unknown' : formatDateTime(end);
 const linkHtml = url
   ? `<a href="${url}" target="_blank" class="link">More details<span>→</span></a>`
   : `<span class="time-highlight muted">No ${region.toUpperCase()} link available</span>`;
 
 html += `
 <div class="countdown-item ended">
-<div class="item-title"><span class="icon">🔧</span><span>${title}</span></div>
+<div class="item-title"><span class="icon">${lastIcon}</span><span>${title}</span></div>
 <div class="item-status">
 <span class="status-indicator"><span class="status-icon">✅</span><span class="time-highlight success">Completed</span></span>
 <span>·</span>
