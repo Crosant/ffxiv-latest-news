@@ -20,6 +20,12 @@ SEASONAL_KEYWORDS = [
     "Maiden's Rhapsody", "Returns",
 ]
 
+# How long (seconds) a maintenance with no announced end time is still
+# considered ongoing after its start.  Emergency maintenances rarely last more
+# than a few hours; after this window a null-end entry is treated as completed
+# so a stale article cannot block newer maintenances indefinitely.
+NO_END_ONGOING_WINDOW = 86400  # 24 hours
+
 
 def fetch_api(category: str, locale: str = "na") -> List[Dict]:
     try:
@@ -308,7 +314,13 @@ def parse_maintenance(
                     ),
                 }
 
-                if end_ts is None or end_ts > now:
+                if end_ts is not None:
+                    ongoing = end_ts > now
+                else:
+                    # No announced end: treat as ongoing only within a bounded
+                    # window after the start so stale articles age out.
+                    ongoing = now - start_ts <= NO_END_ONGOING_WINDOW
+                if ongoing:
                     if not current or pub_ts > current["pub"]:
                         current = m_data
                 else:
