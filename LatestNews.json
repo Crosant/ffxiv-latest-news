@@ -1,32 +1,19 @@
 {
   "version": "2.2.0",
   "source": "lodestonenews.com",
-  "maintenance": {
-    "title": "All Worlds Emergency Maintenance (Aug. 6-7)",
+  "maintenance": null,
+  "lastMaintenance": {
+    "title": "All Worlds Emergency Maintenance (Aug. 6): Follow-up",
     "type": "emergency",
     "start": 1786082400,
-    "end": 1786096800,
-    "url": "https://na.finalfantasyxiv.com/lodestone/news/detail/a9bc7fcaa86d3899295edb02b11d4211279dd294",
+    "end": 1786096500,
+    "url": "https://na.finalfantasyxiv.com/lodestone/news/detail/e5d67a9d4d9a6dd77f12bb0024b9709e4cc8d13b",
     "urls": {
-      "na": "https://na.finalfantasyxiv.com/lodestone/news/detail/a9bc7fcaa86d3899295edb02b11d4211279dd294",
-      "eu": "https://eu.finalfantasyxiv.com/lodestone/news/detail/f55cdcb9cc7fbd48a03723641bfee1bc778bb730",
+      "na": "https://na.finalfantasyxiv.com/lodestone/news/detail/e5d67a9d4d9a6dd77f12bb0024b9709e4cc8d13b",
+      "eu": "https://eu.finalfantasyxiv.com/lodestone/news/detail/f1ed4585275699348b26473a886c6b3e50ca9d8c",
       "jp": null,
       "fr": null,
-      "de": "https://de.finalfantasyxiv.com/lodestone/news/detail/14caca2d56e6c34de5268e499dd0a3a5c51158c3"
-    }
-  },
-  "lastMaintenance": {
-    "title": "All Worlds Maintenance (Jul. 27): Follow-up",
-    "type": "scheduled",
-    "start": 1785218400,
-    "end": 1785230400,
-    "url": "https://na.finalfantasyxiv.com/lodestone/news/detail/cb39397d0ed5420c2a2e177b865da1bccdd6e464",
-    "urls": {
-      "na": "https://na.finalfantasyxiv.com/lodestone/news/detail/a5590b073b7f426a2f10c4fbee7a0f34691fea1e",
-      "eu": "https://eu.finalfantasyxiv.com/lodestone/news/detail/1aff03e42edc8addbb312d09f6ce8c1cf4f738d6",
-      "jp": null,
-      "fr": null,
-      "de": "https://de.finalfantasyxiv.com/lodestone/news/detail/ccd0b8d86d012c9046f474bf89c592b7429164e6"
+      "de": "https://de.finalfantasyxiv.com/lodestone/news/detail/6f29434fa3daf0f28ae851e8c58c13d591b61a86"
     }
   },
   "events": [
@@ -46,5 +33,5 @@
     }
   ],
   "lastEvent": null,
-  "lastUpdated": 1786092514
+  "lastUpdated": 1786098066
 }
