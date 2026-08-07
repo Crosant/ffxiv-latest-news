@@ -141,6 +141,25 @@ const tz = getTimezoneAbbr();
 return `${dateStr} ${tz}`;
 }
 
+function escapeHtml(text) {
+  return String(text)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
+function sanitizeUrl(url) {
+  if (!url) return null;
+  try {
+    const parsed = new URL(url, window.location.href);
+    return (parsed.protocol === 'http:' || parsed.protocol === 'https:') ? parsed.href : null;
+  } catch {
+    return null;
+  }
+}
+
 function renderMaintenance(data) {
 const content = document.getElementById('content');
 const region = document.getElementById('regionSelect').value;
@@ -159,7 +178,8 @@ html += `
 `;
 } else {
 const { title, start, end, type } = data.maintenance;
-const url = regionUrl(data.maintenance, region);
+const safeTitle = escapeHtml(title);
+const safeUrl = sanitizeUrl(regionUrl(data.maintenance, region));
 const icon = type === 'emergency' ? '🚨' : '🔧';
 let statusHTML = '';
 let itemClass = 'maintenance';
@@ -178,13 +198,13 @@ itemClass = 'maintenance active';
 
 const startDate = formatDateTime(start);
 const endDate = end == null ? 'TBD' : formatDateTime(end);
-const linkHtml = url
-  ? `<a href="${url}" target="_blank" class="link">More details<span>→</span></a>`
+const linkHtml = safeUrl
+  ? `<a href="${safeUrl}" target="_blank" class="link">More details<span>→</span></a>`
   : `<span class="time-highlight muted">No ${region.toUpperCase()} link available</span>`;
 
 html += `
 <div class="countdown-item ${itemClass}">
-<div class="item-title"><span class="icon">${icon}</span><span>${title}</span></div>
+<div class="item-title"><span class="icon">${icon}</span><span>${safeTitle}</span></div>
 <div class="item-status">${statusHTML}<span>·</span>${linkHtml}</div>
 <div class="item-status" style="margin-top: 8px; font-size: 12px; opacity: 0.7;"><span>Start: ${startDate}</span><span>·</span><span>End: ${endDate}</span></div>
 </div>
@@ -194,16 +214,17 @@ html += `
 // Last Maintenance Section
 if (data.lastMaintenance) {
 const { title, end, type } = data.lastMaintenance;
-const url = regionUrl(data.lastMaintenance, region);
+const safeTitle = escapeHtml(title);
+const safeUrl = sanitizeUrl(regionUrl(data.lastMaintenance, region));
 const lastIcon = type === 'emergency' ? '🚨' : '🔧';
 const endDate = end == null ? 'Unknown' : formatDateTime(end);
-const linkHtml = url
-  ? `<a href="${url}" target="_blank" class="link">More details<span>→</span></a>`
+const linkHtml = safeUrl
+  ? `<a href="${safeUrl}" target="_blank" class="link">More details<span>→</span></a>`
   : `<span class="time-highlight muted">No ${region.toUpperCase()} link available</span>`;
 
 html += `
 <div class="countdown-item ended">
-<div class="item-title"><span class="icon">${lastIcon}</span><span>${title}</span></div>
+<div class="item-title"><span class="icon">${lastIcon}</span><span>${safeTitle}</span></div>
 <div class="item-status">
 <span class="status-indicator"><span class="status-icon">✅</span><span class="time-highlight success">Completed</span></span>
 <span>·</span>
@@ -218,7 +239,8 @@ ${linkHtml}
 if (data.events && data.events.length > 0) {
 data.events.forEach(event => {
 const { title, start, end, category } = event;
-const url = regionUrl(event, region);
+const safeTitle = escapeHtml(title);
+const safeUrl = sanitizeUrl(regionUrl(event, region));
 
 let statusHTML = '';
 let itemClass = category === 'seasonal' ? 'active' : '';
@@ -232,13 +254,13 @@ statusHTML = `<span class="status-indicator"><span class="status-icon">🎉</spa
 itemClass = 'active';
 }
 
-const linkHtml = url
-  ? `<a href="${url}" target="_blank" class="link">More details<span>→</span></a>`
+const linkHtml = safeUrl
+  ? `<a href="${safeUrl}" target="_blank" class="link">More details<span>→</span></a>`
   : `<span class="time-highlight muted">No ${region.toUpperCase()} link available</span>`;
 
 html += `
 <div class="countdown-item ${itemClass}">
-<div class="item-title"><span class="icon">🗓️</span><span>${title}</span></div>
+<div class="item-title"><span class="icon">🗓️</span><span>${safeTitle}</span></div>
 <div class="item-status">${statusHTML}<span>·</span>${linkHtml}</div>
 </div>
 `;
@@ -257,15 +279,16 @@ html += `
 // Last Event Section
 if (data.lastEvent) {
 const { title, end } = data.lastEvent;
-const url = regionUrl(data.lastEvent, region);
+const safeTitle = escapeHtml(title);
+const safeUrl = sanitizeUrl(regionUrl(data.lastEvent, region));
 const endDate = formatDateTime(end);
-const linkHtml = url
-  ? `<a href="${url}" target="_blank" class="link">More details<span>→</span></a>`
+const linkHtml = safeUrl
+  ? `<a href="${safeUrl}" target="_blank" class="link">More details<span>→</span></a>`
   : `<span class="time-highlight muted">No ${region.toUpperCase()} link available</span>`;
 
 html += `
 <div class="countdown-item ended">
-<div class="item-title"><span class="icon">🗓️</span><span>${title}</span></div>
+<div class="item-title"><span class="icon">🗓️</span><span>${safeTitle}</span></div>
 <div class="item-status">
 <span class="status-indicator"><span class="status-icon">🎁</span><span class="time-highlight muted">This event has ended</span></span>
 <span>·</span>
