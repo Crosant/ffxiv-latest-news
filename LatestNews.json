@@ -16,17 +16,17 @@
     }
   },
   "lastMaintenance": {
-    "title": "All Worlds Emergency Maintenance (Aug. 6): Follow-up",
+    "title": "All Worlds Emergency Maintenance (Aug. 13): Follow-up",
     "type": "emergency",
-    "start": 1786082400,
-    "end": 1786096500,
-    "url": "https://na.finalfantasyxiv.com/lodestone/news/detail/e5d67a9d4d9a6dd77f12bb0024b9709e4cc8d13b",
+    "start": 1786687200,
+    "end": 1786697400,
+    "url": "https://na.finalfantasyxiv.com/lodestone/news/detail/21c8f8b7bc350888dfddb0c2d7658cbaac116b4a",
     "urls": {
-      "na": "https://na.finalfantasyxiv.com/lodestone/news/detail/e5d67a9d4d9a6dd77f12bb0024b9709e4cc8d13b",
-      "eu": "https://eu.finalfantasyxiv.com/lodestone/news/detail/f1ed4585275699348b26473a886c6b3e50ca9d8c",
+      "na": "https://na.finalfantasyxiv.com/lodestone/news/detail/21c8f8b7bc350888dfddb0c2d7658cbaac116b4a",
+      "eu": "https://eu.finalfantasyxiv.com/lodestone/news/detail/04d284bd65d5cf35c260c5975f5bce4ed1e0b603",
       "jp": null,
       "fr": null,
-      "de": "https://de.finalfantasyxiv.com/lodestone/news/detail/6f29434fa3daf0f28ae851e8c58c13d591b61a86"
+      "de": "https://de.finalfantasyxiv.com/lodestone/news/detail/cbfa140f2f171b38e19006e0afcd6ca2bb1b38dd"
     }
   },
   "events": [
@@ -46,5 +46,5 @@
     }
   ],
   "lastEvent": null,
-  "lastUpdated": 1786602922
+  "lastUpdated": 1786699574
 }
