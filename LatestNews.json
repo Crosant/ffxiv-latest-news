@@ -18,20 +18,6 @@
   },
   "events": [
     {
-      "title": "The Moonfire Faire Begins August 12!",
-      "start": 1786521600,
-      "end": 1787756340,
-      "url": "https://na.finalfantasyxiv.com/lodestone/topics/detail/3817357c7556773cf1a07db2646a6d92245ada43",
-      "urls": {
-        "na": "https://na.finalfantasyxiv.com/lodestone/topics/detail/3817357c7556773cf1a07db2646a6d92245ada43",
-        "eu": "https://eu.finalfantasyxiv.com/lodestone/topics/detail/758066a9ca88ac4ec6b7fa4ad95d3414a6b566e6",
-        "jp": "https://jp.finalfantasyxiv.com/lodestone/topics/detail/fb68f3881a9157ba0036992ffe28c86c8b5a74c0",
-        "fr": "https://fr.finalfantasyxiv.com/lodestone/topics/detail/9f140ab7b1f7836bd2378974ab2b53d6cd51405b",
-        "de": "https://de.finalfantasyxiv.com/lodestone/topics/detail/637c2b80c438b876d6b1f19aeaacb86113c054ae"
-      },
-      "category": "seasonal"
-    },
-    {
       "title": "The Rising Returns August 27!",
       "start": 1787814000,
       "end": 1789052340,
@@ -46,6 +32,19 @@
       "category": "seasonal"
     }
   ],
-  "lastEvent": null,
-  "lastUpdated": 1787217197
+  "lastEvent": {
+    "title": "The Moonfire Faire Begins August 12!",
+    "start": 1786521600,
+    "end": 1787756340,
+    "url": "https://na.finalfantasyxiv.com/lodestone/topics/detail/3817357c7556773cf1a07db2646a6d92245ada43",
+    "urls": {
+      "na": "https://na.finalfantasyxiv.com/lodestone/topics/detail/3817357c7556773cf1a07db2646a6d92245ada43",
+      "eu": "https://eu.finalfantasyxiv.com/lodestone/topics/detail/758066a9ca88ac4ec6b7fa4ad95d3414a6b566e6",
+      "jp": "https://jp.finalfantasyxiv.com/lodestone/topics/detail/fb68f3881a9157ba0036992ffe28c86c8b5a74c0",
+      "fr": "https://fr.finalfantasyxiv.com/lodestone/topics/detail/9f140ab7b1f7836bd2378974ab2b53d6cd51405b",
+      "de": "https://de.finalfantasyxiv.com/lodestone/topics/detail/637c2b80c438b876d6b1f19aeaacb86113c054ae"
+    },
+    "category": "seasonal"
+  },
+  "lastUpdated": 1787761159
 }
