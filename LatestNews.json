@@ -30,6 +30,20 @@
         "de": "https://de.finalfantasyxiv.com/lodestone/topics/detail/d1eec50cb467b53b26075a1144ea3a39dae3e340"
       },
       "category": "seasonal"
+    },
+    {
+      "title": "Moogle Treasure Trove - The First Hunt for Astronomy Commences September 9!",
+      "start": 1788940800,
+      "end": 1792421940,
+      "url": "https://na.finalfantasyxiv.com/lodestone/topics/detail/7a376504f18acaff4ffc60c1526f7354141c1a46",
+      "urls": {
+        "na": "https://na.finalfantasyxiv.com/lodestone/topics/detail/7a376504f18acaff4ffc60c1526f7354141c1a46",
+        "eu": "https://eu.finalfantasyxiv.com/lodestone/topics/detail/f7179beb59a27561b0a32baf45b8a4f229a54b95",
+        "jp": "https://jp.finalfantasyxiv.com/lodestone/topics/detail/05926d81dc0cd7b3ba5d39db148a3e98db4ad44f",
+        "fr": "https://fr.finalfantasyxiv.com/lodestone/topics/detail/359f8972a96de5e6706034e0ddd5eb4d9bd11218",
+        "de": "https://de.finalfantasyxiv.com/lodestone/topics/detail/62cea9ac15920b5fab2ba123100b2f95e5d3c244"
+      },
+      "category": "seasonal"
     }
   ],
   "lastEvent": {
@@ -40,11 +54,11 @@
     "urls": {
       "na": "https://na.finalfantasyxiv.com/lodestone/topics/detail/3817357c7556773cf1a07db2646a6d92245ada43",
       "eu": "https://eu.finalfantasyxiv.com/lodestone/topics/detail/758066a9ca88ac4ec6b7fa4ad95d3414a6b566e6",
-      "jp": "https://jp.finalfantasyxiv.com/lodestone/topics/detail/fb68f3881a9157ba0036992ffe28c86c8b5a74c0",
+      "jp": null,
       "fr": "https://fr.finalfantasyxiv.com/lodestone/topics/detail/9f140ab7b1f7836bd2378974ab2b53d6cd51405b",
       "de": "https://de.finalfantasyxiv.com/lodestone/topics/detail/637c2b80c438b876d6b1f19aeaacb86113c054ae"
     },
     "category": "seasonal"
   },
-  "lastUpdated": 1787761159
+  "lastUpdated": 1788344157
 }
