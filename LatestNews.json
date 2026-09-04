@@ -31,13 +31,13 @@
   },
   "events": [
     {
-      "title": "The Rising Returns August 27!",
+      "title": "The Rising Returns 27 August!",
       "start": 1787814000,
       "end": 1789052340,
       "url": "https://na.finalfantasyxiv.com/lodestone/topics/detail/934039c77087ac5ad6e535866dedb5bc63511885",
       "urls": {
         "na": "https://na.finalfantasyxiv.com/lodestone/topics/detail/934039c77087ac5ad6e535866dedb5bc63511885",
-        "eu": null,
+        "eu": "https://eu.finalfantasyxiv.com/lodestone/topics/detail/3e012e1e73d991257feffdb85db4f78db100bca6",
         "jp": "https://jp.finalfantasyxiv.com/lodestone/topics/detail/63f326f825b5c6e3bb8071d2e6d5903ca9a5e078",
         "fr": "https://fr.finalfantasyxiv.com/lodestone/topics/detail/58c5403eae7af304b345074cd2b1227d45e2163a",
         "de": "https://de.finalfantasyxiv.com/lodestone/topics/detail/d1eec50cb467b53b26075a1144ea3a39dae3e340"
@@ -45,13 +45,13 @@
       "category": "seasonal"
     },
     {
-      "title": "Moogle Treasure Trove - The First Hunt for Astronomy Commences September 9!",
+      "title": "Patch 7.5─Trail to the Heavens Special Site Updated!",
       "start": 1788940800,
       "end": 1792421940,
       "url": "https://na.finalfantasyxiv.com/lodestone/topics/detail/7a376504f18acaff4ffc60c1526f7354141c1a46",
       "urls": {
         "na": "https://na.finalfantasyxiv.com/lodestone/topics/detail/7e9a7eacc4c4bf8bc69f9ee37250932d9ee0133f",
-        "eu": null,
+        "eu": "https://eu.finalfantasyxiv.com/lodestone/topics/detail/16fde0967d5a844dbfd69cfb67ca35121985c13d",
         "jp": "https://jp.finalfantasyxiv.com/lodestone/topics/detail/cb3522e3551a4e4af0eb46c88ba904b64d718f7a",
         "fr": "https://fr.finalfantasyxiv.com/lodestone/topics/detail/a5746be455bd8db7c4980c032282b9ebfcc9a5fc",
         "de": "https://de.finalfantasyxiv.com/lodestone/topics/detail/9de6143946b1aaa0c74393f0e2a80cdfa0df0829"
@@ -60,18 +60,18 @@
     }
   ],
   "lastEvent": {
-    "title": "The Moonfire Faire Begins August 12!",
+    "title": "The Moonfire Faire Begins 12 August!",
     "start": 1786521600,
     "end": 1787756340,
     "url": "https://na.finalfantasyxiv.com/lodestone/topics/detail/3817357c7556773cf1a07db2646a6d92245ada43",
     "urls": {
       "na": "https://na.finalfantasyxiv.com/lodestone/topics/detail/3817357c7556773cf1a07db2646a6d92245ada43",
-      "eu": null,
+      "eu": "https://eu.finalfantasyxiv.com/lodestone/topics/detail/758066a9ca88ac4ec6b7fa4ad95d3414a6b566e6",
       "jp": null,
       "fr": "https://fr.finalfantasyxiv.com/lodestone/topics/detail/9f140ab7b1f7836bd2378974ab2b53d6cd51405b",
       "de": "https://de.finalfantasyxiv.com/lodestone/topics/detail/637c2b80c438b876d6b1f19aeaacb86113c054ae"
     },
     "category": "seasonal"
   },
-  "lastUpdated": 1788556304
+  "lastUpdated": 1788559966
 }
