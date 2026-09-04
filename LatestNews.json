@@ -2,14 +2,14 @@
   "version": "2.2.0",
   "source": "lodestonenews.com",
   "maintenance": {
-    "title": "All Worlds Maintenance (Sep. 7)",
+    "title": "All Worlds Maintenance (Sep. 8)",
     "type": "scheduled",
     "start": 1788847200,
     "end": 1788861600,
     "url": "https://na.finalfantasyxiv.com/lodestone/news/detail/412e688db6331c0d36ea6a9fb75b31a9dc66d354",
     "urls": {
-      "na": "https://na.finalfantasyxiv.com/lodestone/news/detail/ea80facc7dd36c06e1b38cc0af7ab942afad462f",
-      "eu": "https://eu.finalfantasyxiv.com/lodestone/news/detail/0c5532291a44ca64660c23bf153e01d46aa296fb",
+      "na": "https://na.finalfantasyxiv.com/lodestone/news/detail/412e688db6331c0d36ea6a9fb75b31a9dc66d354",
+      "eu": "https://eu.finalfantasyxiv.com/lodestone/news/detail/cb9f8ee52813772c53c1c27dcb6e22ba3d182054",
       "jp": null,
       "fr": null,
       "de": "https://de.finalfantasyxiv.com/lodestone/news/detail/d52ea3661bf504df29420f6d060390b8782adeeb"
@@ -73,5 +73,5 @@
     },
     "category": "seasonal"
   },
-  "lastUpdated": 1788506126
+  "lastUpdated": 1788507117
 }

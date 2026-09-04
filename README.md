@@ -54,7 +54,7 @@ https://raw.githubusercontent.com/LegendsOfTheGame/ffxiv-latest-news/main/Latest
 - **lastUpdated** (number): UNIX timestamp of the last meaningful data update (UTC)
 - **source** (string): Data source attribution
 - **maintenance** (object|null): Next upcoming or ongoing maintenance, or null if none
-  - **maintenance.title** (string): Maintenance title
+  - **maintenance.title** (string): Maintenance title, taken from the EU Lodestone article (falls back to the discovery region's title if no EU match is found)
   - **maintenance.type** (string): `"scheduled"` for regular All Worlds maintenances, `"emergency"` for emergency maintenances
   - **maintenance.start** (number): Start time (UNIX timestamp, UTC)
   - **maintenance.end** (number|null): End time (UNIX timestamp, UTC); `null` when no end time has been announced yet (common for emergency maintenances). Consumers should handle `null` and use `start` vs current time to distinguish upcoming vs in-progress maintenances.
@@ -62,7 +62,7 @@ https://raw.githubusercontent.com/LegendsOfTheGame/ffxiv-latest-news/main/Latest
   - **maintenance.urls** (object): Per-region Lodestone URLs (see [Regions](#-regions))
 - **lastMaintenance** (object|null): Most recent completed maintenance (same shape as `maintenance`)
 - **events** (array): Active and upcoming seasonal events
-  - **events[].title** (string): Event title
+  - **events[].title** (string): Event title, taken from the EU Lodestone article (falls back to the NA title if no EU match is found)
   - **events[].category** (string): `"seasonal"`
   - **events[].start** (number): Start time (UNIX timestamp, UTC)
   - **events[].end** (number): End time (UNIX timestamp, UTC)
@@ -107,7 +107,7 @@ const link = event.urls.eu ?? event.urls.na;
 - **Every 6 hours** via GitHub Actions
 - Fetches from [lodestonenews.com](https://lodestonenews.com) API for **all 5 regions**
 - Matches articles across regions using content-aware keys (not article ID or hostname substitution):
-  - *Maintenance*: matched by `(start_ts, end_ts)` — the maintenance window is identical for all regions
+  - *Maintenance*: matched by `(start_ts, end_ts)` **and** maintenance classification — several distinct articles (e.g. Companion App maintenance) can share the same window
   - *Events/Topics*: matched by publication timestamp within ±24 hours
 - Detects both scheduled ("All Worlds Maintenance") and emergency maintenances, scanning **all** region feeds so region-specific emergency announcements (e.g. EU-only) are not missed
 - Follows "Read on" links to scrape actual event dates from Lodestone special pages
@@ -226,7 +226,7 @@ foreach (var eventItem in root.GetProperty("events").EnumerateArray())
 1. **GitHub Actions** runs `parse_news.py` every 6 hours
 2. Script fetches from lodestonenews.com Topics and Maintenance APIs **for all 5 regions**
 3. Articles are matched across regions using content-aware keys — no article IDs or blind hostname substitution:
-   - *Maintenance*: matched by `(start_ts, end_ts)` — the maintenance window is global
+   - *Maintenance*: matched by `(start_ts, end_ts)` plus maintenance classification — the window is global, but other maintenance articles (Companion App, Mog Station, …) can share it
    - *Events/Topics*: matched by publication timestamp within a ±24 h window
 4. For seasonal events:
    - Detects events by keywords (Valentione's, Heavensturn, etc.)
