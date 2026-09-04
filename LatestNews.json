@@ -1,5 +1,5 @@
 {
-  "version": "2.2.0",
+  "version": "2.2.1",
   "source": "lodestonenews.com",
   "maintenance": {
     "title": "All Worlds Maintenance (Sep. 8)",
@@ -10,9 +10,9 @@
     "urls": {
       "na": "https://na.finalfantasyxiv.com/lodestone/news/detail/412e688db6331c0d36ea6a9fb75b31a9dc66d354",
       "eu": "https://eu.finalfantasyxiv.com/lodestone/news/detail/cb9f8ee52813772c53c1c27dcb6e22ba3d182054",
-      "jp": null,
-      "fr": null,
-      "de": null
+      "jp": "https://jp.finalfantasyxiv.com/lodestone/news/detail/d9b7f2d833224ca0f205ebc4f295f22fae21fa52",
+      "fr": "https://fr.finalfantasyxiv.com/lodestone/news/detail/5fa23f03da2662098e1b77b812c01bb15c48b2d6",
+      "de": "https://de.finalfantasyxiv.com/lodestone/news/detail/0f9f58e07e923e5f6ffd9930d2328d0735615e3d"
     }
   },
   "lastMaintenance": {
@@ -24,8 +24,8 @@
     "urls": {
       "na": "https://na.finalfantasyxiv.com/lodestone/news/detail/21c8f8b7bc350888dfddb0c2d7658cbaac116b4a",
       "eu": "https://eu.finalfantasyxiv.com/lodestone/news/detail/04d284bd65d5cf35c260c5975f5bce4ed1e0b603",
-      "jp": null,
-      "fr": null,
+      "jp": "https://jp.finalfantasyxiv.com/lodestone/news/detail/1711a3b2809c42b04bcd2570b92d5e11f0796c90",
+      "fr": "https://fr.finalfantasyxiv.com/lodestone/news/detail/bae7fc441308b0de0b63479be9c0ab067331fc98",
       "de": null
     }
   },
@@ -73,5 +73,5 @@
     },
     "category": "seasonal"
   },
-  "lastUpdated": 1788509559
+  "lastUpdated": 1788515920
 }
