@@ -120,7 +120,9 @@ def build_maintenance_regional_matches(
 
         best, best_delta = None, None
         for item in candidates:
-            if _parse_ts(item.get("start") or "") is not None:
+            item_start = _parse_ts(item.get("start") or "")
+            item_end = _parse_ts(item.get("end") or "")
+            if item_start is not None or item_end is not None:
                 continue
             item_pub = _parse_ts(item.get("time") or "")
             if item_pub is None:
