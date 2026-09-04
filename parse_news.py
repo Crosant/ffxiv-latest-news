@@ -52,40 +52,85 @@ def _parse_ts(iso: str) -> Optional[int]:
         return None
 
 
+# Maximum seconds between two articles' publish times to consider them the
+# same maintenance announcement across regions when a region's article carries
+# no maintenance window.  lodestonenews.com only extracts start/end times for
+# the na, eu and de locales, so jp/fr maintenance articles never have a window
+# and must be matched by publish time instead.  Square Enix publishes an
+# announcement to all regions nearly simultaneously; the candidate closest in
+# publish time within this window is used, which also keeps original and
+# follow-up articles (same type, hours apart) paired correctly.
+_MAINT_PUB_MATCH_WINDOW = 86400  # 24 hours
+
+
 def build_maintenance_regional_matches(
     start_ts: int,
     end_ts: Optional[int],
     m_type: str,
+    pub_ts: int,
     region_items: Dict[str, List[Dict]],
 ) -> Dict[str, Optional[Dict]]:
     """
-    Find the Lodestone maintenance article for each region by matching on the
-    (start_ts, end_ts) pair and the maintenance classification.
+    Find the Lodestone maintenance article for each region.
 
-    Lodestone article IDs differ across regions, so the URL path cannot be used as
-    a match key.  The maintenance window (start and end times) is identical for all
-    regions since Square Enix takes every region down simultaneously, making it a
-    reliable cross-region identifier.  However, several distinct maintenance
-    articles (e.g. Companion App or Mog Station maintenance) often share the exact
-    same window as the All Worlds maintenance, so a candidate must additionally
-    classify to the same maintenance type (see classify_maintenance) as the
-    discovered article.  A region article is only emitted when an exact match is
-    found in that region's feed; nothing is fabricated.
+    Primary key — the (start_ts, end_ts) pair plus the maintenance
+    classification.  Lodestone article IDs differ across regions, so the URL
+    path cannot be used as a match key.  The maintenance window (start and end
+    times) is identical for all regions since Square Enix takes every region
+    down simultaneously, making it a reliable cross-region identifier.
+    However, several distinct maintenance articles (e.g. Companion App or Mog
+    Station maintenance) often share the exact same window as the All Worlds
+    maintenance, so a candidate must additionally classify to the same
+    maintenance type (see classify_maintenance) as the discovered article.
 
-    end_ts may be None (emergency maintenances are often announced without an end
-    time); in that case a match requires the region item to also lack an end time.
+    Fallback key — publish-time proximity.  lodestonenews.com only extracts
+    start/end times for the na, eu and de locales, so jp/fr articles never
+    carry a window (na/eu/de articles can also lack one when the upstream
+    parser fails).  Among same-type candidates with no window at all, the one
+    whose publish time is closest to the discovery article's publish time
+    (within _MAINT_PUB_MATCH_WINDOW) is used.  Candidates that carry a
+    different window are never considered: they belong to a different
+    maintenance.
+
+    A region article is only emitted when a match is found in that region's
+    feed; nothing is fabricated.
+
+    end_ts may be None (emergency maintenances are often announced without an
+    end time); in that case a window match requires the region item to also
+    lack an end time.
     """
     matches: Dict[str, Optional[Dict]] = {}
     for region in REGIONS:
         matches[region] = None
-        for item in region_items.get(region, []):
-            if classify_maintenance(item.get("title", "")) != m_type:
-                continue
+        candidates = [
+            item
+            for item in region_items.get(region, [])
+            if classify_maintenance(item.get("title", "")) == m_type
+        ]
+
+        for item in candidates:
             s = _parse_ts(item.get("start") or "")
             e = _parse_ts(item.get("end") or "")
             if s == start_ts and e == end_ts:
                 matches[region] = item
                 break
+
+        if matches[region] is not None:
+            continue
+
+        best, best_delta = None, None
+        for item in candidates:
+            if _parse_ts(item.get("start") or "") is not None:
+                continue
+            item_pub = _parse_ts(item.get("time") or "")
+            if item_pub is None:
+                continue
+            delta = abs(item_pub - pub_ts)
+            if delta <= _MAINT_PUB_MATCH_WINDOW and (
+                best_delta is None or delta < best_delta
+            ):
+                best, best_delta = item, delta
+        matches[region] = best
     return matches
 
 
@@ -269,19 +314,50 @@ def scrape_event_dates(url: str) -> Tuple[Optional[int], Optional[int]]:
         return None, None
 
 
+# Localised Lodestone title patterns identifying "All Worlds" scheduled
+# maintenances and emergency maintenances.  The lodestonenews.com feed returns
+# each region's article with its localised title (English for na/eu, Japanese
+# for jp, French for fr, German for de), so classification must recognise
+# every supported language for cross-region matching to work.  Each entry is a
+# tuple of lowercase substrings that must all be present in the title.
+_SCHEDULED_PATTERNS = [
+    ("all worlds maintenance",),             # na / eu
+    ("全ワールド", "メンテナンス"),            # jp
+    ("maintenance", "tous les mondes"),      # fr
+    ("maintenance", "ensemble des mondes"),  # fr (alternate wording)
+    ("wartung", "aller welten"),             # de
+    ("wartungsarbeiten", "allen welten"),    # de (alternate wording)
+]
+
+_EMERGENCY_PATTERNS = [
+    ("emergency", "maintenance"),  # na / eu
+    ("緊急メンテナンス",),           # jp
+    ("臨時メンテナンス",),           # jp (unscheduled maintenance)
+    ("maintenance", "urgence"),    # fr
+    ("notfallwartung",),           # de
+]
+
+
 def classify_maintenance(title: str) -> Optional[str]:
     """
-    Classify a maintenance article title.
+    Classify a maintenance article title in any supported Lodestone language.
 
     Returns "scheduled" for regular "All Worlds Maintenance" announcements,
     "emergency" for emergency maintenances (e.g. "Emergency Maintenance (Aug. 7)"
     or "[Chaos] Emergency Server Maintenance"), and None for anything else.
+    Emergency patterns are checked first because localised emergency titles also
+    contain the scheduled-maintenance keywords (e.g. the Japanese
+    "全ワールド 緊急メンテナンス作業のお知らせ" contains "全ワールド" and
+    "メンテナンス", and the German "Notfallwartung aller Welten" contains
+    "wartung" and "aller welten").
     """
     lower = title.lower()
-    if "all worlds maintenance" in lower:
-        return "scheduled"
-    if "emergency" in lower and "maintenance" in lower:
-        return "emergency"
+    for pattern in _EMERGENCY_PATTERNS:
+        if all(part in lower for part in pattern):
+            return "emergency"
+    for pattern in _SCHEDULED_PATTERNS:
+        if all(part in lower for part in pattern):
+            return "scheduled"
     return None
 
 
@@ -328,7 +404,7 @@ def parse_maintenance(
                 seen_windows.add((start_ts, end_ts))
 
                 m_matches = build_maintenance_regional_matches(
-                    start_ts, end_ts, m_type, maint_by_region
+                    start_ts, end_ts, m_type, pub_ts, maint_by_region
                 )
                 m_data = {
                     "title": pick_title(m_matches, item["title"]),
@@ -371,7 +447,7 @@ def parse_maintenance(
 
 def main() -> None:
     print("=" * 60)
-    print("FFXIV Latest News Updater v2.2.0")
+    print("FFXIV Latest News Updater v2.2.1")
     print("=" * 60)
 
     now = int(datetime.now(timezone.utc).timestamp())
@@ -439,7 +515,7 @@ def main() -> None:
                 print("    ✅ Stored as lastEvent")
 
     output = {
-        "version": "2.2.0",
+        "version": "2.2.1",
         "source": "lodestonenews.com",
         "maintenance": current_maint,
         "lastMaintenance": last_maint,
