@@ -53,17 +53,24 @@ def _parse_ts(iso: str) -> Optional[int]:
 
 
 def build_maintenance_regional_matches(
-    start_ts: int, end_ts: Optional[int], region_items: Dict[str, List[Dict]]
+    start_ts: int,
+    end_ts: Optional[int],
+    m_type: str,
+    region_items: Dict[str, List[Dict]],
 ) -> Dict[str, Optional[Dict]]:
     """
     Find the Lodestone maintenance article for each region by matching on the
-    (start_ts, end_ts) pair.
+    (start_ts, end_ts) pair and the maintenance classification.
 
     Lodestone article IDs differ across regions, so the URL path cannot be used as
     a match key.  The maintenance window (start and end times) is identical for all
     regions since Square Enix takes every region down simultaneously, making it a
-    reliable cross-region identifier.  A region article is only emitted when an
-    exact match is found in that region's feed; nothing is fabricated.
+    reliable cross-region identifier.  However, several distinct maintenance
+    articles (e.g. Companion App or Mog Station maintenance) often share the exact
+    same window as the All Worlds maintenance, so a candidate must additionally
+    classify to the same maintenance type (see classify_maintenance) as the
+    discovered article.  A region article is only emitted when an exact match is
+    found in that region's feed; nothing is fabricated.
 
     end_ts may be None (emergency maintenances are often announced without an end
     time); in that case a match requires the region item to also lack an end time.
@@ -72,6 +79,8 @@ def build_maintenance_regional_matches(
     for region in REGIONS:
         matches[region] = None
         for item in region_items.get(region, []):
+            if classify_maintenance(item.get("title", "")) != m_type:
+                continue
             s = _parse_ts(item.get("start") or "")
             e = _parse_ts(item.get("end") or "")
             if s == start_ts and e == end_ts:
@@ -319,7 +328,7 @@ def parse_maintenance(
                 seen_windows.add((start_ts, end_ts))
 
                 m_matches = build_maintenance_regional_matches(
-                    start_ts, end_ts, maint_by_region
+                    start_ts, end_ts, m_type, maint_by_region
                 )
                 m_data = {
                     "title": pick_title(m_matches, item["title"]),
