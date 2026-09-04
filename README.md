@@ -12,7 +12,7 @@ https://raw.githubusercontent.com/LegendsOfTheGame/ffxiv-latest-news/main/Latest
 
 ```json
 {
-  "version": "2.2.0",
+  "version": "2.2.1",
   "lastUpdated": 1739692800,
   "source": "lodestonenews.com",
   "maintenance": {
@@ -104,10 +104,10 @@ const link = event.urls.eu ?? event.urls.na;
 
 ## 🔄 Update Schedule
 
-- **Every 6 hours** via GitHub Actions
+- **Every hour** via GitHub Actions
 - Fetches from [lodestonenews.com](https://lodestonenews.com) API for **all 5 regions**
 - Matches articles across regions using content-aware keys (not article ID or hostname substitution):
-  - *Maintenance*: matched by `(start_ts, end_ts)` **and** maintenance classification — several distinct articles (e.g. Companion App maintenance) can share the same window
+  - *Maintenance*: matched by `(start_ts, end_ts)` **and** maintenance classification — several distinct articles (e.g. Companion App maintenance) can share the same window. Titles are classified in every Lodestone language (English, Japanese, French, German). The `jp`/`fr` feeds carry no start/end times upstream, so same-type articles without a window are matched by closest publication timestamp (within ±24 hours) instead
   - *Events/Topics*: matched by publication timestamp within ±24 hours
 - Detects both scheduled ("All Worlds Maintenance") and emergency maintenances, scanning **all** region feeds so region-specific emergency announcements (e.g. EU-only) are not missed
 - Follows "Read on" links to scrape actual event dates from Lodestone special pages
@@ -226,7 +226,7 @@ foreach (var eventItem in root.GetProperty("events").EnumerateArray())
 1. **GitHub Actions** runs `parse_news.py` every 6 hours
 2. Script fetches from lodestonenews.com Topics and Maintenance APIs **for all 5 regions**
 3. Articles are matched across regions using content-aware keys — no article IDs or blind hostname substitution:
-   - *Maintenance*: matched by `(start_ts, end_ts)` plus maintenance classification — the window is global, but other maintenance articles (Companion App, Mog Station, …) can share it
+   - *Maintenance*: matched by `(start_ts, end_ts)` plus maintenance classification — the window is global, but other maintenance articles (Companion App, Mog Station, …) can share it. Titles are classified in all Lodestone languages; `jp`/`fr` articles carry no window upstream and fall back to closest-publication-time matching (±24 h)
    - *Events/Topics*: matched by publication timestamp within a ±24 h window
 4. For seasonal events:
    - Detects events by keywords (Valentione's, Heavensturn, etc.)
@@ -256,8 +256,13 @@ Square Enix publishes each news/maintenance article to all Lodestone regions, bu
 **different article IDs** per region.  The generator therefore cannot match by URL path.
 Instead it uses content-aware keys fetched independently from each region's feed:
 
-- **Maintenance** — matched by `(start_ts, end_ts)`.  Global maintenances share the
-  exact same window across all regions, making this a precise identifier.
+- **Maintenance** — matched by `(start_ts, end_ts)` plus maintenance-type classification.
+  Global maintenances share the exact same window across all regions, making this a
+  precise identifier.  Classification understands the localised titles of every region
+  (e.g. 全ワールド メンテナンス, Maintenance de tous les Mondes, Wartung aller Welten).
+  The upstream API does not extract start/end times for the `jp` and `fr` feeds, so
+  same-type articles without a window are matched by the closest publication timestamp
+  within ±24 hours instead.
 - **Events/Topics** — matched by publication timestamp within ±24 hours.  Seasonal
   events are infrequent enough that no two distinct events are ever published within
   that window simultaneously.
