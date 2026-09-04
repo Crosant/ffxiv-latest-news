@@ -54,7 +54,7 @@ https://raw.githubusercontent.com/LegendsOfTheGame/ffxiv-latest-news/main/Latest
 - **lastUpdated** (number): UNIX timestamp of the last meaningful data update (UTC)
 - **source** (string): Data source attribution
 - **maintenance** (object|null): Next upcoming or ongoing maintenance, or null if none
-  - **maintenance.title** (string): Maintenance title
+  - **maintenance.title** (string): Maintenance title, taken from the EU Lodestone article (falls back to the discovery region's title if no EU match is found)
   - **maintenance.type** (string): `"scheduled"` for regular All Worlds maintenances, `"emergency"` for emergency maintenances
   - **maintenance.start** (number): Start time (UNIX timestamp, UTC)
   - **maintenance.end** (number|null): End time (UNIX timestamp, UTC); `null` when no end time has been announced yet (common for emergency maintenances). Consumers should handle `null` and use `start` vs current time to distinguish upcoming vs in-progress maintenances.
@@ -62,7 +62,7 @@ https://raw.githubusercontent.com/LegendsOfTheGame/ffxiv-latest-news/main/Latest
   - **maintenance.urls** (object): Per-region Lodestone URLs (see [Regions](#-regions))
 - **lastMaintenance** (object|null): Most recent completed maintenance (same shape as `maintenance`)
 - **events** (array): Active and upcoming seasonal events
-  - **events[].title** (string): Event title
+  - **events[].title** (string): Event title, taken from the EU Lodestone article (falls back to the NA title if no EU match is found)
   - **events[].category** (string): `"seasonal"`
   - **events[].start** (number): Start time (UNIX timestamp, UTC)
   - **events[].end** (number): End time (UNIX timestamp, UTC)

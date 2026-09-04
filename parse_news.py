@@ -52,32 +52,32 @@ def _parse_ts(iso: str) -> Optional[int]:
         return None
 
 
-def build_maintenance_regional_urls(
+def build_maintenance_regional_matches(
     start_ts: int, end_ts: Optional[int], region_items: Dict[str, List[Dict]]
-) -> Dict[str, Optional[str]]:
+) -> Dict[str, Optional[Dict]]:
     """
-    Find the Lodestone maintenance article URL for each region by matching on the
+    Find the Lodestone maintenance article for each region by matching on the
     (start_ts, end_ts) pair.
 
     Lodestone article IDs differ across regions, so the URL path cannot be used as
     a match key.  The maintenance window (start and end times) is identical for all
     regions since Square Enix takes every region down simultaneously, making it a
-    reliable cross-region identifier.  A region URL is only emitted when an exact
-    match is found in that region's feed; no URL is fabricated.
+    reliable cross-region identifier.  A region article is only emitted when an
+    exact match is found in that region's feed; nothing is fabricated.
 
     end_ts may be None (emergency maintenances are often announced without an end
     time); in that case a match requires the region item to also lack an end time.
     """
-    urls: Dict[str, Optional[str]] = {}
+    matches: Dict[str, Optional[Dict]] = {}
     for region in REGIONS:
-        urls[region] = None
+        matches[region] = None
         for item in region_items.get(region, []):
             s = _parse_ts(item.get("start") or "")
             e = _parse_ts(item.get("end") or "")
             if s == start_ts and e == end_ts:
-                urls[region] = item["url"]
+                matches[region] = item
                 break
-    return urls
+    return matches
 
 
 # Maximum seconds between two articles' publish times to consider them the same
@@ -87,11 +87,11 @@ def build_maintenance_regional_urls(
 _TOPIC_MATCH_WINDOW = 86400  # 24 hours
 
 
-def build_topic_regional_urls(
+def build_topic_regional_matches(
     na_pub_ts: int, region_items: Dict[str, List[Dict]]
-) -> Dict[str, Optional[str]]:
+) -> Dict[str, Optional[Dict]]:
     """
-    Find the Lodestone topics/event article URL for each region by matching on
+    Find the Lodestone topics/event article for each region by matching on
     publication timestamp.
 
     Lodestone article IDs and titles both differ across regions (titles are
@@ -99,18 +99,34 @@ def build_topic_regional_urls(
     reliable cross-region key.  Square Enix publishes the same seasonal-event
     announcement to all regions within a short window; matching on publish time
     within ±24 hours is therefore reliable for the infrequent seasonal events
-    tracked by this tool.  A region URL is only emitted when a sufficiently
-    close match is found in that region's feed; no URL is fabricated.
+    tracked by this tool.  A region article is only emitted when a sufficiently
+    close match is found in that region's feed; nothing is fabricated.
     """
-    urls: Dict[str, Optional[str]] = {}
+    matches: Dict[str, Optional[Dict]] = {}
     for region in REGIONS:
-        urls[region] = None
+        matches[region] = None
         for item in region_items.get(region, []):
             pub_ts = _parse_ts(item.get("time", ""))
             if pub_ts is not None and abs(pub_ts - na_pub_ts) <= _TOPIC_MATCH_WINDOW:
-                urls[region] = item["url"]
+                matches[region] = item
                 break
-    return urls
+    return matches
+
+
+def regional_urls(matches: Dict[str, Optional[Dict]]) -> Dict[str, Optional[str]]:
+    """Extract the per-region URL map from a per-region article match map."""
+    return {region: (m["url"] if m else None) for region, m in matches.items()}
+
+
+def pick_title(matches: Dict[str, Optional[Dict]], fallback: str) -> str:
+    """
+    Return the article title from the EU feed, falling back to the given
+    (discovery-source) title when no EU match was found.
+    """
+    eu_match = matches.get("eu")
+    if eu_match and eu_match.get("title"):
+        return eu_match["title"]
+    return fallback
 
 
 def load_existing_output(path: str) -> Optional[Dict]:
@@ -270,9 +286,11 @@ def parse_maintenance(
 
     maint_by_region is a mapping of region → list of items as returned by
     fetch_all_regions("maintenance").  All regions are scanned (NA first, so it
-    remains the canonical source when an article exists in multiple regions);
-    entries seen in multiple regions are deduplicated by their maintenance
-    window (start/end timestamp pair).
+    remains the canonical source for discovery when an article exists in
+    multiple regions); entries seen in multiple regions are deduplicated by
+    their maintenance window (start/end timestamp pair).
+    The reported title is taken from the EU article whenever one exists,
+    falling back to the discovery source's title otherwise.
     This ensures emergency maintenances announced only on EU/JP/etc. feeds are
     still detected.
     """
@@ -300,8 +318,11 @@ def parse_maintenance(
                     continue
                 seen_windows.add((start_ts, end_ts))
 
+                m_matches = build_maintenance_regional_matches(
+                    start_ts, end_ts, maint_by_region
+                )
                 m_data = {
-                    "title": item["title"],
+                    "title": pick_title(m_matches, item["title"]),
                     "type": m_type,
                     "start": start_ts,
                     "end": end_ts,
@@ -309,9 +330,7 @@ def parse_maintenance(
                     # Deprecated – use urls instead.  Kept for one version of
                     # backward compatibility; will be removed in a future release.
                     "url": item["url"],
-                    "urls": build_maintenance_regional_urls(
-                        start_ts, end_ts, maint_by_region
-                    ),
+                    "urls": regional_urls(m_matches),
                 }
 
                 if end_ts is not None:
@@ -367,7 +386,9 @@ def main() -> None:
     cutoff = now - (RETENTION_DAYS * 86400)
 
     # Use NA as canonical source for event discovery; other regions are matched
-    # by article path to build the per-region urls object.
+    # by publication timestamp to build the per-region urls object.  The title
+    # is taken from the matched EU article (falling back to NA's title if no
+    # EU match is found).
     na_topics = topics_by_region.get("na", [])
 
     for item in na_topics:
@@ -383,19 +404,20 @@ def main() -> None:
             continue
 
         na_pub_ts = _parse_ts(item.get("time", ""))
+        t_matches = (
+            build_topic_regional_matches(na_pub_ts, topics_by_region)
+            if na_pub_ts is not None
+            else {r: None for r in REGIONS}
+        )
 
         evt = {
-            "title": title,
+            "title": pick_title(t_matches, title),
             "start": start,
             "end": end,
             # Deprecated – use urls instead.  Kept for one version of
             # backward compatibility; will be removed in a future release.
             "url": item["url"],
-            "urls": (
-                build_topic_regional_urls(na_pub_ts, topics_by_region)
-                if na_pub_ts is not None
-                else {r: None for r in REGIONS}
-            ),
+            "urls": regional_urls(t_matches),
             "category": "seasonal",
         }
 
