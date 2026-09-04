@@ -104,7 +104,7 @@ const link = event.urls.eu ?? event.urls.na;
 
 ## 🔄 Update Schedule
 
-- **Every 6 hours** via GitHub Actions
+- **Every hour** via GitHub Actions
 - Fetches from [lodestonenews.com](https://lodestonenews.com) API for **all 5 regions**
 - Matches articles across regions using content-aware keys (not article ID or hostname substitution):
   - *Maintenance*: matched by `(start_ts, end_ts)` **and** maintenance classification — several distinct articles (e.g. Companion App maintenance) can share the same window. Titles are classified in every Lodestone language (English, Japanese, French, German). The `jp`/`fr` feeds carry no start/end times upstream, so same-type articles without a window are matched by closest publication timestamp (within ±24 hours) instead
