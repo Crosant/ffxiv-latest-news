@@ -12,11 +12,11 @@
       "eu": "https://eu.finalfantasyxiv.com/lodestone/news/detail/cb9f8ee52813772c53c1c27dcb6e22ba3d182054",
       "jp": null,
       "fr": null,
-      "de": "https://de.finalfantasyxiv.com/lodestone/news/detail/d52ea3661bf504df29420f6d060390b8782adeeb"
+      "de": null
     }
   },
   "lastMaintenance": {
-    "title": "All Worlds Emergency Maintenance (Aug. 13): Follow-up",
+    "title": "All Worlds Emergency Maintenance (Aug. 14): Follow-up",
     "type": "emergency",
     "start": 1786687200,
     "end": 1786697400,
@@ -26,12 +26,12 @@
       "eu": "https://eu.finalfantasyxiv.com/lodestone/news/detail/04d284bd65d5cf35c260c5975f5bce4ed1e0b603",
       "jp": null,
       "fr": null,
-      "de": "https://de.finalfantasyxiv.com/lodestone/news/detail/cbfa140f2f171b38e19006e0afcd6ca2bb1b38dd"
+      "de": null
     }
   },
   "events": [
     {
-      "title": "The Rising Returns August 27!",
+      "title": "The Rising Returns 27 August!",
       "start": 1787814000,
       "end": 1789052340,
       "url": "https://na.finalfantasyxiv.com/lodestone/topics/detail/934039c77087ac5ad6e535866dedb5bc63511885",
@@ -45,7 +45,7 @@
       "category": "seasonal"
     },
     {
-      "title": "Moogle Treasure Trove - The First Hunt for Astronomy Commences September 9!",
+      "title": "Patch 7.5─Trail to the Heavens Special Site Updated!",
       "start": 1788940800,
       "end": 1792421940,
       "url": "https://na.finalfantasyxiv.com/lodestone/topics/detail/7a376504f18acaff4ffc60c1526f7354141c1a46",
@@ -60,7 +60,7 @@
     }
   ],
   "lastEvent": {
-    "title": "The Moonfire Faire Begins August 12!",
+    "title": "The Moonfire Faire Begins 12 August!",
     "start": 1786521600,
     "end": 1787756340,
     "url": "https://na.finalfantasyxiv.com/lodestone/topics/detail/3817357c7556773cf1a07db2646a6d92245ada43",
@@ -73,5 +73,5 @@
     },
     "category": "seasonal"
   },
-  "lastUpdated": 1788507117
+  "lastUpdated": 1788509559
 }
