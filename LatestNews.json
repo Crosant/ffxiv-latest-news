@@ -1,35 +1,51 @@
 {
   "version": "2.2.1",
   "source": "lodestonenews.com",
-  "maintenance": {
-    "title": "All Worlds Maintenance (Sep. 8)",
+  "maintenance": null,
+  "lastMaintenance": {
+    "title": "All Worlds Maintenance (Sep. 8): Follow-up",
     "type": "scheduled",
     "start": 1788847200,
-    "end": 1788861600,
-    "url": "https://na.finalfantasyxiv.com/lodestone/news/detail/412e688db6331c0d36ea6a9fb75b31a9dc66d354",
+    "end": 1788859500,
+    "url": "https://na.finalfantasyxiv.com/lodestone/news/detail/a66d99ef5c009775fc03f7fc8c9857ef1626f3d1",
     "urls": {
-      "na": "https://na.finalfantasyxiv.com/lodestone/news/detail/412e688db6331c0d36ea6a9fb75b31a9dc66d354",
-      "eu": "https://eu.finalfantasyxiv.com/lodestone/news/detail/cb9f8ee52813772c53c1c27dcb6e22ba3d182054",
-      "jp": "https://jp.finalfantasyxiv.com/lodestone/news/detail/d9b7f2d833224ca0f205ebc4f295f22fae21fa52",
-      "fr": "https://fr.finalfantasyxiv.com/lodestone/news/detail/5fa23f03da2662098e1b77b812c01bb15c48b2d6",
-      "de": "https://de.finalfantasyxiv.com/lodestone/news/detail/0f9f58e07e923e5f6ffd9930d2328d0735615e3d"
+      "na": "https://na.finalfantasyxiv.com/lodestone/news/detail/a66d99ef5c009775fc03f7fc8c9857ef1626f3d1",
+      "eu": "https://eu.finalfantasyxiv.com/lodestone/news/detail/82f7556289ac56ec7b1c6ec2a0f767b19ba8ba85",
+      "jp": "https://jp.finalfantasyxiv.com/lodestone/news/detail/e7bd8349da50338f40ba8fa330c3bebf30b751cb",
+      "fr": "https://fr.finalfantasyxiv.com/lodestone/news/detail/50eacac473da2896777040e13286c1db20e77c8f",
+      "de": "https://de.finalfantasyxiv.com/lodestone/news/detail/d3b87ccc77b83e75fc152f3a80b6c8eba3349ff8"
     }
   },
-  "lastMaintenance": {
-    "title": "All Worlds Emergency Maintenance (Aug. 14): Follow-up",
-    "type": "emergency",
-    "start": 1786687200,
-    "end": 1786697400,
-    "url": "https://na.finalfantasyxiv.com/lodestone/news/detail/21c8f8b7bc350888dfddb0c2d7658cbaac116b4a",
-    "urls": {
-      "na": "https://na.finalfantasyxiv.com/lodestone/news/detail/21c8f8b7bc350888dfddb0c2d7658cbaac116b4a",
-      "eu": "https://eu.finalfantasyxiv.com/lodestone/news/detail/04d284bd65d5cf35c260c5975f5bce4ed1e0b603",
-      "jp": "https://jp.finalfantasyxiv.com/lodestone/news/detail/1711a3b2809c42b04bcd2570b92d5e11f0796c90",
-      "fr": "https://fr.finalfantasyxiv.com/lodestone/news/detail/bae7fc441308b0de0b63479be9c0ab067331fc98",
-      "de": null
+  "events": [
+    {
+      "title": "The Rising Returns 27 August!",
+      "start": 1787814000,
+      "end": 1789052340,
+      "url": "https://na.finalfantasyxiv.com/lodestone/topics/detail/934039c77087ac5ad6e535866dedb5bc63511885",
+      "urls": {
+        "na": "https://na.finalfantasyxiv.com/lodestone/topics/detail/934039c77087ac5ad6e535866dedb5bc63511885",
+        "eu": "https://eu.finalfantasyxiv.com/lodestone/topics/detail/3e012e1e73d991257feffdb85db4f78db100bca6",
+        "jp": "https://jp.finalfantasyxiv.com/lodestone/topics/detail/63f326f825b5c6e3bb8071d2e6d5903ca9a5e078",
+        "fr": "https://fr.finalfantasyxiv.com/lodestone/topics/detail/58c5403eae7af304b345074cd2b1227d45e2163a",
+        "de": "https://de.finalfantasyxiv.com/lodestone/topics/detail/d1eec50cb467b53b26075a1144ea3a39dae3e340"
+      },
+      "category": "seasonal"
+    },
+    {
+      "title": "Patch 7.5─Trail to the Heavens Special Site Updated!",
+      "start": 1788940800,
+      "end": 1792421940,
+      "url": "https://na.finalfantasyxiv.com/lodestone/topics/detail/7a376504f18acaff4ffc60c1526f7354141c1a46",
+      "urls": {
+        "na": "https://na.finalfantasyxiv.com/lodestone/topics/detail/7e9a7eacc4c4bf8bc69f9ee37250932d9ee0133f",
+        "eu": "https://eu.finalfantasyxiv.com/lodestone/topics/detail/16fde0967d5a844dbfd69cfb67ca35121985c13d",
+        "jp": "https://jp.finalfantasyxiv.com/lodestone/topics/detail/cb3522e3551a4e4af0eb46c88ba904b64d718f7a",
+        "fr": "https://fr.finalfantasyxiv.com/lodestone/topics/detail/a5746be455bd8db7c4980c032282b9ebfcc9a5fc",
+        "de": "https://de.finalfantasyxiv.com/lodestone/topics/detail/9de6143946b1aaa0c74393f0e2a80cdfa0df0829"
+      },
+      "category": "seasonal"
     }
-  },
-  "events": [],
+  ],
   "lastEvent": null,
-  "lastUpdated": 1788848686
+  "lastUpdated": 1788862523
 }
