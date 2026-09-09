@@ -1,20 +1,7 @@
 {
   "version": "2.2.1",
   "source": "lodestonenews.com",
-  "maintenance": {
-    "title": "All Worlds Emergency Maintenance (Sep. 9)",
-    "type": "emergency",
-    "start": 1788933600,
-    "end": 1788948000,
-    "url": "https://na.finalfantasyxiv.com/lodestone/news/detail/fe272ef325fe6f154b4884fff014624dfd7699bb",
-    "urls": {
-      "na": "https://na.finalfantasyxiv.com/lodestone/news/detail/fe272ef325fe6f154b4884fff014624dfd7699bb",
-      "eu": "https://eu.finalfantasyxiv.com/lodestone/news/detail/0224bc0cf539c3a5432a02a491ffdf3ec69db358",
-      "jp": "https://jp.finalfantasyxiv.com/lodestone/news/detail/72aac553109b297701627aa3d40a56c560b68482",
-      "fr": "https://fr.finalfantasyxiv.com/lodestone/news/detail/2a1f6e9b404b2457a7e123224d19deca9624e471",
-      "de": null
-    }
-  },
+  "maintenance": null,
   "lastMaintenance": {
     "title": "All Worlds Emergency Maintenance (Sep. 9): Follow-up",
     "type": "emergency",
@@ -60,5 +47,5 @@
     }
   ],
   "lastEvent": null,
-  "lastUpdated": 1788945382
+  "lastUpdated": 1788948893
 }
