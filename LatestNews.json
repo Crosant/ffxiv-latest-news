@@ -1,31 +1,18 @@
 {
   "version": "2.2.1",
   "source": "lodestonenews.com",
-  "maintenance": {
-    "title": "[Aether] Gilgamesh World Emergency Maintenance (Sep. 14)",
+  "maintenance": null,
+  "lastMaintenance": {
+    "title": "[Aether] Gilgamesh World Emergency Maintenance (Sep. 14): Follow-up",
     "type": "emergency",
     "start": 1789369200,
-    "end": 1789372800,
-    "url": "https://na.finalfantasyxiv.com/lodestone/news/detail/6b3797589f67b16014d6227d8e949bc739335785",
+    "end": 1789371900,
+    "url": "https://na.finalfantasyxiv.com/lodestone/news/detail/8e13e637974d9cdc1d9faa2a07d3051d19ee1c28",
     "urls": {
-      "na": "https://na.finalfantasyxiv.com/lodestone/news/detail/6b3797589f67b16014d6227d8e949bc739335785",
-      "eu": "https://eu.finalfantasyxiv.com/lodestone/news/detail/69520a27e392f9595b128b71896bd291cc19c311",
-      "jp": "https://jp.finalfantasyxiv.com/lodestone/news/detail/ef28193622eb68298b7a230897cf608daf6ab4e3",
-      "fr": "https://fr.finalfantasyxiv.com/lodestone/news/detail/33bb9e4e00043637127894686fb53de369b38e2b",
-      "de": null
-    }
-  },
-  "lastMaintenance": {
-    "title": "[Crystal] Diabolos World Emergency Maintenance (Sep. 11): Follow-up",
-    "type": "emergency",
-    "start": 1789110000,
-    "end": 1789112400,
-    "url": "https://na.finalfantasyxiv.com/lodestone/news/detail/905b780bae5b32090894341bdf50d954db92e41d",
-    "urls": {
-      "na": "https://na.finalfantasyxiv.com/lodestone/news/detail/905b780bae5b32090894341bdf50d954db92e41d",
-      "eu": "https://eu.finalfantasyxiv.com/lodestone/news/detail/34b1d32cfb16ee5cf2b1f22902c1aa93f469a222",
-      "jp": "https://jp.finalfantasyxiv.com/lodestone/news/detail/b2d1d0a0fd47fed1c7a6776bd33cc0847f8f4f3d",
-      "fr": "https://fr.finalfantasyxiv.com/lodestone/news/detail/2773d31d5b2c719a342dcd4c4a09acd8482dbebf",
+      "na": "https://na.finalfantasyxiv.com/lodestone/news/detail/8e13e637974d9cdc1d9faa2a07d3051d19ee1c28",
+      "eu": "https://eu.finalfantasyxiv.com/lodestone/news/detail/087ada2c2e679d6fa07842c743e3e1ef633b1528",
+      "jp": "https://jp.finalfantasyxiv.com/lodestone/news/detail/fe8778f02761b52f2c921f7ff9ea96b37976b7f5",
+      "fr": "https://fr.finalfantasyxiv.com/lodestone/news/detail/f529c51c7ff8c3418c60e56e5219768e5e11357a",
       "de": null
     }
   },
@@ -59,5 +46,5 @@
     },
     "category": "seasonal"
   },
-  "lastUpdated": 1789362938
+  "lastUpdated": 1789374173
 }
