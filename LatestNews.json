@@ -1,7 +1,20 @@
 {
   "version": "2.2.1",
   "source": "lodestonenews.com",
-  "maintenance": null,
+  "maintenance": {
+    "title": "[Aether] Gilgamesh World Emergency Maintenance (Sep. 14)",
+    "type": "emergency",
+    "start": 1789369200,
+    "end": 1789372800,
+    "url": "https://na.finalfantasyxiv.com/lodestone/news/detail/6b3797589f67b16014d6227d8e949bc739335785",
+    "urls": {
+      "na": "https://na.finalfantasyxiv.com/lodestone/news/detail/6b3797589f67b16014d6227d8e949bc739335785",
+      "eu": "https://eu.finalfantasyxiv.com/lodestone/news/detail/69520a27e392f9595b128b71896bd291cc19c311",
+      "jp": "https://jp.finalfantasyxiv.com/lodestone/news/detail/ef28193622eb68298b7a230897cf608daf6ab4e3",
+      "fr": "https://fr.finalfantasyxiv.com/lodestone/news/detail/33bb9e4e00043637127894686fb53de369b38e2b",
+      "de": null
+    }
+  },
   "lastMaintenance": {
     "title": "[Crystal] Diabolos World Emergency Maintenance (Sep. 11): Follow-up",
     "type": "emergency",
@@ -46,5 +59,5 @@
     },
     "category": "seasonal"
   },
-  "lastUpdated": 1789114779
+  "lastUpdated": 1789362938
 }
