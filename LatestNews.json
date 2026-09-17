@@ -1,31 +1,18 @@
 {
   "version": "2.2.1",
   "source": "lodestonenews.com",
-  "maintenance": {
-    "title": "All Worlds Emergency Maintenance (Sep. 17)",
+  "maintenance": null,
+  "lastMaintenance": {
+    "title": "All Worlds Emergency Maintenance (Sep. 17): Follow-up",
     "type": "emergency",
     "start": 1789624800,
-    "end": 1789639200,
-    "url": "https://na.finalfantasyxiv.com/lodestone/news/detail/2a3f20dc5ba8e4b4b50de1580ddaa3fd5b7427dd",
+    "end": 1789637100,
+    "url": "https://na.finalfantasyxiv.com/lodestone/news/detail/47eaa28b595d13f49451f7ba4ff3bf701734c99c",
     "urls": {
-      "na": "https://na.finalfantasyxiv.com/lodestone/news/detail/2a3f20dc5ba8e4b4b50de1580ddaa3fd5b7427dd",
-      "eu": "https://eu.finalfantasyxiv.com/lodestone/news/detail/ddda3f1b495199e9e0a1cbb37ef5a2306508c73c",
-      "jp": "https://jp.finalfantasyxiv.com/lodestone/news/detail/0d09f1ea075c0402138372be7ce07ea30035ccf8",
-      "fr": "https://fr.finalfantasyxiv.com/lodestone/news/detail/afddcfb72b943afa7d49455592747efe91bb7ed5",
-      "de": null
-    }
-  },
-  "lastMaintenance": {
-    "title": "[Aether] Gilgamesh World Emergency Maintenance (Sep. 14): Follow-up",
-    "type": "emergency",
-    "start": 1789369200,
-    "end": 1789371900,
-    "url": "https://na.finalfantasyxiv.com/lodestone/news/detail/8e13e637974d9cdc1d9faa2a07d3051d19ee1c28",
-    "urls": {
-      "na": "https://na.finalfantasyxiv.com/lodestone/news/detail/8e13e637974d9cdc1d9faa2a07d3051d19ee1c28",
-      "eu": "https://eu.finalfantasyxiv.com/lodestone/news/detail/087ada2c2e679d6fa07842c743e3e1ef633b1528",
-      "jp": "https://jp.finalfantasyxiv.com/lodestone/news/detail/fe8778f02761b52f2c921f7ff9ea96b37976b7f5",
-      "fr": "https://fr.finalfantasyxiv.com/lodestone/news/detail/f529c51c7ff8c3418c60e56e5219768e5e11357a",
+      "na": "https://na.finalfantasyxiv.com/lodestone/news/detail/47eaa28b595d13f49451f7ba4ff3bf701734c99c",
+      "eu": "https://eu.finalfantasyxiv.com/lodestone/news/detail/4bd69cbd5ec444a6b9a96485d2bdaca51bbb85af",
+      "jp": "https://jp.finalfantasyxiv.com/lodestone/news/detail/620c6c6fa50b9c46645fc319a60a090e9e205950",
+      "fr": "https://fr.finalfantasyxiv.com/lodestone/news/detail/8daef3aee52416f8eadb603474aa682977d27946",
       "de": null
     }
   },
@@ -46,5 +33,5 @@
     }
   ],
   "lastEvent": null,
-  "lastUpdated": 1789636591
+  "lastUpdated": 1789640099
 }
