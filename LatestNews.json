@@ -45,19 +45,6 @@
       "category": "seasonal"
     }
   ],
-  "lastEvent": {
-    "title": "The Rising Returns 27 August!",
-    "start": 1787814000,
-    "end": 1789052340,
-    "url": "https://na.finalfantasyxiv.com/lodestone/topics/detail/934039c77087ac5ad6e535866dedb5bc63511885",
-    "urls": {
-      "na": "https://na.finalfantasyxiv.com/lodestone/topics/detail/934039c77087ac5ad6e535866dedb5bc63511885",
-      "eu": "https://eu.finalfantasyxiv.com/lodestone/topics/detail/3e012e1e73d991257feffdb85db4f78db100bca6",
-      "jp": null,
-      "fr": "https://fr.finalfantasyxiv.com/lodestone/topics/detail/58c5403eae7af304b345074cd2b1227d45e2163a",
-      "de": "https://de.finalfantasyxiv.com/lodestone/topics/detail/d1eec50cb467b53b26075a1144ea3a39dae3e340"
-    },
-    "category": "seasonal"
-  },
-  "lastUpdated": 1789542831
+  "lastEvent": null,
+  "lastUpdated": 1789636591
 }
