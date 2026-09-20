@@ -7,9 +7,9 @@
     "type": "emergency",
     "start": 1789624800,
     "end": 1789637100,
-    "url": "https://eu.finalfantasyxiv.com/lodestone/news/detail/4bd69cbd5ec444a6b9a96485d2bdaca51bbb85af",
+    "url": "https://na.finalfantasyxiv.com/lodestone/news/detail/47eaa28b595d13f49451f7ba4ff3bf701734c99c",
     "urls": {
-      "na": null,
+      "na": "https://na.finalfantasyxiv.com/lodestone/news/detail/47eaa28b595d13f49451f7ba4ff3bf701734c99c",
       "eu": "https://eu.finalfantasyxiv.com/lodestone/news/detail/4bd69cbd5ec444a6b9a96485d2bdaca51bbb85af",
       "jp": "https://jp.finalfantasyxiv.com/lodestone/news/detail/620c6c6fa50b9c46645fc319a60a090e9e205950",
       "fr": "https://fr.finalfantasyxiv.com/lodestone/news/detail/8daef3aee52416f8eadb603474aa682977d27946",
@@ -33,5 +33,5 @@
     }
   ],
   "lastEvent": null,
-  "lastUpdated": 1789924255
+  "lastUpdated": 1789928151
 }
