@@ -1,7 +1,8 @@
 {
   "version": "2.2.1",
   "source": "lodestonenews.com",
-  "maintenance": {
+  "maintenance": null,
+  "lastMaintenance": {
     "title": "Emergency Maintenance on Save Data Server Backup (Sep. 25)",
     "type": "emergency",
     "start": 1790323200,
@@ -12,20 +13,6 @@
       "eu": "https://eu.finalfantasyxiv.com/lodestone/news/detail/3792e7be62da7fbc3c6b9fb358f5842a4bc160a7",
       "jp": "https://jp.finalfantasyxiv.com/lodestone/news/detail/9092fc69a1aca4cc57f237db9b10f550a49bada9",
       "fr": "https://fr.finalfantasyxiv.com/lodestone/news/detail/e51672457edf71bde2d99ace6ef8e4c9dc7eef2b",
-      "de": null
-    }
-  },
-  "lastMaintenance": {
-    "title": "All Worlds Emergency Maintenance (Sep. 17): Follow-up",
-    "type": "emergency",
-    "start": 1789624800,
-    "end": 1789637100,
-    "url": "https://na.finalfantasyxiv.com/lodestone/news/detail/47eaa28b595d13f49451f7ba4ff3bf701734c99c",
-    "urls": {
-      "na": "https://na.finalfantasyxiv.com/lodestone/news/detail/47eaa28b595d13f49451f7ba4ff3bf701734c99c",
-      "eu": "https://eu.finalfantasyxiv.com/lodestone/news/detail/4bd69cbd5ec444a6b9a96485d2bdaca51bbb85af",
-      "jp": "https://jp.finalfantasyxiv.com/lodestone/news/detail/620c6c6fa50b9c46645fc319a60a090e9e205950",
-      "fr": "https://fr.finalfantasyxiv.com/lodestone/news/detail/8daef3aee52416f8eadb603474aa682977d27946",
       "de": null
     }
   },
@@ -46,5 +33,5 @@
     }
   ],
   "lastEvent": null,
-  "lastUpdated": 1790248397
+  "lastUpdated": 1790327781
 }
