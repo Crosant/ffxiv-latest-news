@@ -18,20 +18,20 @@
   },
   "events": [
     {
-      "title": "Patch 7.5─Trail to the Heavens Special Site Updated!",
-      "start": 1788940800,
-      "end": 1792421940,
-      "url": "https://na.finalfantasyxiv.com/lodestone/topics/detail/7a376504f18acaff4ffc60c1526f7354141c1a46",
+      "title": "Fall Guys Collaboration Event Returns 7 October!",
+      "start": 1791360000,
+      "end": 1793113140,
+      "url": "https://na.finalfantasyxiv.com/lodestone/topics/detail/e1eb49ab626ea7b71795aab17ac5f335d8ace6de",
       "urls": {
-        "na": "https://na.finalfantasyxiv.com/lodestone/topics/detail/7e9a7eacc4c4bf8bc69f9ee37250932d9ee0133f",
-        "eu": "https://eu.finalfantasyxiv.com/lodestone/topics/detail/16fde0967d5a844dbfd69cfb67ca35121985c13d",
-        "jp": null,
-        "fr": "https://fr.finalfantasyxiv.com/lodestone/topics/detail/a5746be455bd8db7c4980c032282b9ebfcc9a5fc",
-        "de": "https://de.finalfantasyxiv.com/lodestone/topics/detail/9de6143946b1aaa0c74393f0e2a80cdfa0df0829"
+        "na": "https://na.finalfantasyxiv.com/lodestone/topics/detail/e1eb49ab626ea7b71795aab17ac5f335d8ace6de",
+        "eu": "https://eu.finalfantasyxiv.com/lodestone/topics/detail/c54a06f0d6da3970becea20a63e01f5c25f6e74e",
+        "jp": "https://jp.finalfantasyxiv.com/lodestone/topics/detail/cd121984d390aad591c7a2050372b31c39962673",
+        "fr": "https://fr.finalfantasyxiv.com/lodestone/topics/detail/0f25220a071ab8a95f0dc4815a0d6b1101b2bb9f",
+        "de": "https://de.finalfantasyxiv.com/lodestone/topics/detail/67df2c10d0b7467e5a006dbadd025c629dbfe8bc"
       },
       "category": "seasonal"
     }
   ],
   "lastEvent": null,
-  "lastUpdated": 1790749362
+  "lastUpdated": 1790774671
 }
