@@ -1,7 +1,20 @@
 {
   "version": "2.2.1",
   "source": "lodestonenews.com",
-  "maintenance": null,
+  "maintenance": {
+    "title": "All Worlds Maintenance (Oct. 12-13)",
+    "type": "scheduled",
+    "start": 1791799200,
+    "end": 1791885600,
+    "url": "https://na.finalfantasyxiv.com/lodestone/news/detail/24dff898070f0d2a8bafb3b1a862e344abecc9b5",
+    "urls": {
+      "na": "https://na.finalfantasyxiv.com/lodestone/news/detail/24dff898070f0d2a8bafb3b1a862e344abecc9b5",
+      "eu": "https://eu.finalfantasyxiv.com/lodestone/news/detail/313fd5991830286c734b1176e21fe718949203bd",
+      "jp": "https://jp.finalfantasyxiv.com/lodestone/news/detail/a584484a93b34028d7cbb9faa2a4226d5f470d90",
+      "fr": "https://fr.finalfantasyxiv.com/lodestone/news/detail/3c4a62e60787b42eb0fe91229c2994cf2efcf2c6",
+      "de": "https://de.finalfantasyxiv.com/lodestone/news/detail/937bc8f7dda7fe51008b7ea77d65548fcd4e5ebe"
+    }
+  },
   "lastMaintenance": {
     "title": "Emergency Maintenance on Save Data Server Backup (Sep. 25)",
     "type": "emergency",
@@ -47,5 +60,5 @@
     }
   ],
   "lastEvent": null,
-  "lastUpdated": 1791447787
+  "lastUpdated": 1791458058
 }
