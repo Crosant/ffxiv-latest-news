@@ -1,20 +1,7 @@
 {
   "version": "2.2.1",
   "source": "lodestonenews.com",
-  "maintenance": {
-    "title": "Online Store Emergency Maintenance (Oct. 13)",
-    "type": "emergency",
-    "start": 1791862020,
-    "end": null,
-    "url": "https://eu.finalfantasyxiv.com/lodestone/news/detail/e1b470c0f7dc092f4614ee5b1ee9231d39d9e3c7",
-    "urls": {
-      "na": null,
-      "eu": "https://eu.finalfantasyxiv.com/lodestone/news/detail/e1b470c0f7dc092f4614ee5b1ee9231d39d9e3c7",
-      "jp": "https://jp.finalfantasyxiv.com/lodestone/news/detail/dd069b3893525b6855fed283e1018f4350ba2cbf",
-      "fr": "https://fr.finalfantasyxiv.com/lodestone/news/detail/5813ee60a6cf508922a757009f27b0f56863753a",
-      "de": null
-    }
-  },
+  "maintenance": null,
   "lastMaintenance": {
     "title": "Online Store Emergency Maintenance (Oct. 12): Follow-up",
     "type": "emergency",
@@ -60,5 +47,5 @@
     }
   ],
   "lastEvent": null,
-  "lastUpdated": 1791911618
+  "lastUpdated": 1791951460
 }
