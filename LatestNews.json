@@ -1,7 +1,8 @@
 {
   "version": "2.2.1",
   "source": "lodestonenews.com",
-  "maintenance": {
+  "maintenance": null,
+  "lastMaintenance": {
     "title": "Japan Data Centre Cross-World Functions Emergency Maintenance (Oct. 15)",
     "type": "emergency",
     "start": 1792029600,
@@ -12,20 +13,6 @@
       "eu": "https://eu.finalfantasyxiv.com/lodestone/news/detail/baa87b06ba895b89b67d25c321c99c2f8ddd25d1",
       "jp": "https://jp.finalfantasyxiv.com/lodestone/news/detail/ce298a7deacb30494e08b2128f9c63e3b3ddaccd",
       "fr": "https://fr.finalfantasyxiv.com/lodestone/news/detail/fe8450689778de296ba39fc399b1c590dad41ed9",
-      "de": null
-    }
-  },
-  "lastMaintenance": {
-    "title": "Online Store Emergency Maintenance (Oct. 12): Follow-up",
-    "type": "emergency",
-    "start": 1791862020,
-    "end": 1791883500,
-    "url": "https://na.finalfantasyxiv.com/lodestone/news/detail/46a19f133b12a24958ed02eb2d4092b1d8d02d2b",
-    "urls": {
-      "na": "https://na.finalfantasyxiv.com/lodestone/news/detail/46a19f133b12a24958ed02eb2d4092b1d8d02d2b",
-      "eu": "https://eu.finalfantasyxiv.com/lodestone/news/detail/23c9564fc5dcf90bf76d19c0b204ca749b94cfda",
-      "jp": "https://jp.finalfantasyxiv.com/lodestone/news/detail/5e1ca10e63454d8aab34f171ec0624e9cef71f5f",
-      "fr": "https://fr.finalfantasyxiv.com/lodestone/news/detail/0275ed032a7a534bef3b4a7b9bc4a7c2ab09dbd8",
       "de": null
     }
   },
@@ -60,5 +47,5 @@
     }
   ],
   "lastEvent": null,
-  "lastUpdated": 1791987279
+  "lastUpdated": 1792030787
 }
