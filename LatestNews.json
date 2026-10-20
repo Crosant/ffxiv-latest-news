@@ -1,20 +1,7 @@
 {
   "version": "2.2.1",
   "source": "lodestonenews.com",
-  "maintenance": {
-    "title": "All Worlds Maintenance (Oct. 20)",
-    "type": "scheduled",
-    "start": 1792468800,
-    "end": 1792490400,
-    "url": "https://na.finalfantasyxiv.com/lodestone/news/detail/a9b9f27eb74244f1c3453c4eb5e136b1379ffbe7",
-    "urls": {
-      "na": "https://na.finalfantasyxiv.com/lodestone/news/detail/a9b9f27eb74244f1c3453c4eb5e136b1379ffbe7",
-      "eu": "https://eu.finalfantasyxiv.com/lodestone/news/detail/3c35b05c651ed0d0fd2f2d505e8f1ab997ab8274",
-      "jp": "https://jp.finalfantasyxiv.com/lodestone/news/detail/d2164ef1b69ee88cb2611c4a0ce5c5ad20bc490f",
-      "fr": "https://fr.finalfantasyxiv.com/lodestone/news/detail/1aa45dcf72a2f4d91281e757cf0417dd6660ac85",
-      "de": "https://de.finalfantasyxiv.com/lodestone/news/detail/6279e5fd36c11edd10cd2c44a9e813a69683ae4b"
-    }
-  },
+  "maintenance": null,
   "lastMaintenance": {
     "title": "All Worlds Maintenance (Oct. 20): Follow-up",
     "type": "scheduled",
@@ -60,5 +47,5 @@
     }
   ],
   "lastEvent": null,
-  "lastUpdated": 1792487737
+  "lastUpdated": 1792491160
 }
