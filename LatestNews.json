@@ -1,7 +1,20 @@
 {
   "version": "2.2.1",
   "source": "lodestonenews.com",
-  "maintenance": null,
+  "maintenance": {
+    "title": "Companion App Emergency Maintenance (Oct. 21-22)",
+    "type": "emergency",
+    "start": 1792571400,
+    "end": 1792657800,
+    "url": "https://na.finalfantasyxiv.com/lodestone/news/detail/6d466735667e70a72aa243bb2ebc68ab94df0e3f",
+    "urls": {
+      "na": "https://na.finalfantasyxiv.com/lodestone/news/detail/6d466735667e70a72aa243bb2ebc68ab94df0e3f",
+      "eu": "https://eu.finalfantasyxiv.com/lodestone/news/detail/b6f4caf64729e7d54dbd3302caf21f1e9433c733",
+      "jp": "https://jp.finalfantasyxiv.com/lodestone/news/detail/ddbb1f0cd8a157c16f3cb0989c425eee3fa36d36",
+      "fr": "https://fr.finalfantasyxiv.com/lodestone/news/detail/ce3ccfab0ea902424ab78a2d9ca034b8f288c26b",
+      "de": null
+    }
+  },
   "lastMaintenance": {
     "title": "All Worlds Maintenance (Oct. 20): Follow-up",
     "type": "scheduled",
@@ -47,5 +60,5 @@
     }
   ],
   "lastEvent": null,
-  "lastUpdated": 1792491160
+  "lastUpdated": 1792574138
 }
