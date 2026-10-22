@@ -11,21 +11,21 @@
       "na": "https://na.finalfantasyxiv.com/lodestone/news/detail/2cff4ee28b321afc589d9b5fc11f47ff76d34826",
       "eu": null,
       "jp": "https://jp.finalfantasyxiv.com/lodestone/news/detail/66e36b1a8a07945ebaefafc3566dd97521c79764",
-      "fr": "https://fr.finalfantasyxiv.com/lodestone/news/detail/e60841b19c150a8247f3b13e91d1fee75ec47e37",
+      "fr": "https://fr.finalfantasyxiv.com/lodestone/news/detail/17646cd222f67a33b92931d69baaf308b1708c0d",
       "de": null
     }
   },
   "lastMaintenance": {
-    "title": "Support Centre Emergency Maintenance  (Oct. 21)",
+    "title": "Forum Emergency Maintenance (Oct. 21)",
     "type": "emergency",
-    "start": 1792581600,
-    "end": 1792581600,
-    "url": "https://eu.finalfantasyxiv.com/lodestone/news/detail/ce1666130af1d45f3814faaa28ffb1267b228db6",
+    "start": 1792597800,
+    "end": 1792597800,
+    "url": "https://eu.finalfantasyxiv.com/lodestone/news/detail/0b5bf3e5d7fbf7b40cf07c1874e62397f767de7f",
     "urls": {
       "na": null,
-      "eu": "https://eu.finalfantasyxiv.com/lodestone/news/detail/ce1666130af1d45f3814faaa28ffb1267b228db6",
-      "jp": "https://jp.finalfantasyxiv.com/lodestone/news/detail/99515581afa5b505cf798e2ab5952d11286ee92f",
-      "fr": "https://fr.finalfantasyxiv.com/lodestone/news/detail/e60841b19c150a8247f3b13e91d1fee75ec47e37",
+      "eu": "https://eu.finalfantasyxiv.com/lodestone/news/detail/0b5bf3e5d7fbf7b40cf07c1874e62397f767de7f",
+      "jp": "https://jp.finalfantasyxiv.com/lodestone/news/detail/66e36b1a8a07945ebaefafc3566dd97521c79764",
+      "fr": "https://fr.finalfantasyxiv.com/lodestone/news/detail/17646cd222f67a33b92931d69baaf308b1708c0d",
       "de": null
     }
   },
@@ -60,5 +60,5 @@
     }
   ],
   "lastEvent": null,
-  "lastUpdated": 1792642547
+  "lastUpdated": 1792646070
 }
