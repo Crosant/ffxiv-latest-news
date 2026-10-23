@@ -3,17 +3,17 @@
   "source": "lodestonenews.com",
   "maintenance": null,
   "lastMaintenance": {
-    "title": "Config Data Sharing Function Emergency Maintenance (Oct. 21-22): Completed",
+    "title": "Forums Emergency Maintenance (Oct. 21): Follow-up",
     "type": "emergency",
-    "start": 1792571400,
-    "end": 1792671360,
-    "url": "https://na.finalfantasyxiv.com/lodestone/news/detail/4eb5c9dd1faeec95e00b80c8a3402a848488dc3b",
+    "start": 1792597800,
+    "end": 1792730700,
+    "url": "https://na.finalfantasyxiv.com/lodestone/news/detail/d5c3ff17ea7ff767343963bfab874d51abad7c10",
     "urls": {
-      "na": "https://na.finalfantasyxiv.com/lodestone/news/detail/4eb5c9dd1faeec95e00b80c8a3402a848488dc3b",
-      "eu": "https://eu.finalfantasyxiv.com/lodestone/news/detail/0824a384dc227c0472182e008500a8ec11ee9c2c",
-      "jp": "https://jp.finalfantasyxiv.com/lodestone/news/detail/af6a9ed1141d5bd0855af47fa0c662e868086965",
-      "fr": "https://fr.finalfantasyxiv.com/lodestone/news/detail/2b49dc9d5f2a36cf0de079a13d6b4b01e07be566",
-      "de": null
+      "na": "https://na.finalfantasyxiv.com/lodestone/news/detail/d5c3ff17ea7ff767343963bfab874d51abad7c10",
+      "eu": "https://eu.finalfantasyxiv.com/lodestone/news/detail/bcc68c6ab8b9c8e2740e38974394d01148b58346",
+      "jp": "https://jp.finalfantasyxiv.com/lodestone/news/detail/6c0cf2fe5c97fd071b392ca6519d1093333fc86a",
+      "fr": "https://fr.finalfantasyxiv.com/lodestone/news/detail/79fe835c3cd06d20b1a8fd39136607dbe0302b8b",
+      "de": "https://de.finalfantasyxiv.com/lodestone/news/detail/ec515d0ec1e948994ec6a5514ed77616bd9e8de1"
     }
   },
   "events": [
@@ -47,5 +47,5 @@
     }
   ],
   "lastEvent": null,
-  "lastUpdated": 1792685789
+  "lastUpdated": 1792736678
 }
