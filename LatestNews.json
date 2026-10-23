@@ -3,16 +3,16 @@
   "source": "lodestonenews.com",
   "maintenance": null,
   "lastMaintenance": {
-    "title": "Forums Emergency Maintenance (Oct. 21): Follow-up",
+    "title": "Companion App Emergency Maintenance (Oct. 21): Follow-up",
     "type": "emergency",
-    "start": 1792597800,
-    "end": 1792730700,
-    "url": "https://na.finalfantasyxiv.com/lodestone/news/detail/d5c3ff17ea7ff767343963bfab874d51abad7c10",
+    "start": 1792572600,
+    "end": 1792750020,
+    "url": "https://na.finalfantasyxiv.com/lodestone/news/detail/05c15ca5d117e79c599784fe51a0eb2f59705529",
     "urls": {
-      "na": "https://na.finalfantasyxiv.com/lodestone/news/detail/d5c3ff17ea7ff767343963bfab874d51abad7c10",
-      "eu": "https://eu.finalfantasyxiv.com/lodestone/news/detail/bcc68c6ab8b9c8e2740e38974394d01148b58346",
-      "jp": "https://jp.finalfantasyxiv.com/lodestone/news/detail/6c0cf2fe5c97fd071b392ca6519d1093333fc86a",
-      "fr": "https://fr.finalfantasyxiv.com/lodestone/news/detail/79fe835c3cd06d20b1a8fd39136607dbe0302b8b",
+      "na": "https://na.finalfantasyxiv.com/lodestone/news/detail/05c15ca5d117e79c599784fe51a0eb2f59705529",
+      "eu": null,
+      "jp": "https://jp.finalfantasyxiv.com/lodestone/news/detail/3b6b8a48af7054552ec27fe228919991bee81db9",
+      "fr": "https://fr.finalfantasyxiv.com/lodestone/news/detail/fdc003acc69bc289d33c33ccd3f9c0162da9683b",
       "de": "https://de.finalfantasyxiv.com/lodestone/news/detail/ec515d0ec1e948994ec6a5514ed77616bd9e8de1"
     }
   },
@@ -47,5 +47,5 @@
     }
   ],
   "lastEvent": null,
-  "lastUpdated": 1792736678
+  "lastUpdated": 1792754012
 }
