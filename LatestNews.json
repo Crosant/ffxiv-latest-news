@@ -18,20 +18,6 @@
   },
   "events": [
     {
-      "title": "Fall Guys Collaboration Event Returns 7 October!",
-      "start": 1791360000,
-      "end": 1793113140,
-      "url": "https://na.finalfantasyxiv.com/lodestone/topics/detail/e1eb49ab626ea7b71795aab17ac5f335d8ace6de",
-      "urls": {
-        "na": "https://na.finalfantasyxiv.com/lodestone/topics/detail/e1eb49ab626ea7b71795aab17ac5f335d8ace6de",
-        "eu": "https://eu.finalfantasyxiv.com/lodestone/topics/detail/c54a06f0d6da3970becea20a63e01f5c25f6e74e",
-        "jp": null,
-        "fr": "https://fr.finalfantasyxiv.com/lodestone/topics/detail/0f25220a071ab8a95f0dc4815a0d6b1101b2bb9f",
-        "de": "https://de.finalfantasyxiv.com/lodestone/topics/detail/67df2c10d0b7467e5a006dbadd025c629dbfe8bc"
-      },
-      "category": "seasonal"
-    },
-    {
       "title": "All Saints' Wake Begins 15 October",
       "start": 1792051200,
       "end": 1793631540,
@@ -46,6 +32,19 @@
       "category": "seasonal"
     }
   ],
-  "lastEvent": null,
-  "lastUpdated": 1793008394
+  "lastEvent": {
+    "title": "Fall Guys Collaboration Event Returns 7 October!",
+    "start": 1791360000,
+    "end": 1793113140,
+    "url": "https://na.finalfantasyxiv.com/lodestone/topics/detail/e1eb49ab626ea7b71795aab17ac5f335d8ace6de",
+    "urls": {
+      "na": "https://na.finalfantasyxiv.com/lodestone/topics/detail/e1eb49ab626ea7b71795aab17ac5f335d8ace6de",
+      "eu": "https://eu.finalfantasyxiv.com/lodestone/topics/detail/c54a06f0d6da3970becea20a63e01f5c25f6e74e",
+      "jp": null,
+      "fr": "https://fr.finalfantasyxiv.com/lodestone/topics/detail/0f25220a071ab8a95f0dc4815a0d6b1101b2bb9f",
+      "de": "https://de.finalfantasyxiv.com/lodestone/topics/detail/67df2c10d0b7467e5a006dbadd025c629dbfe8bc"
+    },
+    "category": "seasonal"
+  },
+  "lastUpdated": 1793130847
 }
