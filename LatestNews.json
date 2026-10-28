@@ -13,7 +13,7 @@
       "eu": null,
       "jp": "https://jp.finalfantasyxiv.com/lodestone/news/detail/3b6b8a48af7054552ec27fe228919991bee81db9",
       "fr": "https://fr.finalfantasyxiv.com/lodestone/news/detail/fdc003acc69bc289d33c33ccd3f9c0162da9683b",
-      "de": "https://de.finalfantasyxiv.com/lodestone/news/detail/ec515d0ec1e948994ec6a5514ed77616bd9e8de1"
+      "de": null
     }
   },
   "events": [
@@ -46,5 +46,5 @@
     },
     "category": "seasonal"
   },
-  "lastUpdated": 1793130847
+  "lastUpdated": 1793185503
 }
