@@ -17,19 +17,6 @@
     }
   },
   "events": [],
-  "lastEvent": {
-    "title": "All Saints' Wake Begins 15 October",
-    "start": 1792051200,
-    "end": 1793631540,
-    "url": "https://na.finalfantasyxiv.com/lodestone/topics/detail/10d899ee4fcc8eba8414f464a712e14200e8e1f8",
-    "urls": {
-      "na": "https://na.finalfantasyxiv.com/lodestone/topics/detail/10d899ee4fcc8eba8414f464a712e14200e8e1f8",
-      "eu": "https://eu.finalfantasyxiv.com/lodestone/topics/detail/1a2f450a10369c614dcae06468c478ec815e642d",
-      "jp": null,
-      "fr": "https://fr.finalfantasyxiv.com/lodestone/topics/detail/82d710f292645a9c37e135964ce480ec3add2d6a",
-      "de": "https://de.finalfantasyxiv.com/lodestone/topics/detail/969680f04eaf5428962bff28f3f8962848e2c125"
-    },
-    "category": "seasonal"
-  },
-  "lastUpdated": 1793632196
+  "lastEvent": null,
+  "lastUpdated": 1793794395
 }
