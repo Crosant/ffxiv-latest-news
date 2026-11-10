@@ -1,35 +1,22 @@
 {
   "version": "2.2.1",
   "source": "lodestonenews.com",
-  "maintenance": {
-    "title": "All Worlds Maintenance (Nov. 9-10)",
+  "maintenance": null,
+  "lastMaintenance": {
+    "title": "All Worlds Maintenance (Nov. 9-10): Follow-up",
     "type": "scheduled",
     "start": 1794218400,
-    "end": 1794304800,
-    "url": "https://na.finalfantasyxiv.com/lodestone/news/detail/319982c490718c2f355b87bbb1e61fb455c7d286",
+    "end": 1794302100,
+    "url": "https://na.finalfantasyxiv.com/lodestone/news/detail/611e992461bd620df45700041e46569377ee2972",
     "urls": {
-      "na": "https://na.finalfantasyxiv.com/lodestone/news/detail/319982c490718c2f355b87bbb1e61fb455c7d286",
-      "eu": "https://eu.finalfantasyxiv.com/lodestone/news/detail/fae7a5d1c9e7f2967f2edd1db9ae78f14b3d0377",
-      "jp": "https://jp.finalfantasyxiv.com/lodestone/news/detail/c37f3c23df3ff03c7852805f20e227090d35b1b9",
-      "fr": "https://fr.finalfantasyxiv.com/lodestone/news/detail/43884ff27eef1ec60efbe693097d8ccc220adae9",
-      "de": "https://de.finalfantasyxiv.com/lodestone/news/detail/0a0011b664ba65b3ac75774d0e0af38ebb6c97ec"
-    }
-  },
-  "lastMaintenance": {
-    "title": "Companion App Emergency Maintenance (Oct. 21): Follow-up",
-    "type": "emergency",
-    "start": 1792572600,
-    "end": 1792750020,
-    "url": "https://na.finalfantasyxiv.com/lodestone/news/detail/05c15ca5d117e79c599784fe51a0eb2f59705529",
-    "urls": {
-      "na": "https://na.finalfantasyxiv.com/lodestone/news/detail/05c15ca5d117e79c599784fe51a0eb2f59705529",
-      "eu": null,
-      "jp": "https://jp.finalfantasyxiv.com/lodestone/news/detail/3b6b8a48af7054552ec27fe228919991bee81db9",
-      "fr": "https://fr.finalfantasyxiv.com/lodestone/news/detail/fdc003acc69bc289d33c33ccd3f9c0162da9683b",
-      "de": "https://de.finalfantasyxiv.com/lodestone/news/detail/ec515d0ec1e948994ec6a5514ed77616bd9e8de1"
+      "na": "https://na.finalfantasyxiv.com/lodestone/news/detail/611e992461bd620df45700041e46569377ee2972",
+      "eu": "https://eu.finalfantasyxiv.com/lodestone/news/detail/8ac8c6e6e500ad434990990242d05cd37b11b27b",
+      "jp": "https://jp.finalfantasyxiv.com/lodestone/news/detail/9720cb22d18c17264e41da5cfe3aa68b1de96640",
+      "fr": "https://fr.finalfantasyxiv.com/lodestone/news/detail/5a5e2ad2d7549c2e877fbece972a162f28d69e16",
+      "de": "https://de.finalfantasyxiv.com/lodestone/news/detail/c94b949dbd4c16e9e053edf0be370ffb18e85c7a"
     }
   },
   "events": [],
   "lastEvent": null,
-  "lastUpdated": 1793952753
+  "lastUpdated": 1794305369
 }
