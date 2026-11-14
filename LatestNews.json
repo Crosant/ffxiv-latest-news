@@ -2,8 +2,21 @@
   "version": "2.2.1",
   "source": "lodestonenews.com",
   "maintenance": null,
-  "lastMaintenance": null,
+  "lastMaintenance": {
+    "title": "All Worlds Maintenance (Nov. 9-10): Follow-up",
+    "type": "scheduled",
+    "start": 1794218400,
+    "end": 1794302100,
+    "url": "https://na.finalfantasyxiv.com/lodestone/news/detail/611e992461bd620df45700041e46569377ee2972",
+    "urls": {
+      "na": "https://na.finalfantasyxiv.com/lodestone/news/detail/611e992461bd620df45700041e46569377ee2972",
+      "eu": "https://eu.finalfantasyxiv.com/lodestone/news/detail/8ac8c6e6e500ad434990990242d05cd37b11b27b",
+      "jp": "https://jp.finalfantasyxiv.com/lodestone/news/detail/9720cb22d18c17264e41da5cfe3aa68b1de96640",
+      "fr": "https://fr.finalfantasyxiv.com/lodestone/news/detail/5a5e2ad2d7549c2e877fbece972a162f28d69e16",
+      "de": "https://de.finalfantasyxiv.com/lodestone/news/detail/c94b949dbd4c16e9e053edf0be370ffb18e85c7a"
+    }
+  },
   "events": [],
   "lastEvent": null,
-  "lastUpdated": 1794632937
+  "lastUpdated": 1794636816
 }
