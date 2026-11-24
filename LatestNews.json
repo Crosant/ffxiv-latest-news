@@ -16,7 +16,22 @@
       "de": "https://de.finalfantasyxiv.com/lodestone/news/detail/c94b949dbd4c16e9e053edf0be370ffb18e85c7a"
     }
   },
-  "events": [],
+  "events": [
+    {
+      "title": "Announcing Cross-region Data Center Travel Between North American and European Data Centers",
+      "start": 1796112000,
+      "end": 1799740740,
+      "url": "https://na.finalfantasyxiv.com/lodestone/topics/detail/ff9a765a27236b66f516cac46a8eb33fab7930a3",
+      "urls": {
+        "na": "https://na.finalfantasyxiv.com/lodestone/topics/detail/3e0f3cebb70090699b4e20503d5494d8e33e7df5",
+        "eu": "https://eu.finalfantasyxiv.com/lodestone/topics/detail/a1326adf1a6165fc78d84f042993394af4590d78",
+        "jp": "https://jp.finalfantasyxiv.com/lodestone/topics/detail/86555b365a518238debcd3814c3eb0f81da40f3f",
+        "fr": "https://fr.finalfantasyxiv.com/lodestone/topics/detail/efcd431b64ec3a69f39fbd0383218607c12da504",
+        "de": "https://de.finalfantasyxiv.com/lodestone/topics/detail/48a2a7d3c7fe93122f5720526da860bc1a67f45c"
+      },
+      "category": "seasonal"
+    }
+  ],
   "lastEvent": null,
-  "lastUpdated": 1795460830
+  "lastUpdated": 1795511430
 }
