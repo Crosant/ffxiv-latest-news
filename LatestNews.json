@@ -18,20 +18,20 @@
   },
   "events": [
     {
-      "title": "Announcing Cross-region Data Center Travel Between North American and European Data Centers",
+      "title": "Announcing the Eorzean Symphony World Tour!",
       "start": 1796112000,
       "end": 1799740740,
       "url": "https://na.finalfantasyxiv.com/lodestone/topics/detail/ff9a765a27236b66f516cac46a8eb33fab7930a3",
       "urls": {
-        "na": "https://na.finalfantasyxiv.com/lodestone/topics/detail/3e0f3cebb70090699b4e20503d5494d8e33e7df5",
-        "eu": "https://eu.finalfantasyxiv.com/lodestone/topics/detail/a1326adf1a6165fc78d84f042993394af4590d78",
+        "na": "https://na.finalfantasyxiv.com/lodestone/topics/detail/6980c068417272551bdafc3f215858b2bb08a3a8",
+        "eu": "https://eu.finalfantasyxiv.com/lodestone/topics/detail/8b643feceb60104c4b016cc54414b9d1ef71bfaa",
         "jp": "https://jp.finalfantasyxiv.com/lodestone/topics/detail/86555b365a518238debcd3814c3eb0f81da40f3f",
-        "fr": "https://fr.finalfantasyxiv.com/lodestone/topics/detail/efcd431b64ec3a69f39fbd0383218607c12da504",
-        "de": "https://de.finalfantasyxiv.com/lodestone/topics/detail/48a2a7d3c7fe93122f5720526da860bc1a67f45c"
+        "fr": "https://fr.finalfantasyxiv.com/lodestone/topics/detail/3a658a63e80583855a406d4c8cc4bb8efbc004e7",
+        "de": "https://de.finalfantasyxiv.com/lodestone/topics/detail/46a95faa4ae9ed0b5f2b7025df7bb13a9e2f168e"
       },
       "category": "seasonal"
     }
   ],
   "lastEvent": null,
-  "lastUpdated": 1795511430
+  "lastUpdated": 1795543895
 }
