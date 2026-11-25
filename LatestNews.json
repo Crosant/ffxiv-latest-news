@@ -25,7 +25,7 @@
       "urls": {
         "na": "https://na.finalfantasyxiv.com/lodestone/topics/detail/6980c068417272551bdafc3f215858b2bb08a3a8",
         "eu": "https://eu.finalfantasyxiv.com/lodestone/topics/detail/8b643feceb60104c4b016cc54414b9d1ef71bfaa",
-        "jp": "https://jp.finalfantasyxiv.com/lodestone/topics/detail/86555b365a518238debcd3814c3eb0f81da40f3f",
+        "jp": "https://jp.finalfantasyxiv.com/lodestone/topics/detail/15947f18e00a0f6ea1aacc40108a63e2b3362e66",
         "fr": "https://fr.finalfantasyxiv.com/lodestone/topics/detail/3a658a63e80583855a406d4c8cc4bb8efbc004e7",
         "de": "https://de.finalfantasyxiv.com/lodestone/topics/detail/46a95faa4ae9ed0b5f2b7025df7bb13a9e2f168e"
       },
@@ -33,5 +33,5 @@
     }
   ],
   "lastEvent": null,
-  "lastUpdated": 1795543895
+  "lastUpdated": 1795572825
 }
